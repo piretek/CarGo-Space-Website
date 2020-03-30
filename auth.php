@@ -44,11 +44,6 @@ include './includes/header.php';
             <?php unset($_SESSION['register-form-error']); ?>
           <?php endif; ?>
 
-          <?php if (isset($_SESSION['register-form-success'])) : ?>
-            <span class='success'><?= $_SESSION['register-form-success'] ?></span>
-            <?php unset($_SESSION['register-form-success']); ?>
-          <?php endif; ?>
-
           <form action="register.php" method="POST">
             <div class='input--container'>
               <label class='input--label' for="email">Email:</label>
@@ -89,6 +84,11 @@ include './includes/header.php';
             </div>
           </form>
         </div>
+      <?php endif; ?>
+
+      <?php if (isset($_SESSION['register-form-success'])) : ?>
+        <span class='success'><?= $_SESSION['register-form-success'] ?></span>
+        <?php unset($_SESSION['register-form-success']); ?>
       <?php endif; ?>
     </div>
   </div>
