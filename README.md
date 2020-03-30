@@ -13,7 +13,7 @@
   - [ ] Dodawanie pojazdów do bazy danych
   - [ ] Usuwanie pojazdów z bazy danych
   - [ ] Edycja samochodów w bazie danych
-- [ ] Wykorzystanie sesji
+- [x] Wykorzystanie sesji
 - [ ] Wymagane elementy:
   - [ ] formularz
   - [ ] tabela
