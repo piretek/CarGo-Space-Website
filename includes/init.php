@@ -13,7 +13,7 @@ $config = require_once './includes/config.php';
 require_once 'database.php';
 $db = create_database_connection( $config['db'] );
 
-if ($auth && ($_SESSION['user'] === 0 || !isset($_SESSION['user']))) {
+if (isset($auth) && $auth && ($_SESSION['user'] === 0 || !isset($_SESSION['user']))) {
   header("Location: {$config['site_url']}/");
   exit();
 }

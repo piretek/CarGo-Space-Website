@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+h1,h2,h3,h4,h5,h6 {
+  margin: 2px 0 5px 0;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -44,12 +48,41 @@ body {
 }
 
 .input--container > .input--label,
+.input--container > .input--error,
 .input--container > .input {
   width: 100%;
 }
 
-button {
+.input--container > .input {
   border: 0;
-  padding: 8px 12px;
-  margin: 10px
+  padding: 6px;
+  background: #EFEFEF;
+  outline: 0;
+}
+
+.input--container > .input--error {
+  color: #CC0000;
+  font-size: .8em;
+}
+
+button[type=submit] {
+  border: 0;
+  padding: 8px 15px;
+  margin: 10px 0;
+  cursor: pointer;
+  border-radius: 3px;
+  font-weight: bold;
+  letter-spacing: .2px;
+  background: #A5D3FA;
+  text-transform: uppercase;
+}
+
+span.error {
+  font-weight: bold;
+  color: #CC0000;
+}
+
+span.success {
+  font-weight: bold;
+  color: #669933;
 }
