@@ -59,7 +59,8 @@ if (isset($_POST['email'])) {
   else {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    $createUserQuery = "INSERT INTO users (email, password) VALUES ('{$email}', '{$hashedPassword}')";
+    $createUserQuery = "INSERT INTO users (email, password, firstname, lastname) VALUES ('{$email}', '{$hashedPassword}','','')";
+
     $response = $db->query($createUserQuery);
     if ($response) {
       $_SESSION['register-form-success'] = 'Użytkownik pomyślnie zarejestrowany.';
