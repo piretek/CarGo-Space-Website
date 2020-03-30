@@ -1,5 +1,6 @@
 <?php
 
+if (!defined('SECURE_BOOT')) define('SECURE_BOOT', true);
 session_start();
 
 if (!file_exists('./includes/config.php')) {
@@ -16,4 +17,3 @@ if ($auth && ($_SESSION['user'] === 0 || !isset($_SESSION['user']))) {
   header("Location: {$config['site_url']}/");
   exit();
 }
-

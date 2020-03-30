@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('SECURE_BOOT')) exit();
+
 function create_database_connection($credentials) {
 
   $db = @new mysqli($credentials['host'], $credentials['login'], $credentials['pass'], $credentials['name']);

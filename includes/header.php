@@ -1,3 +1,8 @@
+<?php
+
+if (!defined('SECURE_BOOT')) exit();
+
+?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
