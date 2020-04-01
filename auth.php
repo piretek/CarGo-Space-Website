@@ -27,7 +27,7 @@ include './includes/header.php';
           </div>
           <div class='input--container'>
             <label class='input--label' for='password'>Hasło:</label>
-            <input class='input' id='password' type="password" name="pass" placeholder="podaj hasło">
+            <input class='input' id='password' type="password" name="password" placeholder="podaj hasło">
           </div>
           <div>
             <button type="submit">ZALOGUJ</button>

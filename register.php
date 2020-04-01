@@ -11,7 +11,7 @@ function redirect_error($message = null) {
   exit();
 }
 
-if (isset($_POST['email'])) {
+if (isset($_POST['email']) && !isset($_SESSION['user'])) {
 
   $acceptedKeys = [
     'email',
@@ -26,8 +26,8 @@ if (isset($_POST['email'])) {
   }
 
   $email = $db->real_escape_string( htmlentities(strtolower($_POST['email']), ENT_QUOTES, "UTF-8") );
-  $password = $db->real_escape_string( htmlentities($_POST['password'], ENT_QUOTES, "UTF-8") );
-  $repeatedPassword = $db->real_escape_string( htmlentities($_POST['repeat-password'], ENT_QUOTES, "UTF-8") );
+  $password = $db->real_escape_string( $_POST['password'] );
+  $repeatedPassword = $db->real_escape_string( $_POST['repeat-password'] );
 
   $ok = true;
 
