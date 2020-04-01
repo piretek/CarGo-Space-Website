@@ -15,10 +15,10 @@
   - [ ] Edycja samochodów w bazie danych
 - [x] Wykorzystanie sesji
 - [ ] Wymagane elementy:
-  - [ ] formularz
+  - [x] formularz
   - [ ] tabela
   - [ ] lista numerowana/nienumerowana
   - [ ] obrazki
-- [ ] Podłączony zewnętrzny arkusz CSS
+- [x] Podłączony zewnętrzny arkusz CSS
 - [ ] Logowanie do panelu zarządzania z wykorzystaniem hashowania!
 - [ ] Tabele w bazie danych z rozbudowaną strukturą po 5 kolumn, połączone relacjami.
