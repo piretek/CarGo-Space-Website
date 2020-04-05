@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Czas generowania: 05 Kwi 2020, 17:41
+-- Czas generowania: 05 Kwi 2020, 19:51
 -- Wersja serwera: 10.4.10-MariaDB
 -- Wersja PHP: 7.3.12
 
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `pesel` varchar(11) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `pesel` (`pesel`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -127,12 +127,13 @@ CREATE TABLE IF NOT EXISTS `rents` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `client` int(11) NOT NULL,
   `car` int(11) NOT NULL,
-  `from` int(11) NOT NULL,
-  `to` int(11) NOT NULL,
+  `begin` int(11) NOT NULL,
+  `end` int(11) NOT NULL,
+  `email_sent` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `rents_cars` (`car`),
   KEY `rents_clients` (`client`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
