@@ -51,7 +51,7 @@ $pages = [
   ],
   [
     "name" => "O firmie",
-    "url" => $config['site_url'].'/'
+    "url" => $config['site_url'].'/about.php'
   ],
   [
     "name" => "Kontakt",
