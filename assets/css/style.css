@@ -8,6 +8,14 @@ a {
   text-decoration: none;
 }
 
+p {
+  margin: 5px 0;
+}
+
+p.nm {
+  margin: 0;
+}
+
 h1,h2,h3,h4,h5,h6 {
   margin: 2px 0 5px 0;
 }
@@ -193,6 +201,14 @@ ul.nav > li:hover > a {
 
 .dashboard--pages-container {
   padding-left: 20px;
+}
+
+.dashboard--pages-container .page {
+  display: none;
+}
+
+.dashboard--pages-container .page.active {
+  display: block;
 }
 
 .d-menu {

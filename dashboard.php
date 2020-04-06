@@ -7,7 +7,7 @@ include './includes/header.php';
 ?>
 
 <div class="columns col-center">
-  <div class="column col-80">
+  <div class="column col-75">
     <div class="columns">
       <div class='column col-100'>
         <div class="columns">
@@ -25,7 +25,7 @@ include './includes/header.php';
                 <h3 class='page--title'></h3>
               </div>
               <div class="column col-50">
-                <p>
+                <p class='nm'>
                   Witaj, <?= $sessionUser['email'] ?>
                   <a class='logout-link' href='logout.php'>
                     <button>Wyloguj się</button>
@@ -34,7 +34,9 @@ include './includes/header.php';
               </div>
             </div>
             <div class="columns">
-              <div id='page-rents' class="page column col-100"></div>
+              <div id='page-rents' class="page column col-100">
+
+              </div>
               <div id='page-fleet' class="page column col-100"></div>
               <div id='page-users' class="page column col-100"></div>
               <div id='page-account' class="page column col-100"></div>
@@ -44,7 +46,7 @@ include './includes/header.php';
       </div>
     </div>
   </div>
-
 </div>
 
+<script src='assets/js/dashboard.js'></script>
 <?php include './includes/footer.php'; ?>
