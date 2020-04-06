@@ -26,4 +26,6 @@ else {
   define('USER_AUTHORIZED', false);
 }
 
+require_once './includes/functions/carinfo.php';
+
 
