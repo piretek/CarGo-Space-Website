@@ -73,6 +73,13 @@ body {
   width: 20%;
 }
 
+.col-1per3 {
+  width: calc(100% / 3);
+}
+.col-2per3 {
+  width: calc(calc(100% / 3) * 2) ;
+}
+
 .input--container {
   display: flex;
   flex-wrap: wrap;
