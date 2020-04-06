@@ -38,6 +38,10 @@ if (!defined('SECURE_BOOT')) exit();
   ?>
   </style>
 
+  <script>
+    const site_url = '<?= $config['site_url'] ?>';
+  </script>
+
   <script src='assets/js/background.js' type='text/javascript'></script>
 </head>
 <body>

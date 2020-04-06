@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
+
+  const urlParams = new URLSearchParams(window.location.search)
   const pages = document.querySelectorAll('.page')
   const pageButtons = document.querySelectorAll('.page-bttn')
 
@@ -13,11 +15,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
   pageButtons.forEach((pageButton) => {
     pageButton.addEventListener('click', function() {
-      changePage(pageButton.getAttribute('id'), pageButton.textContent)
+      if (urlParams.has('view')) urlParams.delete('view')
+
+      if (urlParams.has('action')) {
+        window.location.href = site_url + '/dashboard.php?view=' + pageButton.getAttribute('id')
+      }
+      else {
+        changePage(pageButton.getAttribute('id'), pageButton.textContent)
+      }
     })
   })
 
-  const urlParams = new URLSearchParams(window.location.search)
+
   if (!urlParams.has('view') || urlParams.get('view') === 'rents') {
     changePage('rents', 'Wypożyczenia')
   }
