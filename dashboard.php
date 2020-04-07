@@ -1,5 +1,6 @@
 <?php
 
+$pageName = 'Panel zarządzania';
 $auth = true;
 require_once './includes/init.php';
 
