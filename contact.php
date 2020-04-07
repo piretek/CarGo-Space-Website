@@ -1,5 +1,6 @@
 <?php
 
+$pageName = 'Kontakt';
 $auth = false;
 require_once './includes/init.php';
 

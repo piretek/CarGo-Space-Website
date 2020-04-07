@@ -1,5 +1,6 @@
 <?php
 
+$pageName = 'Logowanie';
 $auth = false;
 require_once './includes/init.php';
 
