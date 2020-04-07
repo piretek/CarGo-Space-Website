@@ -1,5 +1,6 @@
 <?php
 
+$pageName = 'Strona główna';
 $auth = false;
 require_once './includes/init.php';
 
