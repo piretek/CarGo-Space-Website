@@ -51,7 +51,7 @@ $pages = [
   ],
   [
     "name" => "O firmie",
-    "url" => $config['site_url'].'/'
+    "url" => $config['site_url'].'/about.php'
   ],
   [
     "name" => "Kontakt",
@@ -71,7 +71,7 @@ $pages = [
 <div class='wrapper'>
 <div class='header'>
   <div class="menu">
-    <h1 class='name'>Wypożyczalnia samochodów</h1>
+    <h1 class='name'>CarGo Space</h1>
     <ul class='nav'>
       <?php
         foreach($pages as $page){
