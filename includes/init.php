@@ -17,3 +17,5 @@ if (isset($auth) && $auth && ($_SESSION['user'] === 0 || !isset($_SESSION['user'
   header("Location: {$config['site_url']}/");
   exit();
 }
+
+date_default_timezone_set('Europe/Warsaw');
