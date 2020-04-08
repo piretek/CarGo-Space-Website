@@ -48,7 +48,8 @@ if (isset($_POST['action'])) {
       exit;
     }
     else {
-      $_SESSION['dashboard-form-error'] = 'Błąd zapytania do bazy danych.';
+      $error = $db->errno;
+      $_SESSION['dashboard-form-error'] = $error === 1451 ? 'Usuń model, który posiada przydzieloną markę.' : 'Błąd zapytania do bazy danych.';
       header("Location: {$config['site_url']}/dashboard.php?view=fleet");
       exit;
     }

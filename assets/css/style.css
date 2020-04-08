@@ -91,6 +91,7 @@ form.as-anchor > button[type=submit] {
 .col-1per3 {
   width: calc(100% / 3);
 }
+
 .col-2per3 {
   width: calc(calc(100% / 3) * 2) ;
 }
@@ -123,6 +124,12 @@ form.as-anchor > button[type=submit] {
 .input--container > .input--error {
   color: #CC0000;
   font-size: .8em;
+}
+
+.input--select {
+  display: block;
+  padding: 5px;
+  font-size: 1em;
 }
 
 button[type=submit] {
