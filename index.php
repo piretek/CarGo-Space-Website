@@ -3,7 +3,6 @@
 $pageName = 'Strona główna';
 $auth = false;
 require_once './includes/init.php';
-require_once './includes/functions/carinfo.php';
 
 include './includes/header.php';
 ?>
@@ -26,9 +25,9 @@ include './includes/header.php';
 
               <a href="<?= $config['site_url'].'/contact.php?car='.$car['id']?>" class="car">
                 <div class="image-car">
-                  <div class="title-car">        
+                  <div class="title-car">
                     <h2 class="title-text"><?= "{$carInfo['brand']} {$carInfo['model']}" ?></h2>
-                  </div>    
+                  </div>
                 </div>
                 <div class="car-supporting-text">
                   <ul class="car-info">
