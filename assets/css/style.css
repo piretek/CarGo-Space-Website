@@ -206,7 +206,7 @@ ul.nav > li:hover > a {
 
 .info {
   display: flex;
-  height: 250px;
+  height: calc(100vw/3);
   overflow: hidden;
   transition: .02s;
 }
@@ -218,7 +218,7 @@ ul.nav > li:hover > a {
 }
 
 .info:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
   color: brightness(85%);
 }
 
@@ -250,7 +250,6 @@ ul.nav > li:hover > a {
 
 .image-car {
   height: 152px;
-  background: url('../images/backgrounds/background-2.jpg') center / cover;
   background-position: left;
 }
 

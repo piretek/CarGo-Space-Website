@@ -24,7 +24,7 @@ include './includes/header.php';
             $carInfo = carinfo($car['id']); ?>
 
               <a href="<?= $config['site_url'].'/contact.php?car='.$car['id']?>" class="car">
-                <div class="image-car">
+                <div class="image-car" style="  background: url('assets/images/cars/<?= $carInfo['image']?>') center / cover;">
                   <div class="title-car">        
                     <h2 class="title-text"><?= "{$carInfo['brand']} {$carInfo['model']}" ?></h2>
                   </div>    
@@ -33,7 +33,8 @@ include './includes/header.php';
                   <ul class="car-info">
                     <li><strong>Typ:</strong> <?= $carInfo['type'] ?></li>
                     <li><strong>Rok produkcji:</strong> <?= $carInfo['year'] ?></li>
-                    <li><strong>Silnik:</strong> <?= $carInfo['engine'] ?></li>
+                    <li><strong>Pojemność silnika:</strong> <?= $carInfo['engine'] ?></li>
+                    <li><strong>Rodzaj paliwa:</strong> <?= $carInfo['fuel'] ?></li>
                     <li><strong>Skrzynia biegów:</strong> <?= $carInfo['clutch'] ?></li>
                     <li><strong>Numer rejestracyjny:</strong> <?= $carInfo['registration'] ?></li>
                   </ul>
@@ -46,5 +47,4 @@ include './includes/header.php';
     </div>
   </div>
 </div>
-
 <?php include './includes/footer.php'; ?>
