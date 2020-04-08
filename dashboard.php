@@ -65,7 +65,7 @@ include './includes/header.php';
               (isset($_GET['action']) && !empty($_GET['action']) && substr($_GET['action'], 0, 3) === 'add') ||
               (isset($_GET['action']) && !empty($_GET['action']) && substr($_GET['action'], 0, 3) !== 'add' && isset($_GET['id']) && !empty($_GET['id']))) : ?>
 
-              <form method='POST'>
+              <form method='POST' <?= $_GET['action'] === 'add-fleet' || $_GET['action'] == 'edit-fleet' ? 'enctype="multipart/form-data"' : '' ?>>
                 <input type='hidden' name='action' value='<?= $_GET['action'] ?>' />
                 <?php if (isset($_GET['id'])) : ?>
                   <input type='hidden' name='id' value='<?= $_GET['id'] ?>' />
