@@ -9,7 +9,7 @@ function input( $id, $label, $value = '', $placeholder = '', $type = 'text', $er
 
     <div class='input--container'>
       <label class='input--label' for="<?= $id ?>"><?= $label ?></label>
-      <input class='input' id="<?= $id ?>" type="<?= $type ?>" name="<?= $id ?>" placeholder="<?= $placeholder ?>">
+      <input class='input' id="<?= $id ?>" type="<?= $type ?>" name="<?= $id ?>" placeholder="<?= $placeholder ?>" value='<?= $value ?>'>
       <span class='input--error'><?php $errField = $id; if (isset($_SESSION[$errorPrefix.'-form-error-'.$errField])) { echo $_SESSION[$errorPrefix.'-form-error-'.$errField]; unset($_SESSION[$errorPrefix.'-form-error-'.$errField]); } ?></span>
     </div>
 
