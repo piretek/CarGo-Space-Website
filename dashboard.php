@@ -5,6 +5,7 @@ $auth = true;
 require_once './includes/init.php';
 
 $actions = [
+  // Array structure:
   // 'action' => 'file',
 
   // Fleet
@@ -18,6 +19,10 @@ $actions = [
   'add-brand' => 'add-brand',
   'edit-brand' => 'edit-brand',
   'delete-brand' => 'edit-brand',
+  // Models
+  'add-model' => 'add-model',
+  'edit-model' => 'edit-model',
+  'delete-model' => 'edit-model',
 ];
 
 if (isset($_POST['action'])) {
