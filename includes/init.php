@@ -19,3 +19,6 @@ if (isset($auth) && $auth && ($_SESSION['user'] === 0 || !isset($_SESSION['user'
 }
 
 date_default_timezone_set('Europe/Warsaw');
+
+require_once './includes/functions/carinfo.php';
+require_once './includes/functions/input.php';

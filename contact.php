@@ -18,7 +18,7 @@ if(isset($_POST['email'])){
 
   if(!$ok){
     foreach($errors as $field => $error){
-      $_SESSION["contact-error-$field"] = $error;
+      $_SESSION["contact-form-error-$field"] = $error;
     }
 
     $_SESSION["contact-form-error"] = "Popraw błędy w formularzu!";
@@ -68,7 +68,7 @@ if(isset($_POST['email'])){
 
   if(!$ok){
     foreach($errors as $field => $error){
-      $_SESSION["contact-error-$field"] = $error;
+      $_SESSION["contact-form-error-$field"] = $error;
     }
 
     $_SESSION["contact-form-error"] = "Popraw błędy w formularzu!";
@@ -129,58 +129,18 @@ include './includes/header.php';
         <form action="contact.php" method="POST">
           <div class="columns">
             <div class="column col-50">
-              <div class='input--container'>
-                <label class='input--label' for="name">Imie:</label>
-                <input class='input' id="name" type="text" name="name" placeholder="podaj imie">
-                <span class='input--error'><?php $errField = 'name'; if (isset($_SESSION['contact-error-'.$errField])) { echo $_SESSION['contact-error-'.$errField]; unset($_SESSION['contact-error-'.$errField]); } ?></span>
-              </div>
-              <div class='input--container'>
-                <label class='input--label' for='surname'>Nazwisko:</label>
-                <input class='input' id='surname' type="text" name="surname" placeholder="podaj nazwisko">
-                <span class='input--error'><?php $errField = 'surname'; if (isset($_SESSION['contact-error-'.$errField])) { echo $_SESSION['contact-error-'.$errField]; unset($_SESSION['contact-error-'.$errField]); } ?></span>
-              </div>
-              <div class='input--container'>
-                <label class='input--label' for="PESEL">PESEL:</label>
-                <input class='input' id="pesel" type="text" name="pesel" placeholder="podaj numer PESEL">
-                <span class='input--error'><?php $errField = 'pesel'; if (isset($_SESSION['contact-error-'.$errField])) { echo $_SESSION['contact-error-'.$errField]; unset($_SESSION['contact-error-'.$errField]); } ?></span>
-              </div>
-              <div class='input--container'>
-                <label class='input--label' for='city'>Miejscowość:</label>
-                <input class='input' id='city' type="text" name="city" placeholder="podaj miejscowość">
-                <span class='input--error'><?php $errField = 'city'; if (isset($_SESSION['contact-error-'.$errField])) { echo $_SESSION['contact-error-'.$errField]; unset($_SESSION['contact-error-'.$errField]); } ?></span>
-              </div>
-              <div class='input--container'>
-                <label class='input--label' for='street'>Ulica:</label>
-                <input class='input' id='street' type="text" name="street" placeholder="podaj ulice">
-                <span class='input--error'><?php $errField = 'street'; if (isset($_SESSION['contact-error-'.$errField])) { echo $_SESSION['contact-error-'.$errField]; unset($_SESSION['contact-error-'.$errField]); } ?></span>
-              </div>
-              <div class='input--container'>
-                <label class='input--label' for='number'>Numer domu/bloku:</label>
-                <input class='input' id='number' type="text" name="number" placeholder="podaj numer">
-                <span class='input--error'><?php $errField = 'number'; if (isset($_SESSION['contact-error-'.$errField])) { echo $_SESSION['contact-error-'.$errField]; unset($_SESSION['contact-error-'.$errField]); } ?></span>
-              </div>
-              <div class='input--container'>
-                <label class='input--label' for='phone'>Numer telefonu:</label>
-                <input class='input' id='phone' type="text" name="phone" placeholder="podaj nr telefonu">
-                <span class='input--error'><?php $errField = 'phone'; if (isset($_SESSION['contact-error-'.$errField])) { echo $_SESSION['contact-error-'.$errField]; unset($_SESSION['contact-error-'.$errField]); } ?></span>
-              </div>
-              <div class='input--container'>
-                <label class='input--label' for="email">Email:</label>
-                <input class='input' id="email" type="text" name="email" placeholder="podaj email">
-                <span class='input--error'><?php $errField = 'email'; if (isset($_SESSION['contact-error-'.$errField])) { echo $_SESSION['contact-error-'.$errField]; unset($_SESSION['contact-error-'.$errField]); } ?></span>
-              </div>
+              <?php input('name', 'Imie:', '', 'podaj imie') ?>
+              <?php input('sruname', 'Nazwisko:', '', 'podaj nazwisko') ?>
+              <?php input('pesel', 'PESEL:', '', 'podaj numer PESEL') ?>
+              <?php input('city', 'Miejscowość:', '', 'podaj miejscowość') ?>
+              <?php input('street', 'Ulica:', '', 'podaj ulice') ?>
+              <?php input('number', 'Numer domu/bloku:', '', 'podaj numer') ?>
+              <?php input('phone', 'Numer telefonu:', '', 'podaj nr telefonu') ?>
+              <?php input('email', 'Email:', '', 'podaj email') ?>
             </div>
             <div class="column col-50">
-              <div class='input--container'>
-                <label class='input--label' for="from">Od:</label>
-                <input class='input' id="from" type="date" name="from">
-                <span class='input--error'><?php $errField = 'from'; if (isset($_SESSION['contact-error-'.$errField])) { echo $_SESSION['contact-error-'.$errField]; unset($_SESSION['contact-error-'.$errField]); } ?></span>
-              </div>
-              <div class='input--container'>
-                <label class='input--label' for="to">Do:</label>
-                <input class='input' id="to" type="date" name="to">
-                <span class='input--error'><?php $errField = 'to'; if (isset($_SESSION['contact-error-'.$errField])) { echo $_SESSION['contact-error-'.$errField]; unset($_SESSION['contact-error-'.$errField]); } ?></span>
-              </div>
+              <?php input('from', 'Od:', '', '', 'date') ?>
+              <?php input('to', 'Do:', '', '', 'date') ?>
               <div class='input--container'>
                 <label class='input--label' for='car'>Samochód:</label>
                 <?php
