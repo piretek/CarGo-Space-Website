@@ -54,10 +54,10 @@ if(!defined('SECURE_BOOT')) exit;
                 ?>
               </td>
               <td>Zobacz |
-                <a href="?action=edit-fleet&id=<?= $type['id'] ?>">Edytuj</a> |
+                <a href="?action=edit-fleet&id=<?= $car['id'] ?>">Edytuj</a> |
                 <form class='as-anchor' method='post'>
                   <input type='hidden' name='action' value='delete-fleet' />
-                  <input type='hidden' name='id' value='<?= $type['id'] ?>' />
+                  <input type='hidden' name='id' value='<?= $car['id'] ?>' />
                   <button type='submit'>Usuń</button>
                 </form>
               </td>
@@ -111,10 +111,10 @@ if(!defined('SECURE_BOOT')) exit;
                       <td><?= $model['model'] ?></td>
                       <td><?= $model['year_from']." - ".$model['year_to'] ?></td>
                       <td>
-                        <a href="?action=edit-model&id=<?= $type['id'] ?>">Edytuj</a> |
+                        <a href="?action=edit-model&id=<?= $model['id'] ?>">Edytuj</a> |
                         <form class='as-anchor' method='post'>
                           <input type='hidden' name='action' value='delete-model' />
-                          <input type='hidden' name='id' value='<?= $type['id'] ?>' />
+                          <input type='hidden' name='id' value='<?= $model['id'] ?>' />
                           <button type='submit'>Usuń</button>
                         </form>
                       </td>
@@ -164,10 +164,10 @@ if(!defined('SECURE_BOOT')) exit;
                     <tr>
                       <td><?= $brand['name'] ?></td>
                       <td>
-                        <a href="?action=edit-brand&id=<?= $type['id'] ?>">Edytuj</a> |
+                        <a href="?action=edit-brand&id=<?= $brand['id'] ?>">Edytuj</a> |
                         <form class='as-anchor' method='post'>
                           <input type='hidden' name='action' value='delete-brand' />
-                          <input type='hidden' name='id' value='<?= $type['id'] ?>' />
+                          <input type='hidden' name='id' value='<?= $brand['id'] ?>' />
                           <button type='submit'>Usuń</button>
                         </form>
                       </td>
