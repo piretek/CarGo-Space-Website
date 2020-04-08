@@ -2,7 +2,7 @@
 
 if (!defined('SECURE_BOOT')) exit;
 
-function input( $id, $label, $value, $placeholder = '', $type = 'text', $errorPrefix = null) {
+function input( $id, $label, $value = '', $placeholder = '', $type = 'text', $errorPrefix = null) {
   global $_SESSION;
 
   if ($errorPrefix === null) $errorPrefix = pathinfo(__DIR__.$_SERVER['PHP_SELF'], PATHINFO_FILENAME); ?>
