@@ -31,14 +31,15 @@ include './includes/header.php';
                 <?php
 
                 $knownAction = true;
-                if ($_GET['action'] === 'add-fleet') : ?>
+                if ($_GET['action'] === 'add-fleet') :
 
-                  <h2>Dodaj nowy pojazd</h2>
+                  include_once 'dashboard/forms/add-fleet.php';
 
-                <?php elseif ($_GET['action'] === 'edit-fleet') : ?>
+                elseif ($_GET['action'] === 'edit-fleet') :
 
+                  include_once 'dashboard/forms/edit-fleet.php';
 
-                <?php else :
+                else :
 
                   echo 'Nieznana akcja.';
                   $knownAction = false;
@@ -68,16 +69,16 @@ include './includes/header.php';
               </div>
               <div class="columns">
                 <div id='page-rents' class="page column col-100">
-                  <?php include_once 'rents.php' ?>
+                  <?php include_once 'dashboard/rents.php' ?>
                 </div>
                 <div id='page-fleet' class="page column col-100">
-                  <?php include_once 'fleet.php' ?>
+                  <?php include_once 'dashboard/fleet.php' ?>
                 </div>
                 <div id='page-users' class="page column col-100">
-                  <?php include_once 'users.php' ?>
+                  <?php include_once 'dashboard/users.php' ?>
                 </div>
                 <div id='page-account' class="page column col-100">
-                  <?php include_once 'user-account.php' ?>
+                  <?php include_once 'dashboard/user-account.php' ?>
                 </div>
               </div>
             <?php endif;?>
