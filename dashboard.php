@@ -12,7 +12,7 @@ include './includes/header.php';
     <div class="columns">
       <div class='column col-100'>
         <div class="columns">
-          <div class="col-20">
+          <div class="column col-20">
             <ul class='d-menu'>
               <li id='rents' class='page-bttn d-menu_element'>Wypożyczenia</li>
               <li id='fleet' class='page-bttn d-menu_element'>Flota</li>
@@ -20,7 +20,7 @@ include './includes/header.php';
               <li id='account' class='page-bttn d-menu_element'>Twoje konto</li>
             </ul>
           </div>
-          <div class="col-80 dashboard--pages-container">
+          <div class="column col-80 dashboard--pages-container">
             <?php if (
               (isset($_GET['action']) && !empty($_GET['action']) && substr($_GET['action'], 0, 3) === 'add') ||
               (isset($_GET['action']) && !empty($_GET['action']) && substr($_GET['action'], 0, 3) !== 'add' && isset($_GET['id']) && !empty($_GET['id']))) : ?>
