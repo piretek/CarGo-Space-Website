@@ -10,10 +10,14 @@ $actions = [
   // Fleet
   'add-fleet' => 'add-fleet',
   'edit-fleet' => 'edit-fleet',
-  //Types
+  // Types
   'add-type' => 'add-type',
   'edit-type' => 'edit-type',
   'delete-type' => 'edit-type',
+  // Brands
+  'add-brand' => 'add-brand',
+  'edit-brand' => 'edit-brand',
+  'delete-brand' => 'edit-brand',
 ];
 
 if (isset($_POST['action'])) {
