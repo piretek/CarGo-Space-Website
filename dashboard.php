@@ -4,6 +4,37 @@ $pageName = 'Panel zarządzania';
 $auth = true;
 require_once './includes/init.php';
 
+$actions = [
+  // 'action' => 'file',
+
+  // Fleet
+  'add-fleet' => 'add-fleet',
+  'edit-fleet' => 'edit-fleet',
+  //Types
+  'add-type' => 'add-type',
+  'edit-type' => 'edit-type',
+  'delete-type' => 'edit-type',
+];
+
+if (isset($_POST['action'])) {
+  $isNotAdd = substr($_POST['action'], 0, 3) !== 'add';
+
+  if ($isNotAdd && (!isset($_POST['id']) || empty($_POST['id']))) {
+    echo 'Nieznana akcja.';
+    exit;
+  }
+  else {
+    if (array_key_exists($_POST['action'], $actions)) {
+      require_once 'dashboard/forms/'.$actions[$_POST['action']].'.php';
+    }
+    else {
+      echo 'Nieznana akcja.';
+      exit;
+    }
+  }
+
+}
+
 include './includes/header.php';
 ?>
 
@@ -27,18 +58,16 @@ include './includes/header.php';
 
               <form method='POST'>
                 <input type='hidden' name='action' value='<?= $_GET['action'] ?>' />
-                <input type='hidden' name='id' value='<?= $_GET['id'] ?>' />
+                <?php if (isset($_GET['id'])) : ?>
+                  <input type='hidden' name='id' value='<?= $_GET['id'] ?>' />
+                <?php endif; ?>
 
                 <?php
 
                 $knownAction = true;
-                if ($_GET['action'] === 'add-fleet') :
+                if (array_key_exists($_GET['action'], $actions)) :
 
-                  include_once 'dashboard/forms/add-fleet.php';
-
-                elseif ($_GET['action'] === 'edit-fleet') :
-
-                  include_once 'dashboard/forms/edit-fleet.php';
+                  require_once 'dashboard/forms/'.$actions[$_GET['action']].'.php';
 
                 else :
 
@@ -58,6 +87,16 @@ include './includes/header.php';
               <div class="columns">
                 <div class="column col-50">
                   <h2 class='page--title'></h2>
+
+                  <?php if (isset($_SESSION['dashboard-form-error'])) : ?>
+                    <span class='error'>Błąd: <?= $_SESSION['dashboard-form-error'] ?></span>
+                    <?php unset($_SESSION['dashboard-form-error']); ?>
+                  <?php endif; ?>
+
+                  <?php if (isset($_SESSION['dashboard-form-success'])) : ?>
+                    <span class='success'><?= $_SESSION['dashboard-form-success'] ?></span>
+                    <?php unset($_SESSION['dashboard-form-success']); ?>
+                  <?php endif; ?>
                 </div>
                 <div class="column col-50">
                   <p class='nm ta-right'>
