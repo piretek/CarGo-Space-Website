@@ -26,6 +26,7 @@ else {
   define('USER_AUTHORIZED', false);
 }
 
+date_default_timezone_set('Europe/Warsaw');
+
 require_once './includes/functions/carinfo.php';
-
-
+require_once './includes/functions/input.php';

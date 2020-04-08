@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('SECURE_BOOT')) exit;
+
 function carinfo($carId) {
   global $db;
 
