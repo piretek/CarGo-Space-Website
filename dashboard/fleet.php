@@ -53,7 +53,14 @@ if(!defined('SECURE_BOOT')) exit;
                   }
                 ?>
               </td>
-              <td>Zobacz | Edytuj | Usuń</td>
+              <td>Zobacz |
+                <a href="?action=edit-fleet&id=<?= $type['id'] ?>">Edytuj</a> |
+                <form class='as-anchor' method='post'>
+                  <input type='hidden' name='action' value='delete-fleet' />
+                  <input type='hidden' name='id' value='<?= $type['id'] ?>' />
+                  <button type='submit'>Usuń</button>
+                </form>
+              </td>
             </tr>
 
           <?php endwhile; ?>
@@ -103,7 +110,14 @@ if(!defined('SECURE_BOOT')) exit;
                       <td><?= $model['brand'] ?></td>
                       <td><?= $model['model'] ?></td>
                       <td><?= $model['year_from']." - ".$model['year_to'] ?></td>
-                      <td>Edytuj | Usuń</td>
+                      <td>
+                        <a href="?action=edit-model&id=<?= $type['id'] ?>">Edytuj</a> |
+                        <form class='as-anchor' method='post'>
+                          <input type='hidden' name='action' value='delete-model' />
+                          <input type='hidden' name='id' value='<?= $type['id'] ?>' />
+                          <button type='submit'>Usuń</button>
+                        </form>
+                      </td>
                     </tr>
 
                   <?php endwhile; ?>
@@ -150,9 +164,12 @@ if(!defined('SECURE_BOOT')) exit;
                     <tr>
                       <td><?= $brand['name'] ?></td>
                       <td>
-                        <span>
-                          Edytuj | Usuń
-                        </span>
+                        <a href="?action=edit-brand&id=<?= $type['id'] ?>">Edytuj</a> |
+                        <form class='as-anchor' method='post'>
+                          <input type='hidden' name='action' value='delete-brand' />
+                          <input type='hidden' name='id' value='<?= $type['id'] ?>' />
+                          <button type='submit'>Usuń</button>
+                        </form>
                       </td>
                     </tr>
 
@@ -199,7 +216,14 @@ if(!defined('SECURE_BOOT')) exit;
 
                     <tr>
                       <td><?= $type['name'] ?></td>
-                      <td>Edytuj | Usuń</td>
+                      <td>
+                        <a href="?action=edit-type&id=<?= $type['id'] ?>">Edytuj</a> |
+                        <form class='as-anchor' method='post'>
+                          <input type='hidden' name='action' value='delete-type' />
+                          <input type='hidden' name='id' value='<?= $type['id'] ?>' />
+                          <button type='submit'>Usuń</button>
+                        </form>
+                      </td>
                     </tr>
 
                   <?php endwhile; ?>
