@@ -54,7 +54,8 @@ if(!defined('SECURE_BOOT')) exit;
                   }
                 ?>
               </td>
-              <td>Zobacz |
+              <td>
+                <a href="?view=car&id=<?= $car['id'] ?>">Zobacz</a> |
                 <a href="?action=edit-fleet&id=<?= $car['id'] ?>">Edytuj</a> |
                 <form class='as-anchor' method='post'>
                   <input type='hidden' name='action' value='delete-fleet' />

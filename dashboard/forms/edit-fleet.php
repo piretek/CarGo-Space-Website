@@ -258,7 +258,7 @@ $carInfo = carinfo($car['id']);
   </div>
   <div class='column col-50 image-preview'>
     <?php if (!empty($car['image'])) : ?>
-      <img class='image-preview' src='<?= $carInfo['image'] ?>' alt='Zdjęcie pojazdu' title='Zdjęcie poglądowe pojazdu' />
+      <img src='<?= $carInfo['image'] ?>' alt='Zdjęcie pojazdu' title='Zdjęcie poglądowe pojazdu' />
     <?php endif; ?>
   </div>
 </div>

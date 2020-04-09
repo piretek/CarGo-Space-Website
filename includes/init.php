@@ -30,3 +30,4 @@ date_default_timezone_set('Europe/Warsaw');
 
 require_once './includes/functions/carinfo.php';
 require_once './includes/functions/input.php';
+require_once './includes/functions/rent_price.php';

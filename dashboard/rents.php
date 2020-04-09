@@ -10,6 +10,7 @@ if(!defined('SECURE_BOOT')) exit;
       <th>Klient</th>
       <th>Samochód</th>
       <th>Okres wypożyczenia</th>
+      <th>Przychód</th>
       <th>Akcje</th>
     </tr>
     <?php
@@ -32,6 +33,7 @@ if(!defined('SECURE_BOOT')) exit;
           <td>
             <?= date('d.m.Y', $rent['begin'])." - ".date('d.m.Y', $rent['end']) ?>
           </td>
+          <td><?= rent_price($rent['id']) ?> zł</td>
           <td>Zobacz | Edytuj | Usuń</td>
         </tr>
 

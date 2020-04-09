@@ -15,12 +15,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   pageButtons.forEach((pageButton) => {
     pageButton.addEventListener('click', function() {
-      if (urlParams.has('view')) urlParams.delete('view')
 
-      if (urlParams.has('action')) {
+      if (urlParams.has('action') || (urlParams.has('view') && urlParams.get('view') == 'car')) {
         window.location.href = site_url + '/dashboard.php?view=' + pageButton.getAttribute('id')
       }
       else {
+        if (urlParams.has('view')) urlParams.delete('view')
         changePage(pageButton.getAttribute('id'), pageButton.textContent)
       }
     })
@@ -39,4 +39,17 @@ document.addEventListener('DOMContentLoaded', function() {
   else if (urlParams.get('view') === 'account') {
     changePage('account', 'Twoje konto')
   }
+
+  document.querySelectorAll('form.as-anchor, form.as-anchor-button').forEach((form) => {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault()
+
+      if (!confirm('Czy na pewno chcesz dokonać usunięcia?')) {
+        return false
+      }
+      else {
+        e.target.submit()
+      }
+    })
+  })
 })
