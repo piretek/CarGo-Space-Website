@@ -43,13 +43,14 @@ if(!defined('SECURE_BOOT')) exit;
               <td><?= $carInfo['registration'] ?></td>
               <td>
                 <?php
-                  $rents = $db->query("SELECT * FROM rents WHERE id = '{$car['id']}' AND begin <= '".time()."' AND end >= '".time()."'");
+                  $query = "SELECT * FROM rents WHERE car = '{$car['id']}' AND begin <= '".time()."' AND end >= '".time()."'";
+                  $rents = $db->query($query);
                   if ($rents->num_rows == 0) {
                     echo "<span class='success'>Nie</span>";
                   }
                   else {
                     $rent = $rents->fetch_assoc();
-                    echo "<span class='error'>Tak (".date('d.m.Y', $rent['begin'])." - ".date('d.m.Y', $rent['end']).")</span>";
+                    echo "<span class='error'>Tak</span> - (".date('d.m.Y', $rent['begin'])." - ".date('d.m.Y', $rent['end']).")";
                   }
                 ?>
               </td>
