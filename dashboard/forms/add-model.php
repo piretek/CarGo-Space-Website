@@ -37,12 +37,13 @@ if (isset($_POST['action'])) {
   }
 
   if ($ok) {
-    $query = sprintf("INSERT INTO `models` VALUES (null, '%s', '%s', '%s', '%s', '%s');",
+    $query = sprintf("INSERT INTO `models` VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s');",
       $db->real_escape_string($_POST['brand']),
       $db->real_escape_string($_POST['type']),
       $db->real_escape_string($_POST['name']),
       $db->real_escape_string($_POST['year_from']),
       $db->real_escape_string($_POST['year_to']),
+      $db->real_escape_string($_POST['price']),
     );
 
     $successful = $db->query($query);
@@ -126,5 +127,8 @@ if (isset($_POST['action'])) {
     <p>Okres produkcji modelu</p>
     <?php input('year_from', 'Od:', '2000', 'Rok rozpoczęcia produkcji', 'number'); ?>
     <?php input('year_to', 'Do:', date('Y'), 'Rok zakończenia produkcji', 'number'); ?>
+  </div>
+  <div class="column col-100">
+    <?php input('price', 'Cena wypożyczenia za 1 dobę:', '', 'Cena w złotówkach', 'number', null, ['step' => '0.01']); ?>
   </div>
 </div>

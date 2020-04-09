@@ -39,18 +39,19 @@ if (isset($_POST['action'])) {
     }
 
     if ($ok) {
-      $query = sprintf("UPDATE `models` SET brand = '%s', type = '%s', model = '%s', year_from = '%s', year_to = '%s' WHERE id = '%s'",
+      $query = sprintf("UPDATE `models` SET brand = '%s', type = '%s', model = '%s', year_from = '%s', year_to = '%s', price = '%s' WHERE id = '%s'",
         $db->real_escape_string($_POST['brand']),
         $db->real_escape_string($_POST['type']),
         $db->real_escape_string($_POST['name']),
         $db->real_escape_string($_POST['year_from']),
         $db->real_escape_string($_POST['year_to']),
+        $db->real_escape_string($_POST['price']),
         $db->real_escape_string($_POST['id']),
       );
       $successful = $db->query($query);
 
       if ($successful) {
-        $_SESSION['dashboard-form-success'] = 'Zedytowano model';
+        $_SESSION['dashboard-form-success'] = 'Zmieniono model';
         header("Location: {$config['site_url']}/dashboard.php?view=fleet");
         exit;
       }
@@ -151,5 +152,8 @@ $model = $db->query($query)->fetch_assoc();
     <p>Okres produkcji modelu</p>
     <?php input('year_from', 'Od:', $model['year_from'], 'Rok rozpoczęcia produkcji', 'number'); ?>
     <?php input('year_to', 'Do:', $model['year_to'], 'Rok zakończenia produkcji', 'number'); ?>
+  </div>
+  <div class="column col-100">
+    <?php input('price', 'Cena wypożyczenia za 1 dobę:', $model['price'], 'Cena w złotówkach', 'number', null, ['step' => '0.01']); ?>
   </div>
 </div>
