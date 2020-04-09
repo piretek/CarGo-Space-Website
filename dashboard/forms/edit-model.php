@@ -19,7 +19,7 @@ if (isset($_POST['action'])) {
 
     if (!$ok) {
       $_SESSION['dashboard-form-error'] = 'Popraw wprowadzone dane.';
-      header("Location: {$config['site_url']}/dashboard.php?action=edit-model");
+      header("Location: {$config['site_url']}/dashboard.php?action=edit-model&id=".$_POST['id']);
       exit;
     }
 
@@ -63,7 +63,7 @@ if (isset($_POST['action'])) {
     }
     else {
       $_SESSION['dashboard-form-error'] = 'Popraw wprowadzone dane.';
-      header("Location: {$config['site_url']}/dashboard.php?action=edit-model");
+      header("Location: {$config['site_url']}/dashboard.php?action=edit-model&id=".$_POST['id']);
       exit;
     }
   }
