@@ -4,7 +4,7 @@ if(!defined('SECURE_BOOT')) exit;
 
 if (isset($_POST['action'])) {
 
-  $excludedKeys = ['action', 'MAX_FILE_SIZE', 'photo'];
+  $excludedKeys = ['action', 'MAX_FILE_SIZE', 'photo', 'price'];
   $ok = true;
 
   foreach($_POST as $key => $value) {
@@ -70,7 +70,7 @@ if (isset($_POST['action'])) {
   $allowedMimes = ['image/png', 'image/jpeg', 'image/jpg', 'image/jfif'];
 
   if ($_FILES['photo']['error'] == UPLOAD_ERR_OK || $_FILES['photo']['error'] == UPLOAD_ERR_NO_FILE) {
-    if (!in_array($_FILES['photo']['type'], $allowedMimes)) {
+    if (!in_array($_FILES['photo']['type'], $allowedMimes) && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
       $ok = false;
       $_SESSION['dashboard-form-error-photo'] = "Błędny format pliku";
     }
@@ -115,13 +115,14 @@ if (isset($_POST['action'])) {
   }
 
   if ($ok) {
-    $query = sprintf("INSERT INTO `cars` VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
+    $query = sprintf("INSERT INTO `cars` VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
       $db->real_escape_string($_POST['model']),
       $db->real_escape_string($_POST['year']),
       $db->real_escape_string($_POST['engine']),
       $db->real_escape_string($_POST['fuel']),
       $db->real_escape_string($_POST['clutch']),
       $db->real_escape_string($_POST['registration']),
+      $db->real_escape_string($_POST['price']),
       $db->real_escape_string($photo),
     );
 
@@ -174,7 +175,7 @@ if (isset($_POST['action'])) {
       <select id='model' name='model' class='input--select'>
       <?php while($model = $models->fetch_assoc()) : $maxYear = $maxYear < $model['year_to'] ? (int) $model['year_to'] : $maxYear ?>
 
-        <option value='<?= $model['id'] ?>'><?= "{$model['brand']} {$model['name']} ({$model['type']})" ?></option>
+        <option value='<?= $model['id'] ?>'><?= "{$model['brand']} {$model['name']} ({$model['type']}) | {$model['year_from']} - {$model['year_to']}" ?></option>
 
       <?php endwhile; ?>
       </select>
@@ -196,6 +197,10 @@ if (isset($_POST['action'])) {
   </div>
   <div class="column col-100">
     <?php input('registration', 'Rejestracja') ?>
+  </div>
+  <div class="column col-100">
+    <?php input('price', 'Cena wypożyczenia za 1 dobę:', '', 'Cena w złotówkach', 'number', null, ['step' => '0.01']); ?>
+    <p>Jeżeli pole pozostanie puste, cena zostanie odziedziczona po cenie modelu.</p>
   </div>
   <div class="column col-100">
     <?php input('photo', 'Zdjęcie pojazdu', '', '', 'file', null, ['accept' => "image/png, image/jpeg, image/jpg, image/jfif"] ) ?>
