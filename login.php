@@ -33,7 +33,6 @@ if (isset($_POST['email']) && !isset($_SESSION['user'])) {
 
       $_SESSION['user'] = (int) $user['id'];
 
-      $_SESSION['login-form-error'] = 'Niepoprawny login lub hasło.';
       header("Location: {$config['site_url']}/dashboard.php");
       exit();
     }

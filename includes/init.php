@@ -13,12 +13,21 @@ $config = require_once './includes/config.php';
 require_once 'database.php';
 $db = create_database_connection( $config['db'] );
 
-if (isset($auth) && $auth && ($_SESSION['user'] === 0 || !isset($_SESSION['user']))) {
+if (isset($auth) && $auth && (!isset($_SESSION['user']) || $_SESSION['user'] === 0)) {
   header("Location: {$config['site_url']}/");
   exit();
+}
+else if (isset($_SESSION['user']) && $_SESSION['user'] !== 0) {
+  $sessionUsers = $db->query("SELECT * FROM users WHERE id = '{$_SESSION['user']}'");
+  $sessionUser = $sessionUsers->fetch_assoc();
+  define('USER_AUTHORIZED', true);
+}
+else {
+  define('USER_AUTHORIZED', false);
 }
 
 date_default_timezone_set('Europe/Warsaw');
 
 require_once './includes/functions/carinfo.php';
 require_once './includes/functions/input.php';
+require_once './includes/functions/rent_price.php';

@@ -4,6 +4,11 @@ $pageName = 'Logowanie';
 $auth = false;
 require_once './includes/init.php';
 
+if (USER_AUTHORIZED) {
+  header('Location: dashboard.php');
+  exit;
+}
+
 include './includes/header.php';
 ?>
 
