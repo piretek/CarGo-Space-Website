@@ -1,11 +1,28 @@
 <?php
 
+$pageName = 'Strona główna';
 $auth = false;
 require_once './includes/init.php';
-require_once './includes/functions/carinfo.php';
 
 include './includes/header.php';
 ?>
+
+<style>
+  <?php
+
+  $cars = $db->query("SELECT id FROM cars");
+  if ($cars->num_rows !== 0){
+    while($car = $cars->fetch_assoc()) {
+      $carInfo = carinfo($car['id']); ?>
+
+      .image-car#image-car-<?= $car['id'] ?> {
+        background-image: url('<?= $carInfo['image'] ?>');
+      }
+
+    <?php }
+  }
+  ?>
+</style>
 
 <div class="columns col-center">
   <div class="column col-75">
@@ -15,19 +32,19 @@ include './includes/header.php';
       <div class='fleet-container'>
         <?php
 
-        $cars = $db->query("SELECT * FROM cars");
-        if ($cars->num_rows == 0){
+        $cars = $db->query("SELECT id FROM cars");
+        if ($cars->num_rows == 0) {
           echo "Brak pojazdów w naszym systemie.";
         }
-        else{
+        else {
           while($car = $cars->fetch_assoc()) {
             $carInfo = carinfo($car['id']); ?>
 
               <a href="<?= $config['site_url'].'/contact.php?car='.$car['id']?>" class="car">
-                <div class="image-car" style="  background: url('assets/images/cars/<?= $carInfo['image']?>') center / cover;">
-                  <div class="title-car">        
+                <div class="image-car" id='image-car-<?= $car['id'] ?>'>
+                  <div class="title-car">
                     <h2 class="title-text"><?= "{$carInfo['brand']} {$carInfo['model']}" ?></h2>
-                  </div>    
+                  </div>
                 </div>
                 <div class="car-supporting-text">
                   <ul class="car-info">
