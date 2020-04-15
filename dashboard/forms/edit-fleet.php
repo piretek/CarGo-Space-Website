@@ -80,7 +80,11 @@ if (isset($_POST['action'])) {
       exit;
     }
 
-    $uploadDirectory = realpath(dirname(__DIR__, 2).$config['car_photo_upload_dir']);
+    $uploadDirectory = dirname(__DIR__, 2).$config['car_photo_upload_dir'];
+    if (!file_exists($uploadDirectory)) mkdir($uploadDirectory, null, true);
+
+    $uploadDirectory = realpath($uploadDirectory);
+
     $allowedMimes = ['image/png', 'image/jpeg', 'image/jpg', 'image/jfif'];
 
     if ($_FILES['photo']['error'] == UPLOAD_ERR_OK || $_FILES['photo']['error'] == UPLOAD_ERR_NO_FILE) {
