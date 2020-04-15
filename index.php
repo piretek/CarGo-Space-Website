@@ -50,7 +50,8 @@ include './includes/header.php';
                   <ul class="car-info">
                     <li><strong>Typ:</strong> <?= $carInfo['type'] ?></li>
                     <li><strong>Rok produkcji:</strong> <?= $carInfo['year'] ?></li>
-                    <li><strong>Silnik:</strong> <?= $carInfo['engine'] ?></li>
+                    <li><strong>Pojemność silnika:</strong> <?= $carInfo['engine'] ?></li>
+                    <li><strong>Rodzaj paliwa:</strong> <?= $carInfo['fuel'] ?></li>
                     <li><strong>Skrzynia biegów:</strong> <?= $carInfo['clutch'] ?></li>
                     <li><strong>Numer rejestracyjny:</strong> <?= $carInfo['registration'] ?></li>
                   </ul>
@@ -63,5 +64,4 @@ include './includes/header.php';
     </div>
   </div>
 </div>
-
 <?php include './includes/footer.php'; ?>
