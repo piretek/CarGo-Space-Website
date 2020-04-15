@@ -185,20 +185,20 @@ ul.nav > li:hover > a {
   font-family: "Open Sans", sans-serif;
 }
 
-.info.info1 {
-  background: 
+.info1 > .info-background {
+  background:
     linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url("../images/backgrounds/background-1.jpg")
     center center / cover
     no-repeat;
-}  
-.info.info2 {
-  background: 
+}
+.info2 > .info-background {
+  background:
     linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url("../images/backgrounds/background-2.jpg")
     center center / cover
     no-repeat;
-}  
-.info.info3 {
-  background: 
+}
+.info3 > .info-background {
+  background:
     linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url("../images/backgrounds/background-3.jpg")
     center center / cover
     no-repeat;
@@ -206,20 +206,42 @@ ul.nav > li:hover > a {
 
 .info {
   display: flex;
-  height: calc(100vw/3);
+  height: calc(100vh / 3);
   overflow: hidden;
   transition: .02s;
+  position: relative;
+}
+
+.info-background,
+.info-content {
+  position: absolute;
+  height: 100%;
+}
+
+.info-background {
+  width: 100%;
+  transition: .3s ease-in;
+}
+
+.info-content-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.info:hover > .info-background {
+  transform: scale(1.1);
+}
+
+.info-content-container > h2,
+.info-content-container > p {
+  width: 100%;
 }
 
 .about-text {
   color: #FFF;
   font-family: 'Open Sans', sans-serif;
   font-size: 20px;
-}
-
-.info:hover {
-  transform: scale(1.1);
-  color: brightness(85%);
 }
 
 .fleet > h1 {
@@ -254,7 +276,7 @@ ul.nav > li:hover > a {
 }
 
 .title-car {
-  background: 
+  background:
     linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7));
   color: #FFF;
   font-size: 16px;
