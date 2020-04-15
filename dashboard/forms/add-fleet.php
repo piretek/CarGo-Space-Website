@@ -182,7 +182,7 @@ if (isset($_POST['action'])) {
     <?php endif;?>
   </div>
   <div class="column col-100">
-    <?php input('year', 'Rok produkcji', $maxYear, 'Podaj rok produkcji pojazdu', 'number') ?>
+    <?php input('year', 'Rok produkcji', isset($maxYear) ? $maxYear : '', 'Podaj rok produkcji pojazdu', 'number') ?>
   </div>
   <div class="column col-100">
     <?php input('engine', 'Silnik', '', 'Podaj parametry silnika') ?>
