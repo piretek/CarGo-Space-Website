@@ -9,7 +9,7 @@ include './includes/header.php';
 <div class="columns col-center">
   <div class="column page-column">
     <h1>Kalkulator ceny wynajmu</h1>
-    <p>Poniżej prosmy o wybranie pojazdu oraz okres, na jaki chcą go Państwo wypożyczyć.</p>
+    <p>Poniżej prosimy o wybranie pojazdu oraz okresu, na jaki chcą go Państwo wypożyczyć.</p>
     <div class='columns calculator'>
       <div class='column col-50'>
         <h3>Wybierz pojazd</h3><?php

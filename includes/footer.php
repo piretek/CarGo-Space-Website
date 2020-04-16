@@ -26,7 +26,7 @@ if (!defined('SECURE_BOOT')) exit();
       </div>
     </div>
     <div class="footer-c">
-      Copyright &copy; 2020 CarGo Space S.A Polska, Wszelkie prawa zastrzeżone.
+      Copyright &copy; 2020 CarGo Space S.A. Polska, Wszelkie prawa zastrzeżone.
     </div>
   </div>
 </div>
