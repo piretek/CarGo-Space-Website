@@ -36,6 +36,9 @@ include './includes/header.php';
               </div>
             <?php endwhile; ?>
           </div>
+        <?php else : ?>
+
+          <p>Brak pojazdów w systemie.</p>
 
         <?php endif; ?>
       </div>
