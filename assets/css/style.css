@@ -189,6 +189,11 @@ span.success {
   width: 100%;
 }
 
+.header {
+  background-color: #EBEBE0;
+  user-select: none;
+}
+
 .menu > .name {
   font-size: 1.5em;
   margin: 0 20px;
@@ -659,10 +664,6 @@ a.rent-a-car {
   text-align: center;
   font-size: 11px;
   background-color: #D6D6C2;
-}
-
-.header {
-  background-color: #EBEBE0;
 }
 
 @media screen and (max-width: 800px) {
