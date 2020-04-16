@@ -665,6 +665,13 @@ a.rent-a-car {
   background-color: #EBEBE0;
 }
 
+.contact-logo {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  padding: 10px;
+}
+
 @media screen and (max-width: 800px) {
   .info-content {
     font-size: 0.8em;
@@ -673,5 +680,3 @@ a.rent-a-car {
     width: 100%;
   }
 }
-
-
