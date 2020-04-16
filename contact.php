@@ -173,11 +173,11 @@ include './includes/header.php';
       </div>
       <div class="column col-40">
         <h2>
-          Gdzie działamy?               
+          Gdzie działamy?
         </h2>
         <div class="column col-center">
           <div class="cities">
-              <div class="city">  
+              <div class="city">
                 <img src="assets/images/cities/lublin.png" alt="Lublin">
                 <p>
                   CarGo Space Lublin<br/>
@@ -185,7 +185,7 @@ include './includes/header.php';
                   20-000 Lublin<br/>
                   E-mail: contact.lublin@cargospace.pl
                 </p>
-              </div> 
+              </div>
             <div class="city">
               <img src="assets/images/cities/warsaw.png" alt="Warszawa">
               <p>
@@ -204,12 +204,12 @@ include './includes/header.php';
                   E-mail: contact.krakow@cargospace.pl
                 </p>
             </div>
-          </div>  
+          </div>
         </div>
       </div>
       <div class='column col-30'>
         <img class="contact-logo" src="<?= $config['site_url'] ?>/assets/images/logo.png" alt="CarGo Space">
-        <h2>CarGo Space S.A.</h2>
+        <h2>CarGo Space Polska S.A.</h2>
         <h5>Wypożyczalnia aut osobowych</h5>
         <p>
           Tel.: <a href='tel:555555555'>555 555 555</a><br />
