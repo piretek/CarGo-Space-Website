@@ -66,6 +66,7 @@ if (isset($_POST['action'])) {
     exit;
   }
 
+  $photo = '';
   $uploadDirectory = realpath(dirname(__DIR__, 2).$config['car_photo_upload_dir']);
   $allowedMimes = ['image/png', 'image/jpeg', 'image/jpg', 'image/jfif'];
 
@@ -122,8 +123,8 @@ if (isset($_POST['action'])) {
       $db->real_escape_string($_POST['fuel']),
       $db->real_escape_string($_POST['clutch']),
       $db->real_escape_string($_POST['registration']),
-      $db->real_escape_string($_POST['price']),
-      $db->real_escape_string($photo),
+      $db->real_escape_string(empty($_POST['price']) ? '0.00' : $_POST['price']),
+      $db->real_escape_string($photo)
     );
 
     $successful = $db->query($query);
@@ -135,7 +136,7 @@ if (isset($_POST['action'])) {
     }
     else {
       $_SESSION['dashboard-form-error'] = 'Błąd zapytania do bazy danych.';
-      header("Location: {$config['site_url']}/dashboard.php?action=add-type");
+      header("Location: {$config['site_url']}/dashboard.php?action=add-fleet");
       exit;
     }
   }
