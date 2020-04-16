@@ -139,8 +139,8 @@ include './includes/header.php';
               <?php input('email', 'Email:', '', 'podaj email') ?>
             </div>
             <div class="column col-50">
-              <?php input('from', 'Od:', '', '', 'date') ?>
-              <?php input('to', 'Do:', '', '', 'date') ?>
+              <?php input('from', 'Od:', isset($_GET['from']) && !empty($_GET['from']) ? $_GET['from'] : '', '', 'date') ?>
+              <?php input('to', 'Do:', isset($_GET['to']) && !empty($_GET['to']) ? $_GET['to'] : '', '', 'date') ?>
               <div class='input--container'>
                 <label class='input--label' for='car'>Samochód:</label>
                 <?php
@@ -151,7 +151,7 @@ include './includes/header.php';
                     <select class="input" id="car" name="car">
                       <?php while($car = $cars->fetch_assoc()){ ?>
 
-                      <option value='<?= $car["id"] ?>'><?= $car["brand"]." ".$car["model"]." ".$car["type"]." ".$car["year"]." ".$car["engine"]." ".$car["clutch"]; ?></option>
+                      <option <?= isset($_GET['car']) && $car['id'] == $_GET['car'] ? 'selected' : '' ?> value='<?= $car["id"] ?>'><?= $car["brand"]." ".$car["model"]." ".$car["type"]." ".$car["year"]." ".$car["engine"]." ".$car["clutch"]; ?></option>
 
                       <?php } ?>
                     </select>
