@@ -6,7 +6,7 @@ require_once './includes/init.php';
 include './includes/header.php';
 ?>
 <div class="columns col-center">
-  <div class="column col-75">
+  <div class="column page-column">
     <h1>
       O firmie
     </h1>

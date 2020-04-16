@@ -63,7 +63,7 @@ $pages = [
   ],
   [
     "name" => "Kalkulator",
-    "url" => $config['site_url'].'/'
+    "url" => $config['site_url'].'/calculator.php'
   ],
   [
     "name" => "Panel zarządzania",
