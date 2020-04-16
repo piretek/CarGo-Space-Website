@@ -9,38 +9,21 @@ if(!defined('SECURE_BOOT')) exit;
   <div class='columns'>
     <div class="column col-100">
       <h4>Zmiana imienia i nazwiska:</h4>
-      <div class='input--container'>
-        <label class='input--label' for='firstname'>Imię:</label>
-        <input class='input' id='firstname' type="text" name="firstname" value='<?= $sessionUser['firstname'] ?>'>
-      </div>
-      <div class='input--container'>
-        <label class='input--label' for='lastname'>Nazwisko:</label>
-        <input class='input' id='lastname' type="text" name="lastname" value='<?= $sessionUser['lastname'] ?>'>
-      </div>
+      <?php input('firstname', 'Imię:', $sessionUser['firstname'] ) ?>
+      <?php input('lastname', 'Nazwisko:', $sessionUser['lastname']) ?>
     </div>
     <div class="column col-50">
       <h4>Zmiana e-email:</h4>
-      <div class='input--container'>
-        <label class='input--label' for='email'>Nowy e-mail:</label>
-        <input class='input' id='email' type="text" name="email">
-      </div>
+      <?php input('email', 'Nowy e-mail: ') ?>
       <p>Aktualny email: <?= $sessionUser['email'] ?></p>
     </div>
     <div class="column col-50">
       <h4>Zmiana hasła:</h4>
-      <div class='input--container'>
-        <label class='input--label' for='password'>Nowe hasło:</label>
-        <input class='input' id='password' type="password" name="password">
-      </div><div class='input--container'>
-        <label class='input--label' for='repeatedPassword'>Powtórz nowe hasło:</label>
-        <input class='input' id='repeatedPassword' type="password" name="repeatedPassword">
-      </div>
+      <?php input('password', 'Nowe hasło:', '', '', 'password') ?>
+      <?php input('repeatedPassword', 'Powtórz nowe hasło:', '', '', 'password') ?>
     </div>
     <div class="column col-50">
-      <div class='input--container'>
-        <label class='input--label' for='oldPassword'>Aktualne hasło:</label>
-        <input class='input' id='oldPassword' type="password" name="oldPassword">
-      </div>
+      <?php input('oldPassword', 'Aktualne hasło:', '', '', 'password') ?>
     </div>
   </div>
   <button type='submit'>Zaktualizuj</button>

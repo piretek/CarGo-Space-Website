@@ -23,10 +23,12 @@ $actions = [
   'add-model' => 'add-model',
   'edit-model' => 'edit-model',
   'delete-model' => 'edit-model',
+  // User account
+  'user-selfedit' => 'user-account',
 ];
 
 if (isset($_POST['action'])) {
-  $isNotAdd = substr($_POST['action'], 0, 3) !== 'add';
+  $isNotAdd = substr($_POST['action'], 0, 3) !== 'add' && $_POST['action'] !== 'user-selfedit';
 
   if ($isNotAdd && (!isset($_POST['id']) || empty($_POST['id']))) {
     echo 'Nieznana akcja.';
@@ -41,7 +43,6 @@ if (isset($_POST['action'])) {
       exit;
     }
   }
-
 }
 
 include './includes/header.php';
@@ -120,7 +121,7 @@ include './includes/header.php';
                 </div>
                 <div class="column col-50">
                   <p class='nm ta-right'>
-                    Witaj, <?= $sessionUser['email'] ?>
+                    Witaj, <?= !empty($sessionUser['firstname']) && !empty($sessionUser['lastname']) ? "{$sessionUser['firstname']} {$sessionUser['lastname']}" : $sessionUser['email'] ?>!
                     <a class='logout-link' href='logout.php'>
                       <button>Wyloguj się</button>
                     </a>
