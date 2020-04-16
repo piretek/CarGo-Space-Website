@@ -5,7 +5,7 @@ function showImage( newImage ) {
   })
 
   const background = document.querySelector(`#background-${newImage}`)
-  if (barkground) background.classList.add('showing');
+  if (background) background.classList.add('showing');
 }
 
 document.addEventListener('DOMContentLoaded', function() {
