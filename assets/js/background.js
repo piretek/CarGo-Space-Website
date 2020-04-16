@@ -5,7 +5,7 @@ function showImage( newImage ) {
   })
 
   const background = document.querySelector(`#background-${newImage}`)
-  background.classList.add('showing');
+  if (background) background.classList.add('showing');
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -17,27 +17,31 @@ document.addEventListener('DOMContentLoaded', function() {
   const bttnLeft = document.querySelector('.bg-left');
   const bttnRight = document.querySelector('.bg-right');
 
-  bttnLeft.addEventListener('click', function () {
-    if (showingImage == 0) {
-      showingImage = backgrounds.length - 1
-    }
-    else {
-      showingImage -= 1
-    }
+  if (bttnLeft) {
+    bttnLeft.addEventListener('click', function () {
+      if (showingImage == 0) {
+        showingImage = backgrounds.length - 1
+      }
+      else {
+        showingImage -= 1
+      }
 
-    showImage(showingImage)
-  })
+      showImage(showingImage)
+    })
+  }
 
-  bttnRight.addEventListener('click', function () {
-    if (showingImage == (backgrounds.length - 1)) {
-      showingImage = 0
-    }
-    else {
-      showingImage += 1
-    }
+  if (bttnRight) {
+    bttnRight.addEventListener('click', function () {
+      if (showingImage == (backgrounds.length - 1)) {
+        showingImage = 0
+      }
+      else {
+        showingImage += 1
+      }
 
-    showImage(showingImage)
-  })
+      showImage(showingImage)
+    })
+  }
 
   setInterval(function() {
     if (showingImage == (backgrounds.length - 1)) {

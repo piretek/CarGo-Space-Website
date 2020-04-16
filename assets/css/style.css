@@ -45,6 +45,10 @@ body {
   width: 100%;
 }
 
+.min-page-height {
+  min-height: calc(100vh - 225.75px - 42px - 30px);
+}
+
 form.as-anchor,
 form.as-anchor-button {
   display: inline-block;
@@ -84,6 +88,18 @@ form.as-anchor > button[type=submit] {
 
 .columns.columns__no-spacing > .column {
   padding: 0;
+}
+
+.column.page-column {
+  width: 80%;
+  box-sizing: content-box;
+  padding: 0 20px;
+}
+
+@media screen and (max-width: 1024px) {
+  .column.page-column {
+    width: 100%;
+  }
 }
 
 .column.col-100 { width: 100%; }
@@ -173,9 +189,27 @@ span.success {
   width: 100%;
 }
 
+.header {
+  background-color: #EBEBE0;
+  user-select: none;
+}
+
 .menu > .name {
   font-size: 1.5em;
   margin: 0 20px;
+  display: flex;
+  align-items: center;
+}
+
+.menu > .name > span {
+  display: block;
+  margin-top: -5px;
+}
+
+.logo {
+  width: 35px;
+  height: auto;
+  margin: 3.5px 0;
 }
 
 ul.nav {
@@ -266,7 +300,6 @@ ul.nav > li:hover > a {
   padding: 0;
   text-align: center;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
-
 }
 
 .d-menu > .d-menu_element {
@@ -344,7 +377,17 @@ ul.nav > li:hover > a {
   background-color: #E0E0E0;
 }
 
-.about-header{
+.column.page-column.about-page {
+  width: 100%;
+  padding: 0;
+}
+
+.about-page-pd {
+  width: 80%;
+  margin: 10px auto;
+}
+
+.about-header {
   color: #FFF;
   font-family: "Open Sans", sans-serif;
 }
@@ -424,6 +467,7 @@ ul.nav > li:hover > a {
   margin: 12px 20px;
   box-shadow:
   0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+  transition: .1s ease-in;
 }
 
 .car:nth-of-type(1) {
@@ -503,4 +547,162 @@ ul.nav > li:hover > a {
 
 .city:hover {
   transform: scale(1.1);
+}
+  
+.calculator {
+  margin-top: 25px;
+}
+
+.calculator > .column {
+  padding: 0 20px;
+}
+
+.calculator > .column:nth-of-type(1) {
+  padding-left: 0;
+}
+
+.calculator > .column:nth-of-type(3) {
+  padding-right: 0;
+}
+
+.column.car-selector {
+  padding: 0;
+}
+
+.car-selector.col-50 {
+  display: flex;
+  cursor: pointer;
+  margin: 8px;
+  width: calc(50% - 16px);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+  background-color: #F4F4F4;
+  transition: .2s ease-in;
+}
+
+.car-selector.selected {
+  background-color:#d6d6c2;
+}
+
+.car-selector.col-50:hover {
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 3px rgba(0,0,0,.12);
+}
+
+.car-selector .car-image {
+  width: 40%;
+}
+
+.car-selector .car-image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.car-selector .car-content {
+  width: 100%;
+  font-size: .7em;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  padding: 5px 5px 5px 10px;
+}
+
+.car-selector.has-image .car-content {
+  width: 60%;
+}
+
+.car-selector .car-content > p {
+  margin: 0;
+}
+
+.selected-car {
+  border: .3px solid #ABABAB;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  margin: 0 0 30px 0;
+}
+
+.selected-car .sc--image img {
+  width: 100%;
+  height: auto;
+}
+
+.selected-car .sc--content {
+  padding: 15px;
+}
+
+.selected-car .sc--content ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.selected-car p.instruction {
+  font-size: .8em;
+  text-align: center;
+  width: 100%;
+}
+
+a.rent-a-car {
+  display: block;
+  width:  100%;
+  text-align:  center;
+  color: #FFF;
+  background-image: linear-gradient(to right bottom, #2d5b65, #2d5662, #2d515f, #2e4d5c, #2f4858);
+  border-radius: 4px;
+  padding: 8px 0;
+  margin: 20px 0;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+.footer {
+  background-color: #EBEBE0;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 13px;
+}
+
+.footers {
+  padding: 0 30px 30px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.footer-1, .footer-2, .footer-3 {
+  width: calc(100% / 3);
+  text-align: center;
+}
+
+.footer-1, .footer-2 {
+  border-right: 1px solid black;
+}
+
+.footer-h {
+  padding-top: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+.footer-c {
+  width: 100%;
+  padding: 20px 30px;
+  text-align: center;
+  font-size: 11px;
+  background-color: #D6D6C2;
+}
+
+.contact-logo {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  padding: 10px;
+}
+
+@media screen and (max-width: 800px) {
+  .info-content {
+    font-size: 0.8em;
+  }
+  .column.col-75 {
+    width: 100%;
+  }
 }

@@ -113,8 +113,8 @@ if(isset($_POST['email'])){
 include './includes/header.php';
 ?>
 
-<div class='columns col-center'>
-  <div class="column col-75">
+<div class='columns col-center min-page-height'>
+  <div class="column page-column">
     <h1>Kontakt</h1>
     <?php if (isset($_SESSION['contact-form-error'])) : ?>
       <span class='error'>Błąd: <?= $_SESSION['contact-form-error'] ?></span>
@@ -139,8 +139,8 @@ include './includes/header.php';
               <?php input('email', 'Email:', '', 'podaj email') ?>
             </div>
             <div class="column col-50">
-              <?php input('from', 'Od:', '', '', 'date') ?>
-              <?php input('to', 'Do:', '', '', 'date') ?>
+              <?php input('from', 'Od:', isset($_GET['from']) && !empty($_GET['from']) ? $_GET['from'] : '', '', 'date') ?>
+              <?php input('to', 'Do:', isset($_GET['to']) && !empty($_GET['to']) ? $_GET['to'] : '', '', 'date') ?>
               <div class='input--container'>
                 <label class='input--label' for='car'>Samochód:</label>
                 <?php
@@ -151,7 +151,7 @@ include './includes/header.php';
                     <select class="input" id="car" name="car">
                       <?php while($car = $cars->fetch_assoc()){ ?>
 
-                      <option value='<?= $car["id"] ?>'><?= $car["brand"]." ".$car["model"]." ".$car["type"]." ".$car["year"]." ".$car["engine"]." ".$car["clutch"]; ?></option>
+                      <option <?= isset($_GET['car']) && $car['id'] == $_GET['car'] ? 'selected' : '' ?> value='<?= $car["id"] ?>'><?= $car["brand"]." ".$car["model"]." ".$car["type"]." ".$car["year"]." ".$car["engine"]." ".$car["clutch"]; ?></option>
 
                       <?php } ?>
                     </select>
@@ -208,6 +208,7 @@ include './includes/header.php';
         </div>
       </div>
       <div class='column col-30'>
+        <img class="contact-logo" src="<?= $config['site_url'] ?>/assets/images/logo.png" alt="CarGo Space">
         <h2>CarGo Space S.A.</h2>
         <h5>Wypożyczalnia aut osobowych</h5>
         <p>
@@ -219,7 +220,7 @@ include './includes/header.php';
           REGON: 893831005
         </p>
         <p>
-         Numer rachunku bankowego:<br /> 10902910238549384336005157
+         Numer rachunku bankowego:<br /> 10 9029 1023 8549 3843 3600 5157
         </p>
         </p>
       </div>
