@@ -189,9 +189,27 @@ span.success {
   width: 100%;
 }
 
+.header {
+  background-color: #EBEBE0;
+  user-select: none;
+}
+
 .menu > .name {
   font-size: 1.5em;
   margin: 0 20px;
+  display: flex;
+  align-items: center;
+}
+
+.menu > .name > span {
+  display: block;
+  margin-top: -5px;
+}
+
+.logo {
+  width: 35px;
+  height: auto;
+  margin: 3.5px 0;
 }
 
 ul.nav {
@@ -648,8 +666,11 @@ a.rent-a-car {
   background-color: #D6D6C2;
 }
 
-.header {
-  background-color: #EBEBE0;
+.contact-logo {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  padding: 10px;
 }
 
 @media screen and (max-width: 800px) {
@@ -660,5 +681,3 @@ a.rent-a-car {
     width: 100%;
   }
 }
-
-

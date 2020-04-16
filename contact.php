@@ -172,6 +172,7 @@ include './includes/header.php';
         </form>
       </div>
       <div class='column col-50'>
+        <img class="contact-logo" src="<?= $config['site_url'] ?>/assets/images/logo.png" alt="CarGo Space">
         <h2>CarGo Space S.A.</h2>
         <h5>Wypożyczalnia aut osobowych</h5>
         <p>
