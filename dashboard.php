@@ -56,7 +56,6 @@ include './includes/header.php';
             <ul class='d-menu'>
               <li id='rents' class='page-bttn d-menu_element'>Wypożyczenia</li>
               <li id='fleet' class='page-bttn d-menu_element'>Flota</li>
-              <li id='users' class='page-bttn d-menu_element'>Użytkownicy</li>
               <li id='account' class='page-bttn d-menu_element'>Twoje konto</li>
             </ul>
           </div>
@@ -133,9 +132,6 @@ include './includes/header.php';
                 </div>
                 <div id='page-fleet' class="page column col-100">
                   <?php include_once 'dashboard/fleet.php' ?>
-                </div>
-                <div id='page-users' class="page column col-100">
-                  <?php include_once 'dashboard/users.php' ?>
                 </div>
                 <div id='page-account' class="page column col-100">
                   <?php include_once 'dashboard/user-account.php' ?>

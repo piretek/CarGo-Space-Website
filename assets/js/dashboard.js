@@ -33,9 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
   else if (urlParams.get('view') === 'fleet') {
     changePage('fleet', 'Flota')
   }
-  else if (urlParams.get('view') === 'users') {
-    changePage('users', 'Użytkownicy')
-  }
   else if (urlParams.get('view') === 'account') {
     changePage('account', 'Twoje konto')
   }
