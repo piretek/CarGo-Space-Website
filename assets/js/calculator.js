@@ -51,7 +51,7 @@ const calculate = () => {
 
       costs.costNetto.label = document.createElement('strong')
       costs.costNetto.label.textContent = 'Cena netto: '
-      costs.costNetto.text = document.createTextNode(priceWithCurrency(price * dayDifference))
+      costs.costNetto.text = document.createTextNode(priceWithCurrency(price * dayDifference * 0.77))
 
       costs.costVat.label = document.createElement('strong')
       costs.costVat.label.textContent = 'VAT (23%): '
