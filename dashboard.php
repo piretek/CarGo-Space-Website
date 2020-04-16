@@ -48,7 +48,7 @@ include './includes/header.php';
 ?>
 
 <div class="columns col-center">
-  <div class="column col-75">
+  <div class="column page-column">
     <div class="columns">
       <div class='column col-100'>
         <div class="columns">

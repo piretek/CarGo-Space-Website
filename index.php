@@ -25,7 +25,7 @@ include './includes/header.php';
 </style>
 
 <div class="columns col-center">
-  <div class="column col-75">
+  <div class="column page-column">
     <div class="fleet">
       <h1>Nasza flota</h1>
 

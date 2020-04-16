@@ -114,7 +114,7 @@ include './includes/header.php';
 ?>
 
 <div class='columns col-center'>
-  <div class="column col-75">
+  <div class="column page-column">
     <h1>Kontakt</h1>
     <?php if (isset($_SESSION['contact-form-error'])) : ?>
       <span class='error'>Błąd: <?= $_SESSION['contact-form-error'] ?></span>
