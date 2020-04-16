@@ -479,3 +479,55 @@ ul.nav > li:hover > a {
   display: flex;
   justify-content: center;
 }
+
+.footer {
+  background-color: #EBEBE0;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 13px;
+}
+
+.footers{
+  padding: 0 30px 30px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.footer-1, .footer-2, .footer-3{
+  width: calc(100% / 3);
+  text-align: center;
+}
+
+.footer-1, .footer-2{
+  border-right: 1px solid black;
+}
+
+.footer-h{
+  padding-top: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+.footer-c{
+  width: 100%;
+  padding: 20px 30px;
+  text-align: center;
+  font-size: 11px;
+  background-color: #D6D6C2;
+}
+
+.header{
+  background-color: #EBEBE0;
+}
+
+@media screen and (max-width: 800px) {
+  .info-content {
+    font-size: 0.8em;
+  }
+  .column.col-75 {
+    width: 100%;
+  }
+}
+
+
