@@ -12,7 +12,7 @@ if (USER_AUTHORIZED) {
 include './includes/header.php';
 ?>
 
-<div class='columns col-center'>
+<div class='columns col-center min-page-height'>
   <div class="column col-50">
     <div class='columns'>
       <div class='column col-100'>

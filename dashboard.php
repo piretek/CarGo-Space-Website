@@ -47,7 +47,7 @@ if (isset($_POST['action'])) {
 include './includes/header.php';
 ?>
 
-<div class="columns col-center">
+<div class="columns col-center min-page-height">
   <div class="column page-column">
     <div class="columns">
       <div class='column col-100'>

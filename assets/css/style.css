@@ -45,6 +45,10 @@ body {
   width: 100%;
 }
 
+.min-page-height {
+  min-height: calc(100vh - 225.75px - 42px - 30px);
+}
+
 form.as-anchor,
 form.as-anchor-button {
   display: inline-block;
