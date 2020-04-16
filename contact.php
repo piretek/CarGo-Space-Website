@@ -167,7 +167,7 @@ include './includes/header.php';
             </div>
           </div>
           <div>
-            <button type="submit">WYPOŻYCZ</button>
+            <button type="submit" class='beautiful'>Wypożycz</button>
           </div>
         </form>
       </div>
