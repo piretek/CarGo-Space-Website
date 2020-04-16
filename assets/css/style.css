@@ -192,6 +192,19 @@ span.success {
 .menu > .name {
   font-size: 1.5em;
   margin: 0 20px;
+  display: flex;
+  align-items: center;
+}
+
+.menu > .name > span {
+  display: block;
+  margin-top: -5px;
+}
+
+.logo {
+  width: 35px;
+  height: auto;
+  margin: 3.5px 0;
 }
 
 ul.nav {

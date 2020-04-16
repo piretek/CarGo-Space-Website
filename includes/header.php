@@ -12,6 +12,11 @@ if (!defined('SECURE_BOOT')) exit();
 
   <link rel='stylesheet' type='text/css' href='assets/css/style.css' />
 
+  <link rel="icon" type="image/png" href="<?= $config['site_url'] ?>/assets/images/logo-16.png">
+
+  <meta name="theme-color" content="#D6D6C2">
+  <link rel="icon" sizes="192x192" href="<?= $config['site_url'] ?>/assets/images/logo-192.png">
+
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -75,7 +80,8 @@ $pages = [
 <div class='wrapper'>
 <div class='header'>
   <div class="menu">
-    <h1 class='name'>CarGo Space</h1>
+    <img class="logo" src="<?= $config['site_url'] ?>/assets/images/logo-42.png" alt="CarGo Space">
+    <h1 class='name'><span>CarGo Space</span></h1>
     <ul class='nav'>
       <?php
         foreach($pages as $page){
