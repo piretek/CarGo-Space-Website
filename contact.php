@@ -187,7 +187,7 @@ include './includes/header.php';
           REGON: 893831005
         </p>
         <p>
-         Numer rachunku bankowego:<br /> 10902910238549384336005157
+         Numer rachunku bankowego:<br /> 10 9029 1023 8549 3843 3600 5157
         </p>
         </p>
       </div>

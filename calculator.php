@@ -8,8 +8,8 @@ include './includes/header.php';
 ?>
 <div class="columns col-center">
   <div class="column page-column">
-    <h1>Kalkulator wynajmu</h1>
-    <p>Poniżej prosmy o wybranie pojazdu oraz ilość dni, na jaką chcą go Państwo wypożyczyć.</p>
+    <h1>Kalkulator ceny wynajmu</h1>
+    <p>Poniżej prosmy o wybranie pojazdu oraz okres, na jaki chcą go Państwo wypożyczyć.</p>
     <div class='columns calculator'>
       <div class='column col-50'>
         <h3>Wybierz pojazd</h3><?php
@@ -30,7 +30,7 @@ include './includes/header.php';
                   <p>
                     <span class='car-brand'><?= $carInfo['brand'] ?></span> <span class='car-model'><?= $carInfo['model'] ?></span><br />
                     <span class='car-type'><?= $carInfo['type']?></span> <span class='car-engine'><?= $carInfo['engine'] ?></span> | <span class='car-fuel'><?= $carInfo['fuel'] ?></span><br />
-                    <span class='car-clutch'><?= 'Skrzynia '.$carInfo['clutch'] ?></span>
+                    Skrzynia <span class='car-clutch'><?= $carInfo['clutch'] ?></span>
                   </p>
                 </div>
               </div>
@@ -46,12 +46,18 @@ include './includes/header.php';
         </div>
         <hr />
         <h3>Podaj niezbędne informacje</h3>
-        <?php input('begin', 'Od:', date('Y-m-d', strtotime('tomorrow')), '', 'date') ?>
-        <?php input('end', 'Do:', '', '', 'date') ?>
+        <?php input('begin', 'Od:', date('Y-m-d', strtotime('tomorrow')), '', 'date', null, [
+          'min' => date('Y-m-d', strtotime('tomorrow'))
+        ]) ?>
+        <?php input('end', 'Do:', '', '', 'date', null, [
+          'min' => date('Y-m-d', strtotime('today +2 days'))
+        ]) ?>
       </div>
       <div class='column col-25'>
         <h3>Koszty wynajmu</h3>
-        <p>Wybierz pojazd i wypełnij formularz z informacjami</p>
+        <div class='costs'>
+          <p>Wybierz pojazd i wypełnij formularz z informacjami</p>
+        </div>
       </div>
     </div>
   </div>

@@ -23,13 +23,13 @@ function input( $id, $label, $value = '', $placeholder = '', $type = 'text', $er
   if ($errorPrefix === null) $errorPrefix = pathinfo(__DIR__.$_SERVER['PHP_SELF'], PATHINFO_FILENAME);
 
   if ($type == 'checkbox' || $type == 'radio') : ?>
-    <div class='input--container rc'>
+    <div class='input--container input-id--<?= $id ?> rc'>
       <input class='input' <?= $attributesText ?>>
       <label class='input--label' for="<?= $id ?>"><?= $label ?></label>
     </div>
     <span class='input--error'><?php $errField = $id; if (isset($_SESSION[$errorPrefix.'-form-error-'.$errField])) { echo $_SESSION[$errorPrefix.'-form-error-'.$errField]; unset($_SESSION[$errorPrefix.'-form-error-'.$errField]); } ?></span>
   <?php else : ?>
-    <div class='input--container'>
+    <div class='input--container input-id--<?= $id ?>'>
       <label class='input--label' for="<?= $id ?>"><?= $label ?></label>
       <input class='input' <?= $attributesText ?>>
       <span class='input--error'><?php $errField = $id; if (isset($_SESSION[$errorPrefix.'-form-error-'.$errField])) { echo $_SESSION[$errorPrefix.'-form-error-'.$errField]; unset($_SESSION[$errorPrefix.'-form-error-'.$errField]); } ?></span>
