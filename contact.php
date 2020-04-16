@@ -113,7 +113,7 @@ if(isset($_POST['email'])){
 include './includes/header.php';
 ?>
 
-<div class='columns col-center'>
+<div class='columns col-center min-page-height'>
   <div class="column page-column">
     <h1>Kontakt</h1>
     <?php if (isset($_SESSION['contact-form-error'])) : ?>
