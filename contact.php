@@ -171,7 +171,8 @@ include './includes/header.php';
                 }
 
                 ?>
-              <span class='input--error'><?php $errField = 'car'; if (isset($_SESSION[$errorPrefix.'-form-error-'.$errField])) { echo $_SESSION[$errorPrefix.'-form-error-'.$errField]; unset($_SESSION[$errorPrefix.'-form-error-'.$errField]); } ?></span>
+                <span class='input--error'><?php $errField = 'car'; if (isset($_SESSION['contact-form-error-'.$errField])) { echo $_SESSION['contact-form-error-'.$errField]; unset($_SESSION['contact-form-error-'.$errField]); } ?></span>
+              </div>
             </div>
           </div>
           <div>
@@ -185,15 +186,15 @@ include './includes/header.php';
         </h2>
         <div class="column col-center">
           <div class="cities">
-              <div class="city">
-                <img src="assets/images/cities/lublin.png" alt="Lublin">
-                <p>
-                  CarGo Space Lublin<br/>
-                  ul. Sezamkowa 20 (2. piętro, pokój nr 14)<br />
-                  20-000 Lublin<br/>
-                  E-mail: contact.lublin@cargospace.com
-                </p>
-              </div>
+            <div class="city">
+              <img src="assets/images/cities/lublin.png" alt="Lublin">
+              <p>
+                CarGo Space Lublin<br/>
+                ul. Sezamkowa 20 (2. piętro, pokój nr 14)<br />
+                20-000 Lublin<br/>
+                E-mail: contact.lublin@cargospace.com
+              </p>
+            </div>
             <div class="city">
               <img src="assets/images/cities/warsaw.png" alt="Warszawa">
               <p>
@@ -229,7 +230,6 @@ include './includes/header.php';
         </p>
         <p>
          Numer rachunku bankowego:<br /> 10 9029 1023 8549 3843 3600 5157
-        </p>
         </p>
       </div>
     </div>
