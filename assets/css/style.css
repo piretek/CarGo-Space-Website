@@ -775,6 +775,10 @@ table.search-results td:nth-child(3) {
   cursor: pointer;
 }
 
+table.search-results td:nth-child(3):hover {
+  text-decoration: underline;
+}
+
 .footer {
   background-color: #EBEBE0;
   text-align: center;
