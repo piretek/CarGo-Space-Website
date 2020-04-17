@@ -596,8 +596,8 @@ ul.nav > li:hover > a {
 .cities img {
   width: auto;
   height: auto;
-  max-width: 30%;
-  max-height: 30%;
+  max-width: 130px;
+  max-height: 120px;
   margin-right: 20px;
 }
 
