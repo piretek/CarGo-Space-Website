@@ -125,7 +125,7 @@ include './includes/header.php';
       <?php unset($_SESSION['contact-form-success']); ?>
     <?php endif; ?>
     <div class="columns">
-      <div class="column col-30">
+      <div class="column col-40" style = "padding-right: 65px;">
         <form action="contact.php" method="POST">
           <div class="columns">
             <div class="column col-50">
@@ -174,7 +174,7 @@ include './includes/header.php';
           </div>
         </form>
       </div>
-      <div class="column col-40">
+      <div class="column col-35">
         <h2>
           Gdzie działamy?
         </h2>
@@ -210,7 +210,7 @@ include './includes/header.php';
           </div>
         </div>
       </div>
-      <div class='contact-align column col-30'>
+      <div class='contact-align column col-25'>
         <img class="contact-logo" src="<?= $config['site_url'] ?>/assets/images/logo.png" alt="CarGo Space">
         <h2>CarGo Space Polska S.A.</h2>
         <h5>Wypożyczalnia aut osobowych</h5>
