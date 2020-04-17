@@ -3,7 +3,8 @@
 if (!defined('SECURE_BOOT')) exit();
 
 ?>
-    <div class="footer">
+
+    <div class="footer <?= basename($_SERVER['PHP_SELF']) == 'about.php' ? 'rm-margin' : '' ?>">
       <div class="footer-h">
         <h1>CarGo Space*</h1>
       </div>
