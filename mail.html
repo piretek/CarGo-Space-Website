@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>email</title>
+        <style>
+            body {
+                font-family: 'Open Sans', sans-serif;
+                font-weight: bold;
+            }
+
+            a {
+                text-decoration: none;
+            }
+            
+            .col-40 {
+                width: 40%;
+                box-shadow: 0 2px 2px 0 rgba(0,0,0,.7   ), 0 3px 1px -2px rgba(0,0,0,.5), 0 1px 5px 0 rgba(0,0,0,.5);
+            }
+
+            .footer {
+                padding: 5px 0;
+                font-size: 12px;
+            }
+
+            .content{
+                padding: 7px 0;
+            }
+
+        </style>
+    </head>
+    <body>
+        <center>
+            <img style="max-width: 200px; max-height: 200px;" src="assets/images/logo.png">
+            <h1>CarGo Space S.A</h1>
+           <div class="col-40">     
+            <div class="content">
+                <h2>Witaj {{user}}</h2>
+                <p>{{mail_content}}</p>
+            </div>
+            <hr style="width: 90%; border-radius: 30px;">
+            <div class="footer">
+                Wiadomość została wysłana automatycznie, prosimy na nią nie odpowiadać.<br/>
+                Otrzymałeś/aś tego maila w związku z korzystaniem z naszych usług.
+                <br/><br/>
+                Copyrighting &copy; CarGo Space S.A 2020 <a href="#">www.cargospace.com</a><br/>
+            </div>
+           </div> 
+        </center>
+    </body>
+</html>
