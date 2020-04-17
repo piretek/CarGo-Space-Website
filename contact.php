@@ -129,14 +129,17 @@ include './includes/header.php';
         <form action="contact.php" method="POST">
           <div class="columns">
             <div class="column col-50">
-              <?php input('name', 'Imie:', '', 'podaj imie') ?>
-              <?php input('sruname', 'Nazwisko:', '', 'podaj nazwisko') ?>
-              <?php input('pesel', 'PESEL:', '', 'podaj numer PESEL') ?>
-              <?php input('city', 'Miejscowość:', '', 'podaj miejscowość') ?>
-              <?php input('street', 'Ulica:', '', 'podaj ulice') ?>
-              <?php input('number', 'Numer domu/bloku:', '', 'podaj numer') ?>
-              <?php input('phone', 'Numer telefonu:', '', 'podaj nr telefonu') ?>
-              <?php input('email', 'Email:', '', 'podaj email') ?>
+              <?php input('name', 'Imię:', '', 'np. Jan') ?>
+              <?php input('sruname', 'Nazwisko:', '', 'np. Kowalski') ?>
+              <?php input('pesel', 'PESEL:', '', 'Numer PESEL (11 cyfr)', 'text', null, [
+                'minlength' => '11',
+                'maxlength' => '11'
+              ]) ?>
+              <?php input('city', 'Miejscowość:', '', 'np. Warszawa') ?>
+              <?php input('street', 'Ulica:', '', 'np. ul. Wiejska') ?>
+              <?php input('number', 'Numer domu/bloku:', '', 'np. 3/1') ?>
+              <?php input('phone', 'Numer telefonu:', '', 'np. 555 555 555') ?>
+              <?php input('email', 'Email:', '', 'np. jan.kowalski@example.com', 'email') ?>
             </div>
             <div class="column col-50">
               <?php input('from', 'Od:', isset($_GET['from']) && !empty($_GET['from']) ? $_GET['from'] : '', '', 'date') ?>
@@ -158,7 +161,7 @@ include './includes/header.php';
 
                   <?php
                   }
-                  else{
+                  else {
                     echo "Brak pojazdów w systemie";
                   }
                 ?>
@@ -167,49 +170,49 @@ include './includes/header.php';
             </div>
           </div>
           <div>
-            <button type="submit">WYPOŻYCZ</button>
+            <button type="submit" class='beautiful'>Wypożycz</button>
           </div>
         </form>
       </div>
       <div class="column col-40">
         <h2>
-          Gdzie działamy?               
+          Gdzie działamy?
         </h2>
         <div class="column col-center">
           <div class="cities">
-              <div class="city">  
+              <div class="city">
                 <img src="assets/images/cities/lublin.png" alt="Lublin">
                 <p>
                   CarGo Space Lublin<br/>
-                  ul. Sezamkowa 20 (2. piętro, pokój nr. 14)<br />
+                  ul. Sezamkowa 20 (2. piętro, pokój nr 14)<br />
                   20-000 Lublin<br/>
-                  E-mail: contact.lublin@cargospace.pl
+                  E-mail: contact.lublin@cargospace.com
                 </p>
-              </div> 
+              </div>
             <div class="city">
               <img src="assets/images/cities/warsaw.png" alt="Warszawa">
               <p>
-                  CarGo Space Warszawa<br/>
-                  ul.Wiejska 3 (parter, pokój nr. 12)<br/>
-                  00-003 Warszawa<br/>
-                  E-mail: contact.warszawa@cargospace.pl
-                </p>
+                CarGo Space Warszawa<br/>
+                ul. Wiejska 3 (parter, pokój nr 12)<br/>
+                00-003 Warszawa<br/>
+                E-mail: contact.waraw@cargospace.com
+              </p>
             </div>
             <div class="city">
               <img src="assets/images/cities/cracow.png" alt="Kraków">
               <p>
-                  CarGo Space Kraków<br/>
-                  ul.Smocza 1 <br/>
-                  30-002 Kraków<br/>
-                  E-mail: contact.krakow@cargospace.pl
-                </p>
+                CarGo Space Kraków<br/>
+                ul. Smocza 1<br/>
+                30-002 Kraków<br/>
+                E-mail: contact.cracow@cargospace.com
+              </p>
             </div>
-          </div>  
+          </div>
         </div>
       </div>
       <div class='contact-align column col-30'>
         <img class="contact-logo" src="<?= $config['site_url'] ?>/assets/images/logo.png" alt="CarGo Space">
-        <h2>CarGo Space S.A.</h2>
+        <h2>CarGo Space Polska S.A.</h2>
         <h5>Wypożyczalnia aut osobowych</h5>
         <p>
           Tel.: <a href='tel:555555555'>555 555 555</a><br />

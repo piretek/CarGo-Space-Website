@@ -9,7 +9,7 @@ if (!defined('SECURE_BOOT')) exit();
     </div>
     <div class="footers">
       <div class="footer-1">
-        <h2>Założyciele firmy</h2>
+        <h2>Realizacja</h2>
           Piotr Czarnecki, Michał Kowalski i Paulina Sznajder
           <br>
           z klasy 3ft.
@@ -26,7 +26,7 @@ if (!defined('SECURE_BOOT')) exit();
       </div>
     </div>
     <div class="footer-c">
-      Copyright &copy; 2020 CarGo Space S.A. Polska, Wszelkie prawa zastrzeżone.
+      Copyright &copy; 2020 CarGo Space Polska S.A. Wszelkie prawa zastrzeżone.
     </div>
   </div>
 </div>
