@@ -1,5 +1,6 @@
 <?php
 
+$pageName = 'O firmie';
 $auth = false;
 require_once './includes/init.php';
 

@@ -94,6 +94,13 @@ $pages = [
       ?>
     </ul>
   </div>
+
+  <?php if ( $db->query("SELECT * FROM users")->num_rows == 0 ) : ?>
+    <div class='no-user-consent'>
+      <p>W systemie nie jest zarejestrowany żaden użytkownik. Aby w pełni wykorzystać potencjał systemu, proszę o założenie konta do zarządzania zasobami. <?= basename($_SERVER['PHP_SELF']) != 'auth.php' ? "Aby to zrobić, <a href='auth.php'>kliknij tutaj</a>." : '' ?></p>
+    </div>
+  <?php endif; ?>
+
   <?php if (basename($_SERVER['PHP_SELF']) == 'index.php') : ?>
   <div class="header-background">
     <button class='bg-bttn bg-left'>&lt;</button>
@@ -103,6 +110,10 @@ $pages = [
         <div class='background <?= $i == 0 ? 'showing' : '' ?>' id='background-<?= $i ?>'></div>
       <?php endforeach; ?>
 
+    </div>
+    <div class='text'>
+      <h1>CarGo Space</h1>
+      <p>Car no do that, car no fly...</p>
     </div>
     <button class='bg-bttn bg-right'>&gt;</button>
   </div>
