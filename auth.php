@@ -43,7 +43,7 @@ include './includes/header.php';
 
       <?php if ($db->query("SELECT * FROM users")->num_rows == 0) : ?>
         <div class='column col-50'>
-          <h4>Zarejestruj się</h4>
+          <h4>Zarejestruj konto administratora</h4>
 
           <?php if (isset($_SESSION['register-form-error'])) : ?>
             <span class='error'>Błąd: <?= $_SESSION['register-form-error'] ?></span>
