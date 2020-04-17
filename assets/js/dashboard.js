@@ -13,12 +13,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector(`.page--title`).innerHTML = title
   }
 
-  const additionalPages = ['car', 'rent']
-
   pageButtons.forEach((pageButton) => {
     pageButton.addEventListener('click', function() {
 
-      if (urlParams.has('action') || (urlParams.has('view') && additionalPages.includes(urlParams.get('view')))) {
+      if (urlParams.has('action') || (urlParams.has('view') && urlParams.get('view') == 'car')) {
         window.location.href = site_url + '/dashboard.php?view=' + pageButton.getAttribute('id')
       }
       else {
@@ -43,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(e) {
       e.preventDefault()
 
-      if (!confirm('Czy na pewno chcesz wykonać tą operację?')) {
+      if (!confirm('Czy na pewno chcesz dokonać usunięcia?')) {
         return false
       }
       else {

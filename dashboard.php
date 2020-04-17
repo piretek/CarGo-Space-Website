@@ -27,8 +27,6 @@ $actions = [
   'user-selfedit' => 'user-account',
   // Rents
   'add-rent' => 'add-rent',
-  'edit-rent' => 'edit-rent',
-  'edit-rent-status' => 'edit-rent',
 ];
 
 if (isset($_POST['action'])) {
@@ -105,10 +103,6 @@ include './includes/header.php';
             <?php elseif (isset($_GET['view']) && $_GET['view'] == 'car' && isset($_GET['id']) && !empty($_GET['id'])) : ?>
 
               <?php include_once "dashboard/car.php" ?>
-
-            <?php elseif (isset($_GET['view']) && $_GET['view'] == 'rent' && isset($_GET['id']) && !empty($_GET['id'])) : ?>
-
-              <?php include_once "dashboard/rent.php" ?>
 
             <?php else : ?>
 

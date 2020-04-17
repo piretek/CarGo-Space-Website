@@ -98,7 +98,7 @@ else {
                 <?php while ($rent = $rents->fetch_assoc()) : ?>
                   <tr>
                     <td><?= $rent['client'] ?></td>
-                    <td><?= $rentStatus[$rent['status']] ?></td>
+                    <td><?= '' ?></td>
                     <td><?= date('d.m.Y', $rent['begin']).' - '.date('d.m.Y', $rent['end']) ?></td>
                     <td>
                       <a href="?view=rent&id=<?= $car['id'] ?>">Zobacz</a>
