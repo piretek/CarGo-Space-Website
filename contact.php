@@ -84,7 +84,7 @@ if(isset($_POST['email'])){
 
     $clients = $db->query("SELECT * FROM clients WHERE pesel = '{$_POST['pesel']}'");
     if($clients->num_rows == 0){
-      $db->query("INSERT INTO clients VALUES (null,'{$_POST['name']}','{$_POST['surname']}','{$_POST['city']}','{$_POST['street']}','{$_POST['number']}','{$_POST['phone']}','{$_POST['email']}','{$_POST['pesel']}')");
+      $db->query("INSERT INTO clients VALUES (null,'{$_POST['name']}','{$_POST['surname']}','{$_POST['city']}','{$_POST['street']}','{$_POST['number']}','{$_POST['phone']}','{$_POST['email']}','{$_POST['pesel']}', '".time()."')");
 
       $client_id = $db->insert_id;
     }
