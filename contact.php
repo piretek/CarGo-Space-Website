@@ -129,14 +129,17 @@ include './includes/header.php';
         <form action="contact.php" method="POST">
           <div class="columns">
             <div class="column col-50">
-              <?php input('name', 'Imie:', '', 'podaj imie') ?>
-              <?php input('sruname', 'Nazwisko:', '', 'podaj nazwisko') ?>
-              <?php input('pesel', 'PESEL:', '', 'podaj numer PESEL') ?>
-              <?php input('city', 'Miejscowość:', '', 'podaj miejscowość') ?>
-              <?php input('street', 'Ulica:', '', 'podaj ulice') ?>
-              <?php input('number', 'Numer domu/bloku:', '', 'podaj numer') ?>
-              <?php input('phone', 'Numer telefonu:', '', 'podaj nr telefonu') ?>
-              <?php input('email', 'Email:', '', 'podaj email') ?>
+              <?php input('name', 'Imię:', '', 'np. Jan') ?>
+              <?php input('sruname', 'Nazwisko:', '', 'np. Kowalski') ?>
+              <?php input('pesel', 'PESEL:', '', 'Numer PESEL (11 cyfr)', 'text', null, [
+                'minlength' => '11',
+                'maxlength' => '11'
+              ]) ?>
+              <?php input('city', 'Miejscowość:', '', 'np. Warszawa') ?>
+              <?php input('street', 'Ulica:', '', 'np. ul. Wiejska') ?>
+              <?php input('number', 'Numer domu/bloku:', '', 'np. 3/1') ?>
+              <?php input('phone', 'Numer telefonu:', '', 'np. 555 555 555') ?>
+              <?php input('email', 'Email:', '', 'np. jan.kowalski@example.com', 'email') ?>
             </div>
             <div class="column col-50">
               <?php input('from', 'Od:', isset($_GET['from']) && !empty($_GET['from']) ? $_GET['from'] : '', '', 'date') ?>
