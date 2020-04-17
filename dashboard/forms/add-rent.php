@@ -175,7 +175,7 @@ $doWeHaveAnyClient = $db->query("SELECT * FROM clients")->num_rows != 0 ? true :
   <span class='success'><?= $_SESSION['dashboard-form-success'] ?></span>
   <?php unset($_SESSION['dashboard-form-success']); ?>
 <?php endif; ?>
-<?php var_dump($_SESSION); ?>
+
 <div class="columns columns__no-spacing">
   <div class="column col-100 bm-2">
     <a href='dashboard.php?view=rents'><button type='button'>&lt; Powrót</button></a>
