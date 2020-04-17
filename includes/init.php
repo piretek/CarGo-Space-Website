@@ -11,6 +11,18 @@ if (!file_exists('./includes/config.php')) {
 $config = require_once './includes/config.php';
 
 require_once 'database.php';
+require_once 'functions/verify-config.php';
+
+$configErrors = verifyConfig($config);
+if (!empty($configErrors)) {
+  echo "Błąd w pliku konfiguracyjnym: <br />";
+
+  foreach($configErrors as $error) {
+    echo $error.'<br />';
+  }
+  exit;
+}
+
 $db = create_database_connection( $config['db'] );
 
 if (isset($auth) && $auth && (!isset($_SESSION['user']) || $_SESSION['user'] === 0)) {
@@ -19,6 +31,13 @@ if (isset($auth) && $auth && (!isset($_SESSION['user']) || $_SESSION['user'] ===
 }
 else if (isset($_SESSION['user']) && $_SESSION['user'] !== 0) {
   $sessionUsers = $db->query("SELECT * FROM users WHERE id = '{$_SESSION['user']}'");
+  if ($sessionUsers->num_rows == 0) {
+    session_destroy();
+
+    header("Location: {$config['site_url']}/");
+    exit;
+  }
+
   $sessionUser = $sessionUsers->fetch_assoc();
   define('USER_AUTHORIZED', true);
 }
