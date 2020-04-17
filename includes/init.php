@@ -47,6 +47,14 @@ else {
 
 date_default_timezone_set('Europe/Warsaw');
 
+$rentStatus = [
+  0 => 'Oczekuje na zatwierdzenie',
+  1 => 'Odrzucone',
+  2 => 'Zatwierdzone',
+  3 => 'W trakcie wypożyczenia',
+  4 => 'Zwrócono',
+];
+
 require_once './includes/functions/carinfo.php';
 require_once './includes/functions/input.php';
 require_once './includes/functions/rent_price.php';
