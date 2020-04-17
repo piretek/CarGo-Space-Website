@@ -25,6 +25,8 @@ $actions = [
   'delete-model' => 'edit-model',
   // User account
   'user-selfedit' => 'user-account',
+  // Rents
+  'add-rent' => 'add-rent',
 ];
 
 if (isset($_POST['action'])) {

@@ -52,7 +52,7 @@ else {
       if ($rents->num_rows == 0) : ?>
 
         <p><span class='success'>Wolny, dostępny do wypożyczenia</span></p>
-        <a href='dashboard?action=add-rent'>
+        <a href='dashboard.php?action=add-rent'>
           <button>Dodaj nowe wypożyczenie dla auta</button>
         </a>
 
