@@ -40,6 +40,11 @@ if(isset($_POST['email'])){
     $errors["from"] = "Data nie może być wcześniejsza niż ".date("d.m.Y", $availableFrom)."!";
   }
 
+  if($to < $availableToFrom){
+    $ok = false;
+    $errors["to"] = "Data nie może być wcześniejsza niż ".date("d.m.Y", $availableToFrom)."!";
+  }
+
   if($to > $availableTo){
     $ok = false;
     $errors["to"] = "Data nie może być późniejsza niż ".date("d.m.Y", $availableTo)."!";
