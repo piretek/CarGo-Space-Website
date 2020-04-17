@@ -97,7 +97,8 @@ CREATE TABLE `rents` (
   `car` int(11) NOT NULL,
   `begin` int(11) NOT NULL,
   `end` int(11) NOT NULL,
-  `email_sent` tinyint(1) NOT NULL
+  `status` tinyint(1) NOT NULL,
+  `created_at` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

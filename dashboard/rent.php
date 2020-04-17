@@ -4,11 +4,11 @@ if(!defined('SECURE_BOOT')) exit;
 
 function calcPrice( $calculation, $id, $isCar = false ) {
 
-  $price = (float) str_replace(',','.', rent_price($id, $isCar));
+  $price = (float) str_replace(',', '', rent_price($id, $isCar));
 
   $calculated = $calculation($price);
 
-  return str_replace('.',',', number_format($calculated, 2));
+  return number_format($calculated, 2);
 }
 
 $query = sprintf("SELECT * FROM rents WHERE id = '%s'", $db->real_escape_string($_GET['id']));
@@ -94,7 +94,7 @@ $client = $clients->fetch_assoc();
         </div>
       </div>
       <div class="column col-100">
-        <?php if ($rent['status'] == 0) : ?>
+        <?php if ($rent['status'] == 0 || $rent['status'] == 2) : ?>
           <h4>Edycja wypożyczenia</h4>
           <form method='post'>
             <input type='hidden' name='action' value='edit-rent' />
@@ -113,9 +113,9 @@ $client = $clients->fetch_assoc();
                 <select id='car' name='car' class='input--select'>
                   <option <?= !isset($_GET['car']) ? 'selected' : '' ?> value='0'>Wybierz dostępny pojazd...</option>
 
-                  <?php while($carId = $carIds->fetch_assoc()) : $car = carInfo($carId['id']); ?>
+                  <?php while($carId = $carIds->fetch_assoc()) : $carInfo = carinfo($carId['id']); ?>
 
-                  <option <?= $car['id'] == $carId['id'] ? 'selected' : '' ?> data-price='<?= rent_price($carId['id'], true) ?>' value='<?= $carId['id'] ?>'><?= "{$car['brand']} {$car['model']} ({$car['type']} {$car['engine']} - {$car['fuel']}) {$car['year']} r. | {$car['registration']} | ".rent_price($carId['id'], true)." zł" ?></option>
+                  <option <?= $car['id'] == $carId['id'] ? 'selected' : '' ?> value='<?= $carId['id'] ?>'><?= "{$carInfo['brand']} {$carInfo['model']} ({$carInfo['type']} {$carInfo['engine']} - {$carInfo['fuel']}) {$carInfo['year']} r. | {$carInfo['registration']} | ".rent_price($carId['id'], true)." zł" ?></option>
 
                   <?php endwhile; ?>
                 </select>

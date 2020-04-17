@@ -195,6 +195,11 @@ button[type=submit] {
   display: block;
 }
 
+.input--container p#car {
+  display: block;
+  width: 100%;
+}
+
 button.beautiful {
   width: 100%;
   text-align: center;
