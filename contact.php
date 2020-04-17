@@ -210,7 +210,7 @@ include './includes/header.php';
           </div>
         </div>
       </div>
-      <div class='column col-30'>
+      <div class='contact-align column col-30'>
         <img class="contact-logo" src="<?= $config['site_url'] ?>/assets/images/logo.png" alt="CarGo Space">
         <h2>CarGo Space Polska S.A.</h2>
         <h5>Wypożyczalnia aut osobowych</h5>
