@@ -34,6 +34,7 @@ if(isset($_POST['email'])){
 
   $availableFrom = strtotime("now +1 day midnight");
   $availableTo = strtotime("now +3 months");
+  $availableToFrom = strtotime("now +2 day midnight");
 
   if($from < $availableFrom){
     $ok = false;
@@ -98,27 +99,33 @@ if(isset($_POST['email'])){
       $client_id = $clients->fetch_assoc()['id'];
     }
 
-    $mail_to = "{$_POST['name']} {$_POST['surname']} <{$_POST['email']}>";
-    $mail_from = 'CarGo Space <no-reply@cargospace.com>';
-    $subject = 'Samochód został wypożyczony';
-    $message = 'Samochód został wypożyczony';
-    $headers = [
-      'MIME-Version' => '1.0',
-      'Content-type' => 'text/html; charset=iso-8859-1',
-      'To' => $mail_to,
-      'From' => $mail_from,
-      'Reply-To' => $mail_from,
-      'X-Mailer' => 'PHP/' . phpversion()
+    $client = [
+      'name' => $_POST['name'],
+      'surname' => $_POST['surname'],
+      'email' => $_POST['email']
     ];
 
-    // $emailSent = mail(null, $subject, $message, $headers);
-    $emailSent = false;
+    $rentedCar = carinfo($_POST['car']);
 
-    $db->query("INSERT INTO rents VALUES (null,'{$client_id}','{$_POST['car']}','{$from}','{$to}', '".($emailSent ? '1' : '0')."')");
+    $successful = $db->query("INSERT INTO rents VALUES (null,'{$client_id}','{$_POST['car']}','{$from}','{$to}', '0', '".time()."')");
 
-    $_SESSION['contact-form-success'] = 'Samochód został wypożyczony. Oczekuj na odpowiedź naszego pracownika. Dziękujemy za zainsteresowanie ofertą CarGo Space!';
-    header("Location: {$config['site_url']}/contact.php");
-    exit;
+    if ($successful) {
+      $sent = send_mail($client, 'rent-created', [
+        'rent-id' => $db->insert_id,
+        'rent-car' => "{$rentedCar['brand']} {$rentedCar['model']} {$rentedCar['engine']} {$rentedCar['fuel']} {$rentedCar['registration']}",
+        'rent-time' => date('d.m.Y', $from).' - '.date('d.m.Y', $to),
+        'rent-price' => rent_price($db->insert_id).' zł'
+      ]);
+
+      $_SESSION['contact-form-success'] = 'Samochód został wypożyczony. Oczekuj na odpowiedź naszego pracownika. Dziękujemy za zainsteresowanie ofertą CarGo Space!';
+      header("Location: {$config['site_url']}/contact.php");
+      exit;
+    }
+    else {
+      $_SESSION['contact-form-error'] = 'Błąd podczas wysyłania wiadomości. Skontaktuj się z administratorem.';
+      header("Location: {$config['site_url']}/contact.php");
+      exit;
+    }
   }
 }
 include './includes/header.php';
@@ -141,7 +148,7 @@ include './includes/header.php';
           <div class="columns">
             <div class="column col-50">
               <?php input('name', 'Imię:', '', 'np. Jan') ?>
-              <?php input('sruname', 'Nazwisko:', '', 'np. Kowalski') ?>
+              <?php input('surname', 'Nazwisko:', '', 'np. Kowalski') ?>
               <?php input('pesel', 'PESEL:', '', 'Numer PESEL (11 cyfr)', 'text', null, [
                 'minlength' => '11',
                 'maxlength' => '11'
