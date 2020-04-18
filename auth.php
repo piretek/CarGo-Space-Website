@@ -86,7 +86,7 @@ include './includes/header.php';
                 ?>
             </div>
             <div>
-              <button type="submit">Zarejestruj</button>
+              <button class='beautiful' type="submit">Zarejestruj</button>
             </div>
           </form>
         </div>
