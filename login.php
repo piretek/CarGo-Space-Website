@@ -19,7 +19,9 @@ if (isset($_POST['email']) && !isset($_SESSION['user'])) {
   $email = $db->real_escape_string( htmlentities(strtolower($_POST['email']), ENT_QUOTES, "UTF-8") );
   $password = $db->real_escape_string( $_POST['password'] );
 
-  $users = $db->query("SELECT * FROM users WHERE email = '{$email}'");
+  $users = $db->query(sprintf("SELECT * FROM users WHERE email = '%s'",
+    $email
+  ));
 
   if ($users->num_rows == 0) {
     $_SESSION['login-form-error'] = 'Niepoprawny login lub hasło.';
