@@ -102,7 +102,7 @@ if(isset($_POST['email'])){
         $db->real_escape_string($_POST['email']),
         $db->real_escape_string($_POST['pesel']),
         time()
-      );
+      ));
 
       $client_id = $db->insert_id;
     }
