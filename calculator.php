@@ -45,7 +45,7 @@ include './includes/header.php';
       <div class='column col-25'>
         <h3>Wybrany pojazd</h3>
         <div class='selected-car'>
-          <p class='instruction'>Wybierz pojazd</p>
+          <p class='choose-car'>Wybierz pojazd</p>
         </div>
         <hr />
         <h3>Podaj niezbędne informacje</h3>
