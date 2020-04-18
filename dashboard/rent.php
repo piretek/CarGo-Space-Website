@@ -12,7 +12,12 @@ function calcPrice( $calculation, $id, $isCar = false ) {
 }
 
 $query = sprintf("SELECT * FROM rents WHERE id = '%s'", $db->real_escape_string($_GET['id']));
-$rent = $db->query($query)->fetch_assoc();
+$rents = $db->query($query);
+if ($rents->num_rows == 0) {
+  header('Location: dashboard.php?view=rents');
+  exit;
+}
+$rent = $rents->fetch_assoc();
 
 $car = carinfo($rent['car']);
 $clients = $db->query(sprintf("SELECT * FROM clients WHERE id = '%s'", $rent['client']));

@@ -34,6 +34,7 @@ if(isset($_POST['email'])){
 
   $availableFrom = strtotime("now +1 day midnight");
   $availableTo = strtotime("now +3 months");
+  $availableToFrom = strtotime("now +2 day midnight");
 
   if($from < $availableFrom){
     $ok = false;
@@ -60,7 +61,7 @@ if(isset($_POST['email'])){
     $errors["phone"] = "Numer telefonu musi mieć 9 cyfr!";
   }
 
-  $cars = $db->query(sprintf("SELECT * FROM rents WHERE ((begin <= '%s' AND end >= '%s') OR (begin <= '%s' AND end >= '%s')) AND status = '3'",
+  $cars = $db->query(sprintf("SELECT * FROM rents WHERE ((begin <= '%s' AND end >= '%s') OR (begin <= '%s' AND end >= '%s')) AND (status = '3' OR status = '2')",
     $db->real_escape_string($from),
     $db->real_escape_string($from),
     $db->real_escape_string($to),
@@ -91,7 +92,7 @@ if(isset($_POST['email'])){
     $clients = $db->query(sprintf("SELECT * FROM clients WHERE pesel = '%s'", $db->real_escape_string($_POST['pesel'])));
     if($clients->num_rows == 0){
 
-      $db->query(sprintf("INSERT INTO clients VALUES (null,'%s','%s','%s','%s','%s','%s','%s','%s', '%s')",
+      $insertClientQuery = sprintf("INSERT INTO clients VALUES (null,'%s','%s','%s','%s','%s','%s','%s','%s')",
         $db->real_escape_string($_POST['name']),
         $db->real_escape_string($_POST['surname']),
         $db->real_escape_string($_POST['city']),
@@ -99,9 +100,14 @@ if(isset($_POST['email'])){
         $db->real_escape_string($_POST['number']),
         $db->real_escape_string($_POST['phone']),
         $db->real_escape_string($_POST['email']),
-        $db->real_escape_string($_POST['pesel']),
-        time()
+        $db->real_escape_string($_POST['pesel'])
       );
+
+      if (!$db->query($insertClientQuery)) {
+        $_SESSION['contact-form-error'] = 'Błąd podczas wysyłania wiadomości. Skontaktuj się z administratorem. '.$db->error;
+        header("Location: {$config['site_url']}/contact.php");
+        exit;
+      }
 
       $client_id = $db->insert_id;
     }
@@ -109,37 +115,42 @@ if(isset($_POST['email'])){
       $client_id = $clients->fetch_assoc()['id'];
     }
 
-    $mail_to = "{$_POST['name']} {$_POST['surname']} <{$_POST['email']}>";
-    $mail_from = 'CarGo Space <no-reply@cargospace.com>';
-    $subject = 'Samochód został wypożyczony';
-    $message = 'Samochód został wypożyczony';
-    $headers = [
-      'MIME-Version' => '1.0',
-      'Content-type' => 'text/html; charset=iso-8859-1',
-      'To' => $mail_to,
-      'From' => $mail_from,
-      'Reply-To' => $mail_from,
-      'X-Mailer' => 'PHP/' . phpversion()
+    $client = [
+      'name' => $_POST['name'],
+      'surname' => $_POST['surname'],
+      'email' => $_POST['email']
     ];
 
-    // $emailSent = mail(null, $subject, $message, $headers);
-    $emailSent = false;
+    $rentedCar = carinfo($_POST['car']);
 
-    $successful = $db->query(sprintf("INSERT INTO rents VALUES (null,'%s','%s','%s','%s', '0', '%d)",
+    $insertRentQuery = sprintf("INSERT INTO rents VALUES (null,'%s','%s','%s','%s', '0', '%d')",
       $db->real_escape_string($client_id),
       $db->real_escape_string($_POST['car']),
       $from,
       $to,
       time()
-    ));
+    );
+
+    $successful = $db->query($insertRentQuery);
 
     if ($successful) {
+      $sent = send_mail($client, 'rent-created', [
+        'rent-id' => $db->insert_id,
+        'rent-car' => "{$rentedCar['brand']} {$rentedCar['model']} {$rentedCar['engine']} {$rentedCar['fuel']} {$rentedCar['registration']}",
+        'rent-time' => date('d.m.Y', $from).' - '.date('d.m.Y', $to),
+        'rent-price' => rent_price($db->insert_id).' zł'
+      ]);
+
+      if (!$sent) {
+        $_SESSION['contact-form-error'] = 'Potwierdzenie nie zostało wysłane.';
+      }
+
       $_SESSION['contact-form-success'] = 'Samochód został wypożyczony. Oczekuj na odpowiedź naszego pracownika. Dziękujemy za zainsteresowanie ofertą CarGo Space!';
       header("Location: {$config['site_url']}/contact.php");
       exit;
     }
     else {
-      $_SESSION['contact-form-error'] = 'Błąd podczas wysyłania informacji. Skontaktuj się z administratorem. ';
+      $_SESSION['contact-form-error'] = 'Błąd podczas wysyłania wiadomości. Skontaktuj się z administratorem.';
       header("Location: {$config['site_url']}/contact.php");
       exit;
     }
@@ -165,7 +176,7 @@ include './includes/header.php';
           <div class="columns">
             <div class="column col-50">
               <?php input('name', 'Imię:', '', 'np. Jan') ?>
-              <?php input('sruname', 'Nazwisko:', '', 'np. Kowalski') ?>
+              <?php input('surname', 'Nazwisko:', '', 'np. Kowalski') ?>
               <?php input('pesel', 'PESEL:', '', 'Numer PESEL (11 cyfr)', 'text', null, [
                 'minlength' => '11',
                 'maxlength' => '11'

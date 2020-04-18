@@ -90,15 +90,25 @@ if (isset($_POST['action'])) {
     }
   }
 
-  $cars = $db->query("SELECT * FROM rents WHERE (begin >= $from AND end <= $from) OR (begin >= $to AND end <= $to)");
-  if($cars->num_rows != 0){
-    $ok = false;
-    $_SESSION['dashboard-form-error-car'] = "Pojazd jest wypożyczony w tym czasie!";
+  if (isset($_POST['accept'])) {
+    $isRentedQuery = sprintf("SELECT * FROM rents WHERE ((begin <= '%s' AND end >= '%s') OR (begin <= '%s' AND end >= '%s')) AND (status = '3' OR status = '2')",
+      $db->real_escape_string($from),
+      $db->real_escape_string($from),
+      $db->real_escape_string($to),
+      $db->real_escape_string($to),
+    );
+
+    $isRented = $db->query($isRentedQuery)->num_rows != 0 ? true : false;
+
+    if ($isRented) {
+      $ok = false;
+      $_SESSION['dashboard-form-error-car'] = 'To auto jest już wynajmowane w tym okresie. Znajdź inny dogodny termin lub zmień pojazd.';
+    }
   }
 
   if ($ok) {
     if ($_POST['client-id'] == 0) {
-      $query = sprintf("INSERT INTO `clients` VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
+      $query = sprintf("INSERT INTO clients VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
         $db->real_escape_string($_POST['client']['name']),
         $db->real_escape_string($_POST['client']['surname']),
         $db->real_escape_string($_POST['client']['city']),
@@ -123,16 +133,16 @@ if (isset($_POST['action'])) {
       $clientId = $_POST['client-id'];
     }
 
+    $client = $db->query("SELECT * FROM clients WHERE id = '$clientId'")->fetch_assoc();
+
     if (isset($_POST['accept'])) {
       $status = 2;
-      // Mail for status 2
     }
     else {
       $status = 0;
-      // Mail for status 0
     }
 
-    $query = sprintf("INSERT INTO `rents` VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s');",
+    $query = sprintf("INSERT INTO rents VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s');",
       $db->real_escape_string($clientId),
       $db->real_escape_string($_POST['car']),
       $db->real_escape_string($from),
@@ -142,6 +152,35 @@ if (isset($_POST['action'])) {
     );
 
     $successful = $db->query($query);
+    $rentId = $db->insert_id;
+
+    $rentedCar = carinfo($_POST['car']);
+
+    $sent = send_mail($client, 'rent-created', [
+      'rent-id' => $rentId,
+      'rent-car' => "{$rentedCar['brand']} {$rentedCar['model']} {$rentedCar['engine']} {$rentedCar['fuel']} {$rentedCar['registration']}",
+      'rent-time' => date('d.m.Y', $from).' - '.date('d.m.Y', $to),
+      'rent-price' => rent_price($rentId).' zł'
+    ]);
+
+    if ($status == 2) {
+      $sentStatusChange = send_mail($client, 'rent-status-changed', [
+        'rent-id' => $rentId,
+        'rent-car' => "{$rentedCar['brand']} {$rentedCar['model']} {$rentedCar['engine']} {$rentedCar['fuel']} {$rentedCar['registration']}",
+        'rent-time' => date('d.m.Y', $from).' - '.date('d.m.Y', $to),
+        'rent-price' => rent_price($rentId).' zł',
+        'rent-newstatus' => 2
+      ]);
+    }
+    else {
+      $sentStatusChange = true;
+    }
+
+    if (!$sent || !$sentStatusChange) {
+      $_SESSION['dashboard-form-error'] = '';
+      if ($sent) $_SESSION['dashboard-form-error'] .= 'Błąd wysyłania maila o utworzeniu wypożyczenia.<br />';
+      if ($sentStatusChange) $_SESSION['dashboard-form-error'] .= 'Błąd wysyłania maila o potwierdzeniu wypożyczenia.';
+    }
 
     if ($successful) {
       $_SESSION['dashboard-form-success'] = 'Dodano nowy pojazd';

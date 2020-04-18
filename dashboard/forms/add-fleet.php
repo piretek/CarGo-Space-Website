@@ -116,7 +116,7 @@ if (isset($_POST['action'])) {
   }
 
   if ($ok) {
-    $query = sprintf("INSERT INTO `cars` VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
+    $query = sprintf("INSERT INTO cars VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
       $db->real_escape_string($_POST['model']),
       $db->real_escape_string($_POST['year']),
       $db->real_escape_string($_POST['engine']),

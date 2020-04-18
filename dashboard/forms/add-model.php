@@ -37,7 +37,7 @@ if (isset($_POST['action'])) {
   }
 
   if ($ok) {
-    $query = sprintf("INSERT INTO `models` VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s');",
+    $query = sprintf("INSERT INTO models VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s');",
       $db->real_escape_string($_POST['brand']),
       $db->real_escape_string($_POST['type']),
       $db->real_escape_string($_POST['name']),
