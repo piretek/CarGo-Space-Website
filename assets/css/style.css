@@ -791,6 +791,55 @@ a.rent-a-car:active {
   text-align: right;
 }
 
+.instruction {
+  background-color: #EBEBE0;
+  margin: 0;
+  padding: 5px 5px;
+}
+
+.how-to {
+  list-style-position: inside;
+  padding: 0;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  text-align: center;
+}
+
+.how-to li {
+  min-width: 400px;
+  width: calc(100% / 3);
+  font-weight: bold;
+  text-align: inherit;
+}
+
+.adnotation {
+  font-size: 12px;
+  font-weight: lighter;
+}
+
+.cookie-consent {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 40px;
+  padding: 10px 5px;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, .8);
+  color: white;
+  font-size: 13px;
+}
+
+.cross {
+  margin: 0px 3px;
+  display: block;
+  height: 18px;
+  width: 18px;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiIHdpZHRoPSIxOHB4IiBoZWlnaHQ9IjE4cHgiPjxwYXRoIGQ9Ik0xOSA2LjQxTDE3LjU5IDUgMTIgMTAuNTkgNi40MSA1IDUgNi40MSAxMC41OSAxMiA1IDE3LjU5IDYuNDEgMTkgMTIgMTMuNDEgMTcuNTkgMTkgMTkgMTcuNTkgMTMuNDEgMTJ6Ii8+PHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjwvc3ZnPg0K");
+}
+
 /*----------------------------------DARK MODE--------------------------------------------- */
 
 body.dark-mode .footer-c,
@@ -801,7 +850,7 @@ body.dark-mode .nav > li > a  {
 }
 
 body.dark-mode .nav > li:hover > a {
-  background: rgba(255,255,255,.1);
+  background-color: rgba(255,255,255,.1);
 }
 
 body.dark-mode {
@@ -867,11 +916,3 @@ body.dark-mode .d-menu_element:hover {
 
 /*----------------------------------------------------------------------------*/
 
-
-
-.how-to {
-  display: flex;
-  text-align: center;
-  padding: 5px 5px;
-  font-size: 14px;
-}
