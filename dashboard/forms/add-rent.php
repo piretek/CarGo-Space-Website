@@ -156,7 +156,7 @@ if (isset($_POST['action'])) {
 
     $rentedCar = carinfo($_POST['car']);
 
-    $sent = send_mail($client, 'rent-created', [
+    $sentMain = send_mail($client, 'rent-created', [
       'rent-id' => $rentId,
       'rent-car' => "{$rentedCar['brand']} {$rentedCar['model']} {$rentedCar['engine']} {$rentedCar['fuel']} {$rentedCar['registration']}",
       'rent-time' => date('d.m.Y', $from).' - '.date('d.m.Y', $to),
@@ -176,14 +176,14 @@ if (isset($_POST['action'])) {
       $sentStatusChange = true;
     }
 
-    if (!$sent || !$sentStatusChange) {
+    if (!$sentMain || !$sentStatusChange) {
       $_SESSION['dashboard-form-error'] = '';
-      if ($sent) $_SESSION['dashboard-form-error'] .= 'Błąd wysyłania maila o utworzeniu wypożyczenia.<br />';
+      if ($sentMain) $_SESSION['dashboard-form-error'] .= 'Błąd wysyłania maila o utworzeniu wypożyczenia.<br />';
       if ($sentStatusChange) $_SESSION['dashboard-form-error'] .= 'Błąd wysyłania maila o potwierdzeniu wypożyczenia.';
     }
 
     if ($successful) {
-      $_SESSION['dashboard-form-success'] = 'Dodano nowy pojazd';
+      $_SESSION['dashboard-form-success'] = 'Dodano nowe wypożyczenie';
       header("Location: {$config['site_url']}/dashboard.php?view=rents");
       exit;
     }
