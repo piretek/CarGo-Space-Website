@@ -33,7 +33,7 @@ if (!defined('SECURE_BOOT')) exit();
   </div>
 </div>
 <div class="cookie-consent hidden">
-  <span>Ta strona korzysta z ciasteczek aby świadczyć usługi na najwyższym poziomie. Dalsze korzystanie ze strony oznacza, że zgadzasz się na ich użycie.</span>
+  <span class='cookie-info'>Ta strona korzysta z ciasteczek aby świadczyć usługi na najwyższym poziomie. Dalsze korzystanie ze strony oznacza, że zgadzasz się na ich użycie.</span>
   <span class="cross"></span>
 </div>
 <script src='assets/js/main.js'></script>

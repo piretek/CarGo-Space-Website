@@ -26,26 +26,26 @@ include './includes/header.php';
 
 <div class="columns col-center min-page-height">
   <div class="column page-column">
-      <h1>Jak to działa?</h1>
-      <div class="instruction columns col-center">
-        <ol class="how-to">
-          <li>
-            <span>Wybierz samochód z naszej floty </span> 
-            <br/>
-            <span class="adnotation">Wskazanie samochodu przekieruje cię do formularza zgłoszeniowego.</span>
-          </li>
-          <li>
-            <span>Wypełnij formularz zgłoszeniowy</span>
-            <br/>
-            <span class="adnotation">Podaj potrzebne dane, wybierz wariant wskazanego przez siebie modelu i wskaż okres wypożyczenia.
-          </li>
-          <li>
-            <span>Ciesz się jazdą najlepszymi samochodami</span>
-            <br/>
-            <span class="adnotation">Po zaakceptowaniu twojego zgłoszenia otrzymasz maila z informacją, że możesz odebrać samochód w oddziale.</span>
-          </li>
-        </ol>
-      </div>    
+    <h1>Jak to działa?</h1>
+    <div class="instruction columns col-center columns__no-spacing">
+      <ol class="how-to">
+        <li>
+          <span>Wybierz samochód z naszej floty </span>
+          <br/>
+          <span class="adnotation">Wskazanie samochodu przekieruje cię do formularza zgłoszeniowego.</span>
+        </li>
+        <li>
+          <span>Wypełnij formularz zgłoszeniowy</span>
+          <br/>
+          <span class="adnotation">Podaj potrzebne dane, wybierz wariant wskazanego przez siebie modelu i wskaż okres wypożyczenia.
+        </li>
+        <li>
+          <span>Ciesz się jazdą najlepszymi samochodami</span>
+          <br/>
+          <span class="adnotation">Po zaakceptowaniu twojego zgłoszenia otrzymasz maila z informacją, że możesz odebrać samochód w oddziale.</span>
+        </li>
+      </ol>
+    </div>
 
     <div class="fleet">
       <h1>Nasza flota</h1>
