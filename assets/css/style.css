@@ -864,3 +864,14 @@ body.dark-mode .d-menu_element:hover {
   cursor: pointer;
   background-color: rgb(0, 0, 0,.1);
 }
+
+/*----------------------------------------------------------------------------*/
+
+
+
+.how-to {
+  display: flex;
+  text-align: center;
+  padding: 5px 5px;
+  font-size: 14px;
+}
