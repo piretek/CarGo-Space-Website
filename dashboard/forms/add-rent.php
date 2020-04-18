@@ -98,7 +98,7 @@ if (isset($_POST['action'])) {
 
   if ($ok) {
     if ($_POST['client-id'] == 0) {
-      $query = sprintf("INSERT INTO `clients` VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
+      $query = sprintf("INSERT INTO clients VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
         $db->real_escape_string($_POST['client']['name']),
         $db->real_escape_string($_POST['client']['surname']),
         $db->real_escape_string($_POST['client']['city']),
@@ -132,7 +132,7 @@ if (isset($_POST['action'])) {
       // Mail for status 0
     }
 
-    $query = sprintf("INSERT INTO `rents` VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s');",
+    $query = sprintf("INSERT INTO rents VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s');",
       $db->real_escape_string($clientId),
       $db->real_escape_string($_POST['car']),
       $db->real_escape_string($from),

@@ -136,7 +136,7 @@ if (isset($_POST['action'])) {
     }
 
     if ($ok) {
-      $query = sprintf("UPDATE `cars` SET model = '%s', year = '%s', engine = '%s', fuel = '%s', clutch = '%s', registration = '%s', price = '%s' WHERE id = '%s'",
+      $query = sprintf("UPDATE cars SET model = '%s', year = '%s', engine = '%s', fuel = '%s', clutch = '%s', registration = '%s', price = '%s' WHERE id = '%s'",
         $db->real_escape_string($_POST['model']),
         $db->real_escape_string($_POST['year']),
         $db->real_escape_string($_POST['engine']),
@@ -149,7 +149,7 @@ if (isset($_POST['action'])) {
       $successful = $db->query($query);
 
       if ($successful && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
-        $query = sprintf("UPDATE `cars` SET image = '%s' WHERE id = '%s'",
+        $query = sprintf("UPDATE cars SET image = '%s' WHERE id = '%s'",
           $db->real_escape_string($photo),
           $db->real_escape_string($_POST['id']),
         );

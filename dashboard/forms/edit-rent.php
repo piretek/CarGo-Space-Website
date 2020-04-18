@@ -34,7 +34,7 @@ if (isset($_POST['action'])) {
 
     if ($ok) {
 
-      $query = sprintf("UPDATE `rents` SET car = '%s', begin = '%s', end = '%s' WHERE id = '%s'",
+      $query = sprintf("UPDATE rents SET car = '%s', begin = '%s', end = '%s' WHERE id = '%s'",
         $db->real_escape_string($_POST['car']),
         $db->real_escape_string($from),
         $db->real_escape_string($to),

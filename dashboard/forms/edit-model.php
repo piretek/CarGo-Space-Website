@@ -39,7 +39,7 @@ if (isset($_POST['action'])) {
     }
 
     if ($ok) {
-      $query = sprintf("UPDATE `models` SET brand = '%s', type = '%s', model = '%s', year_from = '%s', year_to = '%s', price = '%s' WHERE id = '%s'",
+      $query = sprintf("UPDATE models SET brand = '%s', type = '%s', model = '%s', year_from = '%s', year_to = '%s', price = '%s' WHERE id = '%s'",
         $db->real_escape_string($_POST['brand']),
         $db->real_escape_string($_POST['type']),
         $db->real_escape_string($_POST['name']),

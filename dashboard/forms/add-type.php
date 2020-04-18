@@ -16,7 +16,7 @@ if (isset($_POST['action'])) {
     exit;
   }
 
-  $query = sprintf("INSERT INTO `types` VALUES (null, '%s');", $db->real_escape_string($_POST['name']));
+  $query = sprintf("INSERT INTO types VALUES (null, '%s');", $db->real_escape_string($_POST['name']));
   $successful = $db->query($query);
 
   if ($successful) {
