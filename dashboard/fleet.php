@@ -43,8 +43,13 @@ if(!defined('SECURE_BOOT')) exit;
               <td><?= $carInfo['registration'] ?></td>
               <td>
                 <?php
-                  $query = "SELECT * FROM rents WHERE car = '{$car['id']}' AND begin <= '".time()."' AND end >= '".time()."'";
-                  $rents = $db->query($query);
+                  $isRentedQuery = sprintf("SELECT * FROM rents WHERE car = '%s' AND begin <= '%s' AND end >= '%s' AND (status = '3' OR status = '2')",
+                    $car['id'],
+                    time(),
+                    time(),
+                  );
+
+                  $rents = $db->query($isRentedQuery);
                   if ($rents->num_rows == 0) {
                     echo "<span class='success'>Nie</span>";
                   }

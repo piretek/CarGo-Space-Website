@@ -23,7 +23,6 @@ function rent_price( $id, $isCar = false, $from = null, $to = null ) {
 
     if (array_key_exists('begin', $rent) && array_key_exists('end', $rent)) {
       $price = (float) (round(abs($rent['end'] - $rent['begin']) / 60 / 60 / 24, 2) - 1) * (float) $rent['price'];
-      var_dump(round(abs($rent['end'] - $rent['begin']) / 60 / 60 / 24, 2));
     }
     else if ($from !== null && $to !== null) {
       list($from_year, $from_month, $from_day) = explode("-", $from);
