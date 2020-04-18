@@ -30,7 +30,7 @@ if (isset($_POST['action'])) {
       exit;
     }
 
-    $models = $db->query("SELECT * FROM models WHERE id = '{$_POST['model']}'");
+    $models = $db->query(sprintf("SELECT * FROM models WHERE id = '%s'", $db->real_escape_string($_POST['model'])));
     if ($models->num_rows == 0) {
       $ok = false;
       $_SESSION['dashboard-form-error-model'] = 'Taki model nie istnieje.';
