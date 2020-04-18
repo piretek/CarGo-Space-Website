@@ -21,10 +21,10 @@ function send_mail($client, $mailType, $vars = []) {
 
       $message = prepare_mail_content("{$client['name']} {$client['surname']}", [
         'Informujemy, że przyjęliśmy informację dot. wypożyczenia:',
-        'Nr. wypożyczenia: '.$vars['rent-id'],
-        'Pojazd: '.$vars['rent-car'],
-        'Okres: '.$vars['rent-time'],
-        'Cena wynajmu: '.$vars['rent-price'],
+        '<strong>Nr. wypożyczenia:</strong> '.$vars['rent-id'],
+        '<strong>Pojazd:</strong> '.$vars['rent-car'],
+        '<strong>Okres:</strong> '.$vars['rent-time'],
+        '<strong>Cena wynajmu:</strong> '.$vars['rent-price'],
         '',
         'Prosimy o oczekiwanie na wiadomość od pracownika, potwierdzającą rezerwację.'
       ]);
@@ -35,22 +35,22 @@ function send_mail($client, $mailType, $vars = []) {
 
       $message = prepare_mail_content("{$client['name']} {$client['surname']}", [
         "Informujemy, że zmieniliśmy informację dot. wypożyczenia nr {$vars['rent-id']}:",
-        'Pojazd: '.$vars['rent-car'],
-        'Okres: '.$vars['rent-time'],
-        'Cena wynajmu: '.$vars['rent-price'],
+        '<strong>Pojazd:</strong> '.$vars['rent-car'],
+        '<strong>Okres:</strong> '.$vars['rent-time'],
+        '<strong>Cena wynajmu:</strong> '.$vars['rent-price'],
         '',
         'Jeżeli mają Państwo jakieś pytania, prosimy o skontaktowanie się z naszym Biurem Obsługi Klienta przez adres email lub telefon.'
       ]);
 
       break;
     case 'rent-status-changed' :
-      $subject = 'Twoje wypożyczenie zostało '.strtolower(htmlentities($rentStatus[(int) $vars['rent-newstatus']], ENT_QUOTES, 'UTF-8'));
+      $subject = $vars['rent-newstatus'] == 2 || $vars['rent-newstatus'] == 1 ? 'Twoje wypożyczenie zostało '.strtolower(htmlentities($rentStatus[(int) $vars['rent-newstatus']], ENT_QUOTES, 'UTF-8')) : 'Zwrot auta dokonany. Dziękujemy za wspólną podróż z CarGo Space!';
 
       $rentMessage[2] = [
         "Uprzejmie informujemy, że Twoje wypożyczenie zostało ".strtolower($rentStatus[(int) $vars['rent-newstatus']]).".",
-        'Pojazd: '.$vars['rent-car'],
-        'Okres: '.$vars['rent-time'],
-        'Cena wynajmu: '.$vars['rent-price'],
+        '<strong>Pojazd:</strong> '.$vars['rent-car'],
+        '<strong>Okres:</strong> '.$vars['rent-time'],
+        '<strong>Cena wynajmu:</strong> '.$vars['rent-price'],
         '',
         'Prosimy o stawienie się w naszym oddziale w dniu odbioru po odbiór auta i dokumentów. Umowa wynajmu zostanie podpisana przed oddaniem kluczyków.',
         'Jeszcze raz dziękujemy za skorzystanie z naszych usług',
@@ -62,11 +62,17 @@ function send_mail($client, $mailType, $vars = []) {
         'W celu zapoznania się z powodem odrzucenia, nasz pracownik skontaktuje się z Państwem w ciągu 24H.'
       ];
 
+      $rentMessage[4] = [
+        'Odebraliśmy od Ciebie kluczyki do naszego auta. Mamy nadzieję, że podróż z CarGo Space przebiegła wyśmienicie!',
+        'Jeżeli Ci się spodobało i masz taką możliwość możesz polecić nas swoim znajomym.',
+        'Jeszcze raz dziękujemy za skorzystanie z naszych usług,',
+        'Życzymy szerokich dróg i zapraszamy ponownie!'
+      ];
+
       $message = prepare_mail_content("{$client['name']} {$client['surname']}", $rentMessage[(int) $vars['rent-newstatus']]);
 
       break;
   }
-
 
   return mail($mail_to, $subject, $message, $headers);
 }
