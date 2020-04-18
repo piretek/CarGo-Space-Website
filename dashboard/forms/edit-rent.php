@@ -81,9 +81,9 @@ if (isset($_POST['action'])) {
       $db->real_escape_string($_POST['id'])
     ))->fetch_assoc();
 
-    if ($_POST['new-status'] == 3) {
+    if ($_POST['new-status'] == 2 || $_POST['new-status'] == 3) {
 
-      $isRentedQuery = sprintf("SELECT * FROM rents WHERE ((begin <= '%s' AND end >= '%s') OR (begin <= '%s' AND end >= '%s')) AND status = '3'",
+      $isRentedQuery = sprintf("SELECT * FROM rents WHERE ((begin <= '%s' AND end >= '%s') OR (begin <= '%s' AND end >= '%s')) AND (status = '3' OR status = '2')",
         $db->real_escape_string($rent['begin']),
         $db->real_escape_string($rent['begin']),
         $db->real_escape_string($rent['end']),

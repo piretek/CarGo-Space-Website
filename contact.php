@@ -61,7 +61,7 @@ if(isset($_POST['email'])){
     $errors["phone"] = "Numer telefonu musi mieć 9 cyfr!";
   }
 
-  $cars = $db->query(sprintf("SELECT * FROM rents WHERE ((begin <= '%s' AND end >= '%s') OR (begin <= '%s' AND end >= '%s')) AND status = '3'",
+  $cars = $db->query(sprintf("SELECT * FROM rents WHERE ((begin <= '%s' AND end >= '%s') OR (begin <= '%s' AND end >= '%s')) AND (status = '3' OR status = '2')",
     $db->real_escape_string($from),
     $db->real_escape_string($from),
     $db->real_escape_string($to),
