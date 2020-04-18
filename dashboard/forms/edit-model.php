@@ -88,7 +88,12 @@ if (isset($_POST['action'])) {
 }
 
 $query = sprintf("SELECT * FROM models WHERE id = '%s'", $db->real_escape_string($_GET['id']));
-$model = $db->query($query)->fetch_assoc();
+$models = $db->query($query);
+if ($models->num_rows == 0) {
+  header('Location: dashboard.php?view=fleet');
+  exit;
+}
+$model = $models->fetch_assoc();
 
 ?>
 

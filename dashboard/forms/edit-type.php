@@ -57,7 +57,12 @@ if (isset($_POST['action'])) {
 }
 
 $query = sprintf("SELECT * FROM types WHERE id = '%s'", $db->real_escape_string($_GET['id']));
-$type = $db->query($query)->fetch_assoc();
+$types = $db->query($query);
+if ($types->num_rows == 0) {
+  header('Location: dashboard.php?view=fleet');
+  exit;
+}
+$type = $types->fetch_assoc();
 
 ?>
 

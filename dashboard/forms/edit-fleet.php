@@ -195,7 +195,13 @@ if (isset($_POST['action'])) {
 }
 
 $query = sprintf("SELECT * FROM cars WHERE id = '%s'", $db->real_escape_string($_GET['id']));
-$car = $db->query($query)->fetch_assoc();
+$cars = $db->query($query);
+if ($cars->num_rows == 0) {
+  header('Location: dashboard.php?view=fleet');
+  exit;
+}
+$car = $cars->fetch_assoc();
+
 $carInfo = carinfo($car['id']);
 
 ?>
