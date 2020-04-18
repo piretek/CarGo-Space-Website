@@ -118,7 +118,7 @@ if(isset($_POST['email'])){
 
     $rentedCar = carinfo($_POST['car']);
 
-    $successful = $db->query(sprintf("INSERT INTO rents VALUES (null,'%s','%s','%s','%s', '0', '%d)",
+    $successful = $db->query(sprintf("INSERT INTO rents VALUES (null,'%s','%s','%s','%s', '0', '%d')",
       $db->real_escape_string($client_id),
       $db->real_escape_string($_POST['car']),
       $from,
@@ -139,7 +139,7 @@ if(isset($_POST['email'])){
       exit;
     }
     else {
-      $_SESSION['contact-form-error'] = 'Błąd podczas wysyłania wiadomości. Skontaktuj się z administratorem.';
+      $_SESSION['contact-form-error'] = 'Błąd podczas wysyłania wiadomości. Skontaktuj się z administratorem. '.$db->error;
       header("Location: {$config['site_url']}/contact.php");
       exit;
     }
