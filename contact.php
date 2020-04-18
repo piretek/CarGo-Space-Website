@@ -60,7 +60,13 @@ if(isset($_POST['email'])){
     $errors["phone"] = "Numer telefonu musi mieć 9 cyfr!";
   }
 
-  $cars = $db->query("SELECT * FROM rents WHERE (begin >= $from AND end <= $from) OR (begin >= $to AND end <= $to)");
+  $cars = $db->query(sprintf("SELECT * FROM rents WHERE ((begin <= '%s' AND end >= '%s') OR (begin <= '%s' AND end >= '%s')) AND status = '3'",
+    $db->real_escape_string($from),
+    $db->real_escape_string($from),
+    $db->real_escape_string($to),
+    $db->real_escape_string($to),
+  ));
+
   if($cars->num_rows != 0){
     $ok = false;
     $errors['car'] = "Pojazd jest wypożyczony w tym czasie!";
@@ -84,7 +90,7 @@ if(isset($_POST['email'])){
 
     $clients = $db->query("SELECT * FROM clients WHERE pesel = '{$_POST['pesel']}'");
     if($clients->num_rows == 0){
-      $db->query("INSERT INTO clients VALUES (null,'{$_POST['name']}','{$_POST['surname']}','{$_POST['city']}','{$_POST['street']}','{$_POST['number']}','{$_POST['phone']}','{$_POST['email']}','{$_POST['pesel']}')");
+      $db->query("INSERT INTO clients VALUES (null,'{$_POST['name']}','{$_POST['surname']}','{$_POST['city']}','{$_POST['street']}','{$_POST['number']}','{$_POST['phone']}','{$_POST['email']}','{$_POST['pesel']}', '".time()."')");
 
       $client_id = $db->insert_id;
     }

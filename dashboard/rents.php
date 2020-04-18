@@ -41,7 +41,7 @@ if(!defined('SECURE_BOOT')) exit;
                   </td>
                   <td><?= $rentStatus[ $rent['status'] ] ?></td>
                   <td>
-                    <a href="?action=edit-rent&id=<?= $rent['id'] ?>">Zarządzaj</a>
+                    <a href="?view=rent&id=<?= $rent['id'] ?>">Zarządzaj</a>
                   </td>
                 </tr>
 

@@ -6,10 +6,15 @@
 
 a {
   text-decoration: none;
+  color: #47817F;
 }
 
 p {
   margin: 5px 0;
+}
+
+.bt-2 {
+  margin-top: 20px;
 }
 
 .bm-2 {
@@ -62,6 +67,24 @@ form.as-anchor > button[type=submit] {
   margin: 0;
   color: #47817F;
 }
+
+form.as-anchor > button[type=submit].accept,
+form.as-anchor > button[type=submit].cancel {
+  font-size: 1em;
+  color: #FFF;
+  padding: 8px 18px;
+  border-radius: 4px;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+  transition: .2 ease-in;
+}
+
+form.as-anchor > button[type=submit].accept:hover,
+form.as-anchor > button[type=submit].cancel:hover {
+  filter: brightness(1.1);
+}
+
+form.as-anchor > button[type=submit].accept { background-color: #2E7D32 }
+form.as-anchor > button[type=submit].cancel { background-color: #B71C1C }
 
 .columns {
   display: flex;
@@ -170,6 +193,11 @@ button[type=submit] {
   background: #A5D3FA;
   text-transform: uppercase;
   display: block;
+}
+
+.input--container p#car {
+  display: block;
+  width: 100%;
 }
 
 button.beautiful {
