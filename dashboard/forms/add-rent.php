@@ -69,12 +69,12 @@ if (isset($_POST['action'])) {
   }
 
   if ($_POST['client-id'] == 0) {
-    if(strlen($_POST['client']['pesel']) !== 11){
+    if(strlen($_POST['client']['pesel']) != 11){
       $ok = false;
       $_SESSION['dashboard-form-error-client[pesel]'] = "PESEL musi mieć 11 cyfr!";
     }
 
-    if(strlen($_POST['client']['phone']) !== 9){
+    if(strlen($_POST['client']['phone']) != 9){
       $ok = false;
       $_SESSION['dashboard-form-error-client[phone]'] = "Numer telefonu musi mieć 9 cyfr!";
     }
@@ -217,10 +217,10 @@ $doWeHaveAnyClient = $db->query("SELECT * FROM clients")->num_rows != 0 ? true :
 <?php endif; ?>
 
 <div class="columns">
-  <div class="column col-100 bm-2">
+  <div class="column col-100 mb-2">
     <a href='dashboard.php?view=rents'><button type='button'>&lt; Powrót</button></a>
   </div>
-  <div class="column col-100 bm-2">
+  <div class="column col-100 mb-2">
     <div class='input--container'>
       <label for='car'>Pojazd</label><?php
 

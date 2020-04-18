@@ -50,7 +50,7 @@ $client = $clients->fetch_assoc();
     <h4>Informacje o wypożyczeniu</h4>
     <ul>
       <li><strong>Pojazd: </strong> <a href='dashboard.php?view=car&id=<?= $rent['car'] ?>'><?= "{$car['brand']} {$car['model']} - {$car['registration']}" ?></a></li>
-      <li><strong>Klient: </strong> <?= $client['name'].' '.$client['surname'].' ('.$client['pesel'].')' ?></li>
+      <li><strong>Klient: </strong> <?= $client['surname'].' '.$client['name'].' ('.$client['pesel'].')' ?></li>
       <li><strong>Data zgłoszenia: </strong> <?= date('d.m.Y H:i', $rent['created_at']) ?></li>
       <li><strong>Okres: </strong> <?= date('d.m.Y', $rent['begin']).' - '.date('d.m.Y', $rent['end']) ?></li>
     </ul>
@@ -64,10 +64,10 @@ $client = $clients->fetch_assoc();
   </div>
   <div class='column col-50'>
     <div class="columns columns__no-spacing">
-      <div class="column col-100 bm-2">
+      <div class="column col-100 mb-2">
         <h3>Status wypożyczenia</h3>
         <strong class='dashboard-status'><?= $rentStatus[$rent['status']] ?></strong>
-        <div class='bt-2'>
+        <div class='mt-2'>
           <?php if ($rent['status'] == 0) : ?>
             <form class='as-anchor' method='post'>
               <input type='hidden' name='action' value='edit-rent-status' />

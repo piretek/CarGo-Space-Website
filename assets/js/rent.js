@@ -59,7 +59,7 @@ searchInput.addEventListener('input', () => {
         const { id, name, surname, pesel } = clients[index]
 
         const tdName = document.createElement('td')
-        tdName.textContent = `${name} ${surname}`
+        tdName.textContent = `${surname} ${name}`
 
         const tdPesel = document.createElement('td')
         tdPesel.textContent = pesel
@@ -68,8 +68,8 @@ searchInput.addEventListener('input', () => {
         tdBttn.textContent = 'Wybierz'
         tdBttn.addEventListener('click', () => {
           document.querySelector('#search').classList.add('chosen')
-          document.querySelector('p.search-results span').textContent = `${name} ${surname} (${pesel})`
-          document.querySelector('p.search-results span').textContent = `${name} ${surname} (${pesel})`
+          document.querySelector('p.search-results span').textContent = `${surname} ${name} (${pesel})`
+          document.querySelector('p.search-results span').textContent = `${surname} ${name} (${pesel})`
           document.querySelector('input#client-id').value = id
           document.querySelector('input#search-for-client').value = ''
         })

@@ -12,7 +12,7 @@ else {
   $carInfo = carInfo($car['id']); ?>
 
   <div class="columns">
-    <div class="column col-100 bm-2">
+    <div class="column col-100 mb-2">
       <a href='dashboard.php?view=fleet'><button>&lt; Powrót</button></a>
       <a href="dashboard.php?action=edit-fleet&id=<?= $car['id'] ?>"><button>Edytuj</button></a>
       <form class='as-anchor-button' method='post'>
@@ -42,7 +42,7 @@ else {
       <h3 class='bm'>Status wypożyczenia</h3>
       <?php
 
-      $rentQuery = sprintf("SELECT rents.*, CONCAT(clients.name, ' ', clients.surname) AS client, clients.phone FROM rents INNER JOIN clients ON rents.client = clients.id WHERE car = '%s' AND begin < '%d' AND end > '%d'",
+      $rentQuery = sprintf("SELECT rents.*, CONCAT(clients.surname, ' ', clients.name) AS client, clients.phone FROM rents INNER JOIN clients ON rents.client = clients.id WHERE car = '%s' AND begin < '%d' AND end > '%d'",
         $db->real_escape_string($_GET['id']),
         time(),
         time()
@@ -82,7 +82,7 @@ else {
 
               <?php
 
-              $rentQuery = sprintf("SELECT rents.*, CONCAT(clients.name, ' ', clients.surname) AS client FROM rents INNER JOIN clients ON rents.client = clients.id WHERE car = '%s' LIMIT 15",
+              $rentQuery = sprintf("SELECT rents.*, CONCAT(clients.surname, ' ', clients.name) AS client FROM rents INNER JOIN clients ON rents.client = clients.id WHERE car = '%s' LIMIT 15",
                 $db->real_escape_string($_GET['id'])
               );
 
