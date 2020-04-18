@@ -92,7 +92,7 @@ if(isset($_POST['email'])){
     $clients = $db->query(sprintf("SELECT * FROM clients WHERE pesel = '%s'", $db->real_escape_string($_POST['pesel'])));
     if($clients->num_rows == 0){
 
-      $db->query(sprintf("INSERT INTO clients VALUES (null,'%s','%s','%s','%s','%s','%s','%s','%s', '%s')",
+      $insertClientQuery = sprintf("INSERT INTO clients VALUES (null,'%s','%s','%s','%s','%s','%s','%s','%s')",
         $db->real_escape_string($_POST['name']),
         $db->real_escape_string($_POST['surname']),
         $db->real_escape_string($_POST['city']),
@@ -100,9 +100,14 @@ if(isset($_POST['email'])){
         $db->real_escape_string($_POST['number']),
         $db->real_escape_string($_POST['phone']),
         $db->real_escape_string($_POST['email']),
-        $db->real_escape_string($_POST['pesel']),
-        time()
-      ));
+        $db->real_escape_string($_POST['pesel'])
+      );
+
+      if (!$db->query($insertClientQuery)) {
+        $_SESSION['contact-form-error'] = 'Błąd podczas wysyłania wiadomości. Skontaktuj się z administratorem. '.$db->error;
+        header("Location: {$config['site_url']}/contact.php");
+        exit;
+      }
 
       $client_id = $db->insert_id;
     }
@@ -118,13 +123,15 @@ if(isset($_POST['email'])){
 
     $rentedCar = carinfo($_POST['car']);
 
-    $successful = $db->query(sprintf("INSERT INTO rents VALUES (null,'%s','%s','%s','%s', '0', '%d')",
+    $insertRentQuery = sprintf("INSERT INTO rents VALUES (null,'%s','%s','%s','%s', '0', '%d')",
       $db->real_escape_string($client_id),
       $db->real_escape_string($_POST['car']),
       $from,
       $to,
       time()
-    ));
+    );
+
+    $successful = $db->query($insertRentQuery);
 
     if ($successful) {
       $sent = send_mail($client, 'rent-created', [
@@ -134,12 +141,16 @@ if(isset($_POST['email'])){
         'rent-price' => rent_price($db->insert_id).' zł'
       ]);
 
+      if (!$sent) {
+        $_SESSION['contact-form-error'] = 'Potwierdzenie nie zostało wysłane.';
+      }
+
       $_SESSION['contact-form-success'] = 'Samochód został wypożyczony. Oczekuj na odpowiedź naszego pracownika. Dziękujemy za zainsteresowanie ofertą CarGo Space!';
       header("Location: {$config['site_url']}/contact.php");
       exit;
     }
     else {
-      $_SESSION['contact-form-error'] = 'Błąd podczas wysyłania wiadomości. Skontaktuj się z administratorem. '.$db->error;
+      $_SESSION['contact-form-error'] = 'Błąd podczas wysyłania wiadomości. Skontaktuj się z administratorem.';
       header("Location: {$config['site_url']}/contact.php");
       exit;
     }

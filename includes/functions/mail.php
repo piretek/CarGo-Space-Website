@@ -8,8 +8,7 @@ function send_mail($client, $mailType, $vars = []) {
 
   $headers = [
     'MIME-Version' => '1.0',
-    'Content-type' => 'text/html; charset=iso-8859-1',
-    'To' => $mail_to,
+    'Content-type' => 'text/html; charset=UTF-8',
     'From' => $mail_from,
     'Reply-To' => $mail_reply,
     'X-Mailer' => 'PHP/' . phpversion()
@@ -17,10 +16,10 @@ function send_mail($client, $mailType, $vars = []) {
 
   switch($mailType) {
     case 'rent-created' :
-      $subject = 'Samochód został wypożyczony';
+      $subject = 'Zarezerwowałeś wypożyczenie auta '.$vars['rent-car'];
 
       $message = prepare_mail_content("{$client['name']} {$client['surname']}", [
-        'Informujemy, że przyjęliśmy wiadomość dot. wypożyczenia:',
+        'Informujemy, że przyjęliśmy informację dot. wypożyczenia:',
         'Nr. wypożyczenia: '.$vars['rent-id'],
         'Pojazd: '.$vars['rent-car'],
         'Okres: '.$vars['rent-time'],
@@ -33,7 +32,7 @@ function send_mail($client, $mailType, $vars = []) {
   }
 
 
-  return mail(null, $subject, $message, $headers);
+  return mail($mail_to, $subject, $message, $headers);
 }
 
 function prepare_mail_content($user, $mailContent) {
@@ -45,7 +44,7 @@ function prepare_mail_content($user, $mailContent) {
     $matches = [];
 
     $replacement['user'] = $user;
-    $replacement['mail_content'] = is_array($mailContent) ? implode("\n", $mailContent) : $mailContent;
+    $replacement['mail_content'] = is_array($mailContent) ? implode("<br />", $mailContent) : $mailContent;
 
     if (preg_match($pattern, $value, $matches) == 1) {
       $mailTemplate[$line] = str_replace(['{{', '}}'], '', preg_replace($pattern, $replacement[$matches[0]], $value));
