@@ -774,7 +774,7 @@ ul.nav > li:hover > a {
   padding: 0;
 }
 
-.selected-car p.instruction {
+.selected-car p.choose-car {
   font-size: .8em;
   text-align: center;
   width: 100%;
@@ -943,7 +943,7 @@ table.search-results td:nth-child(3):hover {
   font-weight: lighter;
 }
 
-.cookie-consent {
+.cookie-consent{
   display: flex;
   position: fixed;
   bottom: 0;
@@ -954,6 +954,10 @@ table.search-results td:nth-child(3):hover {
   background-color: rgba(0, 0, 0, .8);
   color: white;
   font-size: 13px;
+}
+
+.cookie-consent.hidden {
+  display: none;
 }
 
 .cross {
