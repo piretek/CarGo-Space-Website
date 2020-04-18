@@ -6,7 +6,7 @@ if(!defined('SECURE_BOOT')) exit;
 <div class='columns'>
   <div class='column col-100'>
     <div class='columns columns__no-spacing'>
-      <div class="column col-100 bm-2">
+      <div class="column col-100 mb-2">
         <a href='dashboard.php?action=add-rent'><button>Dodaj nowe wypożyczenie</button></a>
       </div>
       <div class='column col-100'>
@@ -22,7 +22,7 @@ if(!defined('SECURE_BOOT')) exit;
             </tr>
             <?php
 
-            $rentsQuery = "SELECT rents.* , CONCAT(clients.name, ' ', clients.surname, ' (', clients.pesel, ')') AS client FROM rents INNER JOIN clients ON clients.id = rents.client ORDER BY created_at DESC";
+            $rentsQuery = "SELECT rents.* , CONCAT(clients.surname, ' ', clients.name, ' (', clients.pesel, ')') AS client FROM rents INNER JOIN clients ON clients.id = rents.client ORDER BY created_at DESC";
 
             $perPage = 15;
             $allRents = $db->query($rentsQuery)->num_rows;

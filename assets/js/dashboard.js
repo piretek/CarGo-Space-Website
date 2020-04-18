@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector(`.page--title`).innerHTML = title
   }
 
-  const additionalPages = ['car', 'rent']
+  const additionalPages = ['car', 'rent', 'client']
 
   pageButtons.forEach((pageButton) => {
     pageButton.addEventListener('click', function() {
@@ -31,6 +31,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   if (!urlParams.has('view') || urlParams.get('view') === 'rents') {
     changePage('rents', 'Wypożyczenia')
+  }
+  else if (urlParams.get('view') === 'clients') {
+    changePage('clients', 'Klienci')
   }
   else if (urlParams.get('view') === 'fleet') {
     changePage('fleet', 'Flota')
