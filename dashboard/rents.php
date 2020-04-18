@@ -21,7 +21,7 @@ if(!defined('SECURE_BOOT')) exit;
             </tr>
             <?php
 
-            $rents = $db->query("SELECT rents.* , CONCAT(clients.name, ' ', clients.surname, ' (', clients.pesel, ')') AS client FROM rents INNER JOIN clients ON clients.id = rents.client");
+            $rents = $db->query("SELECT rents.* , CONCAT(clients.name, ' ', clients.surname, ' (', clients.pesel, ')') AS client FROM rents INNER JOIN clients ON clients.id = rents.client ORDER BY created_at DESC");
             if ($rents->num_rows == 0) : ?>
 
               <tr>
