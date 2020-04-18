@@ -13,6 +13,7 @@ if(!defined('SECURE_BOOT')) exit;
         <table>
           <tbody>
             <tr>
+              <th>Nr</th>
               <th>Klient</th>
               <th>Samochód</th>
               <th>Okres wypożyczenia</th>
@@ -34,6 +35,7 @@ if(!defined('SECURE_BOOT')) exit;
                 $carInfo = carinfo($rent['car']); ?>
 
                 <tr>
+                  <td><?= $rent['id'] ?></td>
                   <td><?= $rent['client'] ?></td>
                   <td><?= $carInfo['brand'].' '.$carInfo['model'].' | '.$carInfo['registration'] ?></td>
                   <td>
