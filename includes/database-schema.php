@@ -1,9 +1,17 @@
+<?php
+
+if (!defined('SECURE_BOOT')) exit();
+
+$schema = [];
+
+$schema[] = "
 CREATE TABLE `brands` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
+$schema[] = "
 CREATE TABLE `cars` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `model` int(11) NOT NULL,
@@ -16,8 +24,9 @@ CREATE TABLE `cars` (
   `image` varchar(100) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`),
   KEY `cars_models` (`model`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
+$schema[] = "
 CREATE TABLE `clients` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) CHARACTER SET utf8 NOT NULL,
@@ -30,8 +39,9 @@ CREATE TABLE `clients` (
   `pesel` varchar(11) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `pesel` (`pesel`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
+$schema[] = "
 CREATE TABLE `models` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `brand` int(11) NOT NULL,
@@ -43,8 +53,9 @@ CREATE TABLE `models` (
   PRIMARY KEY (`id`),
   KEY `models_brands` (`brand`),
   KEY `models_types` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
+$schema[] = "
 CREATE TABLE `rents` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `client` int(11) NOT NULL,
@@ -56,14 +67,16 @@ CREATE TABLE `rents` (
   PRIMARY KEY (`id`),
   KEY `rents_cars` (`car`),
   KEY `rents_clients` (`client`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
+$schema[] = "
 CREATE TABLE `types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
+$schema[] = "
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(50) CHARACTER SET utf8 NOT NULL,
@@ -71,15 +84,20 @@ CREATE TABLE `users` (
   `firstname` varchar(20) CHARACTER SET utf8 NOT NULL,
   `lastname` varchar(30) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
+$schema[] = "
 ALTER TABLE `cars`
-  ADD CONSTRAINT `cars_models` FOREIGN KEY (`model`) REFERENCES `models` (`id`);
+  ADD CONSTRAINT `cars_models` FOREIGN KEY (`model`) REFERENCES `models` (`id`);";
 
+$schema[] = "
 ALTER TABLE `models`
   ADD CONSTRAINT `models_brands` FOREIGN KEY (`brand`) REFERENCES `brands` (`id`),
-  ADD CONSTRAINT `models_types` FOREIGN KEY (`type`) REFERENCES `types` (`id`);
+  ADD CONSTRAINT `models_types` FOREIGN KEY (`type`) REFERENCES `types` (`id`);";
 
+$schema[] = "
 ALTER TABLE `rents`
   ADD CONSTRAINT `rents_cars` FOREIGN KEY (`car`) REFERENCES `cars` (`id`),
-  ADD CONSTRAINT `rents_clients` FOREIGN KEY (`client`) REFERENCES `clients` (`id`);
+  ADD CONSTRAINT `rents_clients` FOREIGN KEY (`client`) REFERENCES `clients` (`id`);";
+
+return $schema;

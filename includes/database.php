@@ -20,16 +20,19 @@ function import_database_schema($db, $name) {
   }
 
   if ($needsToImport) {
-    if (!file_exists('./includes/database.sql')) {
+    if (!file_exists('./includes/database-schema.php')) {
       echo 'Plik schematu bazy danych nie istnieje.';
       exit();
     }
 
-    $sqlImport = file_get_contents('./includes/database.sql');
+    $sqlStatements = require './includes/database-schema.php';
 
-    $successful = $db->query($sqlImport);
+    $successful = [];
+    foreach($sqlStatements as $sqlStatement) {
+      $successful[] = $db->query($sqlStatement);
+    }
 
-    return $successful;
+    return !in_array(false, $successful);
   }
   else {
     return true;
