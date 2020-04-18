@@ -56,5 +56,6 @@ $rentStatus = [
 ];
 
 require_once './includes/functions/carinfo.php';
+require_once './includes/functions/mail.php';
 require_once './includes/functions/input.php';
 require_once './includes/functions/rent_price.php';
