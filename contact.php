@@ -88,9 +88,20 @@ if(isset($_POST['email'])){
   }
   else {
 
-    $clients = $db->query("SELECT * FROM clients WHERE pesel = '{$_POST['pesel']}'");
+    $clients = $db->query(sprintf("SELECT * FROM clients WHERE pesel = '%s'", $db->real_escape_string($_POST['pesel'])));
     if($clients->num_rows == 0){
-      $db->query("INSERT INTO clients VALUES (null,'{$_POST['name']}','{$_POST['surname']}','{$_POST['city']}','{$_POST['street']}','{$_POST['number']}','{$_POST['phone']}','{$_POST['email']}','{$_POST['pesel']}', '".time()."')");
+
+      $db->query(sprintf("INSERT INTO clients VALUES (null,'%s','%s','%s','%s','%s','%s','%s','%s', '%s')",
+        $db->real_escape_string($_POST['name']),
+        $db->real_escape_string($_POST['surname']),
+        $db->real_escape_string($_POST['city']),
+        $db->real_escape_string($_POST['street']),
+        $db->real_escape_string($_POST['number']),
+        $db->real_escape_string($_POST['phone']),
+        $db->real_escape_string($_POST['email']),
+        $db->real_escape_string($_POST['pesel']),
+        time()
+      );
 
       $client_id = $db->insert_id;
     }
@@ -114,11 +125,24 @@ if(isset($_POST['email'])){
     // $emailSent = mail(null, $subject, $message, $headers);
     $emailSent = false;
 
-    $db->query("INSERT INTO rents VALUES (null,'{$client_id}','{$_POST['car']}','{$from}','{$to}', '".($emailSent ? '1' : '0')."')");
+    $successful = $db->query(sprintf("INSERT INTO rents VALUES (null,'%s','%s','%s','%s', '0', '%d)",
+      $db->real_escape_string($client_id),
+      $db->real_escape_string($_POST['car']),
+      $from,
+      $to,
+      time()
+    ));
 
-    $_SESSION['contact-form-success'] = 'Samochód został wypożyczony. Oczekuj na odpowiedź naszego pracownika. Dziękujemy za zainsteresowanie ofertą CarGo Space!';
-    header("Location: {$config['site_url']}/contact.php");
-    exit;
+    if ($successful) {
+      $_SESSION['contact-form-success'] = 'Samochód został wypożyczony. Oczekuj na odpowiedź naszego pracownika. Dziękujemy za zainsteresowanie ofertą CarGo Space!';
+      header("Location: {$config['site_url']}/contact.php");
+      exit;
+    }
+    else {
+      $_SESSION['contact-form-error'] = 'Błąd podczas wysyłania informacji. Skontaktuj się z administratorem. ';
+      header("Location: {$config['site_url']}/contact.php");
+      exit;
+    }
   }
 }
 include './includes/header.php';
