@@ -86,7 +86,7 @@ $pages = [
       <?php
         foreach($pages as $page){
         ?>
-          <li>
+          <li <?= $page['name'] == 'Panel zarządzania' ? 'class=\'dashboard-link\'' : '' ?>>
             <a href='<?= $page['url'] ?>'><?= $page['name'] ?></a>
           </li>
         <?php

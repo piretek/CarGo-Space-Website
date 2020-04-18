@@ -171,9 +171,9 @@ include './includes/header.php';
       <?php unset($_SESSION['contact-form-success']); ?>
     <?php endif; ?>
     <div class="columns">
-      <div class="column col-40" style = "padding-right: 65px;">
+      <div class="column col-40 contact-form">
         <form action="contact.php" method="POST">
-          <div class="columns">
+          <div class="columns contact-form--container">
             <div class="column col-50">
               <?php input('name', 'Imię:', '', 'np. Jan') ?>
               <?php input('surname', 'Nazwisko:', '', 'np. Kowalski') ?>
@@ -221,7 +221,7 @@ include './includes/header.php';
           </div>
         </form>
       </div>
-      <div class="column col-35">
+      <div class="column col-35 cities--container">
         <h2>
           Gdzie działamy?
         </h2>

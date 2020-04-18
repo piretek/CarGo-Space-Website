@@ -12,7 +12,7 @@ if (USER_AUTHORIZED) {
 include './includes/header.php';
 ?>
 
-<div class='columns col-center min-page-height'>
+<div class='columns col-center min-page-height dashboard-view'>
   <div class="column col-50">
     <div class='columns'>
       <div class='column col-100'>
@@ -36,7 +36,7 @@ include './includes/header.php';
             <input class='input' id='password' type="password" name="password" placeholder="podaj hasło">
           </div>
           <div>
-            <button type="submit">ZALOGUJ</button>
+            <button class='beautiful' type="submit">Zaloguj</button>
           </div>
         </form>
       </div>
@@ -86,7 +86,7 @@ include './includes/header.php';
                 ?>
             </div>
             <div>
-              <button type="submit">Zarejestruj</button>
+              <button class='beautiful' type="submit">Zarejestruj</button>
             </div>
           </form>
         </div>
@@ -99,5 +99,7 @@ include './includes/header.php';
     </div>
   </div>
 </div>
+
+<div class='dashboard-view-mobile min-page-height'>Niestety, ale system zarządzania nie obsługuje urządzeń mobilnych</div>
 
 <?php include './includes/footer.php'; ?>

@@ -56,7 +56,7 @@ if (isset($_POST['action'])) {
 include './includes/header.php';
 ?>
 
-<div class="columns col-center min-page-height">
+<div class="columns col-center min-page-height dashboard-view">
   <div class="column page-column">
     <div class="columns">
       <div class='column col-100'>
@@ -165,6 +165,8 @@ include './includes/header.php';
     </div>
   </div>
 </div>
+
+<div class='dashboard-view-mobile min-page-height'>Niestety, ale system zarządzania nie obsługuje urządzeń mobilnych</div>
 
 <script src='assets/js/dashboard.js'></script>
 <?php include './includes/footer.php'; ?>

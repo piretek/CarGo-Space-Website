@@ -7,7 +7,7 @@ require_once './includes/init.php';
 include './includes/header.php';
 ?>
 <div class="columns col-center min-page-height">
-  <div class="column page-column">
+  <div class="column page-column page-calculator">
     <h1>Kalkulator ceny wynajmu</h1>
     <p>Poniżej prosimy o wybranie pojazdu oraz okresu, na jaki chcą go Państwo wypożyczyć.</p>
     <div class='columns calculator'>

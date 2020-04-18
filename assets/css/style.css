@@ -158,11 +158,7 @@ form.as-anchor > button[type=submit].cancel { background-color: #B71C1C }
   padding: 0 20px;
 }
 
-@media screen and (max-width: 1024px) {
-  .column.page-column {
-    width: 100%;
-  }
-}
+.dashboard-view-mobile { display: none; }
 
 .column.col-100 { width: 100%; }
 .column.col-80 { width: 80%; }
@@ -414,6 +410,10 @@ ul.nav > li:hover > a {
   text-align: right;
 }
 
+.contact-form {
+  padding-right: 65px;
+}
+
 .dashboard--pages-container {
   padding-left: 20px;
 }
@@ -546,6 +546,7 @@ ul.nav > li:hover > a {
 .info {
   display: flex;
   height: calc(100vh / 3);
+  min-height: 200px;
   overflow: hidden;
   transition: .02s;
   position: relative;
@@ -579,7 +580,6 @@ ul.nav > li:hover > a {
 
 .about-text {
   color: #FFF;
-  font-family: 'Open Sans', sans-serif;
   font-size: 20px;
 }
 
@@ -902,15 +902,6 @@ table.search-results td:nth-child(3):hover {
   padding: 10px;
 }
 
-@media screen and (max-width: 800px) {
-  .info-content {
-    font-size: 0.8em;
-  }
-  .column.col-75 {
-    width: 100%;
-  }
-}
-
 .contact-align {
   text-align: right;
 }
@@ -918,12 +909,12 @@ table.search-results td:nth-child(3):hover {
 .instruction {
   background-color: #EBEBE0;
   margin: 0;
-  padding: 5px 5px;
 }
 
 .how-to {
   list-style-position: inside;
   padding: 0;
+  margin: 0;
   max-width: 100%;
   display: flex;
   justify-content: space-between;
@@ -936,6 +927,11 @@ table.search-results td:nth-child(3):hover {
   width: calc(100% / 3);
   font-weight: bold;
   text-align: inherit;
+  padding: 20px 0;
+}
+
+.how-to li:nth-child(even) {
+  background-color: rgba(0,0,0,.05);
 }
 
 .adnotation {
@@ -945,11 +941,12 @@ table.search-results td:nth-child(3):hover {
 
 .cookie-consent{
   display: flex;
+  flex-wrap: wrap;
   position: fixed;
   bottom: 0;
   width: 100vw;
-  height: 40px;
-  padding: 10px 5px;
+  min-height: 40px;
+  padding: 10px 20px;
   justify-content: center;
   background-color: rgba(0, 0, 0, .8);
   color: white;
@@ -961,6 +958,7 @@ table.search-results td:nth-child(3):hover {
 }
 
 .cross {
+  cursor: pointer;
   margin: 0px 3px;
   display: block;
   height: 18px;
@@ -984,7 +982,7 @@ body.dark-mode .nav > li:hover > a {
 body.dark-mode {
   background-color: rgba(0,0,0,.7);
   color: white;
-} 
+}
 
 body.dark-mode .footer,
 body.dark-mode .car,
@@ -994,7 +992,7 @@ body.dark-mode .car-selector {
   color: white;
 }
 
-body.dark-mode .footer-1, 
+body.dark-mode .footer-1,
 body.dark-mode .footer-2 {
   border-right: 1px solid white;
 }
@@ -1025,7 +1023,7 @@ body.dark-mode button[type="submit"] {
 
 body.dark-mode .error,
 body.dark-mode .input--error {
-  color: rgb(255, 0, 0); 
+  color: rgb(255, 0, 0);
 }
 
 body.dark-mode .d-menu_element {
@@ -1044,3 +1042,256 @@ body.dark-mode .d-menu_element:hover {
 
 /*----------------------------------------------------------------------------*/
 
+@media screen and (max-width: 1500px) {
+  .instruction {
+    padding: 0;
+  }
+
+  .how-to {
+    flex-wrap: wrap;
+    margin: 5px 0;
+  }
+
+  .how-to li {
+    width: 100%;
+    padding: 8px 0;
+    min-width: initial;
+  }
+
+  .column.col-40.contact-form {
+    width: 30%;
+    padding-right: 28px;
+  }
+
+  .contact-form--container > .col-50 {
+    width: 100%;
+  }
+
+  .column.col-35.cities--container {
+    width: 45%;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .column.page-column.page-calculator {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .column.page-column {
+    width: 100%;
+  }
+
+  .column.col-75 {
+    width: 100%;
+  }
+
+  .info-content-container {
+    padding: 5px 20px;
+  }
+
+  .column.col-40.contact-form {
+    width: 500px;
+    padding-right: 0;
+    order: 1;
+  }
+
+  .column.col-35.cities--container {
+    order: 3;
+    width: 100%;
+  }
+
+  .city {
+    justify-content: center;
+  }
+
+  .column.col-25.contact-align {
+    order: 2;
+    width: calc(100% - 500px);
+  }
+
+  .car-selector.col-50 {
+    flex-wrap: wrap;
+  }
+
+  .car-selector.has-image .car-content,
+  .car-selector .car-image {
+    width: 100%;
+  }
+
+  .calculator > .col-50 {
+    width: 40%;
+  }
+
+  .calculator > .col-25 {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .dashboard-link { display: none; }
+  .dashboard-view { display: none; }
+  .dashboard-view-mobile {
+    padding: 50px 20px;
+    display: block;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .column.page-column {
+    box-sizing: border-box;
+  }
+
+  .header-background .text {
+    text-align: center;
+    padding: 0 80px;
+  }
+
+  .about-text {
+    font-size: 1em;
+  }
+
+  .car {
+    width: calc(calc(100% / 2) - 40px);
+    margin: 0;
+  }
+
+  .car:nth-of-type(1) {
+    margin-left: initial;
+  }
+
+  .car:nth-of-type(3) {
+    margin-right: initial;
+  }
+
+  .column.col-25.contact-align,
+  .column.col-40.contact-form {
+    width: 50%;
+  }
+
+  .footer-1, .footer-2 {
+    width: 50%;
+  }
+
+  .footer-2 {
+    border: 0;
+  }
+
+  .footer-3 {
+    width: 100%;
+  }
+
+  .footer-1, .footer-2, .footer-3 {
+    margin: 7.5px 0;
+  }
+
+  ul.nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .calculator > .col-50 {
+    width: 100%;
+    border-bottom: .5px solid rgba(0,0,0,.4);
+    margin-bottom: 40px;
+  }
+
+  .calculator > .col-25 {
+    width: 50%;
+  }
+
+  .car-selector.col-50 {
+    margin: 8px 0;
+    width: calc(50% - 8px);
+  }
+
+  .car-selector.col-50:nth-child(even) {
+    margin-left: 8px;
+  }
+
+  .car-selector.col-50:nth-child(odd) {
+    margin-right: 8px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .car {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  ul.nav {
+    border-top: 1px solid rgba(0,0,0,.2);
+  }
+
+  ul.nav > li {
+    text-align: center;
+    width: 100%;
+  }
+
+  ul.nav > li:nth-child(odd) {
+    background-color: rgba(0,0,0,.05);
+  }
+
+  .about-page-pd {
+    text-align: center;
+  }
+
+  .about-text {
+    font-size: .8em;
+  }
+
+  .how-to li {
+    padding: 10px 6px;
+  }
+
+  .header-background .text {
+    text-align: center;
+    padding: 0 30px;
+  }
+
+  .column.col-35.cities--container,
+  .column.col-25.contact-align,
+  .column.col-40.contact-form {
+    width: 100%;
+    padding: 20px 0;
+  }
+
+  .column.col-25.contact-align {
+    text-align: center;
+  }
+
+  .city {
+    flex-wrap: wrap;
+    padding: 12px 10px;
+  }
+
+  .city > img,
+  .city > p {
+    margin: 10px 0;
+  }
+
+  .footer-1, .footer-2 {
+    width: 100%;
+    border: 0;
+  }
+
+  .calculator > .col-25 {
+    width: 100%;
+  }
+
+  .calculator > .column:nth-of-type(3) {
+    padding: 20px;
+  }
+
+  .cross {
+    order: 1;
+  }
+
+  .cookie-info {
+    order: 2;
+  }
+}
