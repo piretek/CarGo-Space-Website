@@ -1,6 +1,7 @@
 <?php
 
 function send_mail($client, $mailType, $vars = []) {
+  global $rentStatus;
 
   $mail_to = "{$client['name']} {$client['surname']} <{$client['email']}>";
   $mail_from = 'CarGo Space <no-reply@cargospace.com>';
@@ -27,6 +28,41 @@ function send_mail($client, $mailType, $vars = []) {
         '',
         'Prosimy o oczekiwanie na wiadomość od pracownika, potwierdzającą rezerwację.'
       ]);
+
+      break;
+    case 'rent-edited' :
+      $subject = 'Zmieniliśmy informacje o Twoim wypożyczeniu';
+
+      $message = prepare_mail_content("{$client['name']} {$client['surname']}", [
+        "Informujemy, że zmieniliśmy informację dot. wypożyczenia nr {$vars['rent-id']}:",
+        'Pojazd: '.$vars['rent-car'],
+        'Okres: '.$vars['rent-time'],
+        'Cena wynajmu: '.$vars['rent-price'],
+        '',
+        'Jeżeli mają Państwo jakieś pytania, prosimy o skontaktowanie się z naszym Biurem Obsługi Klienta przez adres email lub telefon.'
+      ]);
+
+      break;
+    case 'rent-status-changed' :
+      $subject = 'Twoje wypożyczenie zostało '.strtolower(htmlentities($rentStatus[(int) $vars['rent-newstatus']], ENT_QUOTES, 'UTF-8'));
+
+      $rentMessage[2] = [
+        "Uprzejmie informujemy, że Twoje wypożyczenie zostało ".strtolower($rentStatus[(int) $vars['rent-newstatus']]).".",
+        'Pojazd: '.$vars['rent-car'],
+        'Okres: '.$vars['rent-time'],
+        'Cena wynajmu: '.$vars['rent-price'],
+        '',
+        'Prosimy o stawienie się w naszym oddziale w dniu odbioru po odbiór auta i dokumentów. Umowa wynajmu zostanie podpisana przed oddaniem kluczyków.',
+        'Jeszcze raz dziękujemy za skorzystanie z naszych usług',
+        'Życzymy szerokiej drogi i zapraszamy ponownie!'
+      ];
+
+      $rentMessage[1] = [
+        "Uprzejmie informujemy, że Twoje wypożyczenie w terminie: <br />{$vars['rent-time']}, auta: <br />{$vars['rent-car']}<br /> zostało ".strtolower($rentStatus[$vars['rent-newstatus']]).".",
+        'W celu zapoznania się z powodem odrzucenia, nasz pracownik skontaktuje się z Państwem w ciągu 24H.'
+      ];
+
+      $message = prepare_mail_content("{$client['name']} {$client['surname']}", $rentMessage[(int) $vars['rent-newstatus']]);
 
       break;
   }

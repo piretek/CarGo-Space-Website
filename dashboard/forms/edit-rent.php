@@ -42,6 +42,22 @@ if (isset($_POST['action'])) {
       );
       $successful = $db->query($query);
 
+      $rent = $db->query(sprintf("SELECT rents.* , clients.name, clients.surname, clients.email FROM rents INNER JOIN clients ON clients.id = rents.client WHERE rents.id = '%s'",
+        $db->real_escape_string($_POST['id'])
+      ))->fetch_assoc();
+
+      $rentedCar = carinfo($rent['car']);
+      $sent = send_mail($rent, 'rent-edited', [
+        'rent-id' => $rent['id'],
+        'rent-car' => "{$rentedCar['brand']} {$rentedCar['model']} {$rentedCar['engine']} {$rentedCar['fuel']} {$rentedCar['registration']}",
+        'rent-time' => date('d.m.Y', $from).' - '.date('d.m.Y', $to),
+        'rent-price' => rent_price($db->insert_id).' zł'
+      ]);
+
+      if (!$sent) {
+        $_SESSION['dashboard-form-error'] = 'Błąd podczas wysyłania wiadomości do klienta.';
+      }
+
       if ($successful) {
         $_SESSION['dashboard-form-success'] = 'Zmieniono dane';
         header("Location: {$config['site_url']}/dashboard.php?view=rent&id=".$_POST['id']);
@@ -61,10 +77,11 @@ if (isset($_POST['action'])) {
   }
   else if ($_POST['action'] == 'edit-rent-status') {
 
+    $rent = $db->query(sprintf("SELECT rents.* , clients.name, clients.surname, clients.email FROM rents INNER JOIN clients ON clients.id = rents.client WHERE rents.id = '%s'",
+      $db->real_escape_string($_POST['id'])
+    ))->fetch_assoc();
+
     if ($_POST['new-status'] == 3) {
-      $rent = $db->query(sprintf("SELECT * FROM rents WHERE id = '%s'",
-        $db->real_escape_string($_POST['id'])
-      ))->fetch_assoc();
 
       $isRentedQuery = sprintf("SELECT * FROM rents WHERE ((begin <= '%s' AND end >= '%s') OR (begin <= '%s' AND end >= '%s')) AND status = '3'",
         $db->real_escape_string($rent['begin']),
@@ -88,6 +105,19 @@ if (isset($_POST['action'])) {
     );
 
     $successful = $db->query($query);
+
+    $rentedCar = carinfo($rent['car']);
+    $sent = send_mail($rent, 'rent-status-changed', [
+      'rent-id' => $rent['id'],
+      'rent-car' => "{$rentedCar['brand']} {$rentedCar['model']} {$rentedCar['engine']} {$rentedCar['fuel']} {$rentedCar['registration']}",
+      'rent-time' => date('d.m.Y', $rent['begin']).' - '.date('d.m.Y', $rent['end']),
+      'rent-price' => rent_price($rent['id']).' zł',
+      'rent-newstatus' => $_POST['new-status']
+    ]);
+
+    if (!$sent) {
+      $_SESSION['dashboard-form-error'] = 'Błąd podczas wysyłania wiadomości do klienta.';
+    }
 
     if ($successful) {
       $_SESSION['dashboard-form-success'] = 'Zmieniono status';
