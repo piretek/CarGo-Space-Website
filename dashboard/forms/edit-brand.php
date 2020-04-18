@@ -57,7 +57,12 @@ if (isset($_POST['action'])) {
 }
 
 $query = sprintf("SELECT * FROM brands WHERE id = '%s'", $db->real_escape_string($_GET['id']));
-$brand = $db->query($query)->fetch_assoc();
+$brands = $db->query($query);
+if ($brands->num_rows == 0) {
+  header('Location: dashboard.php?view=fleet');
+  exit;
+}
+$brand = $brands->fetch_assoc();
 
 ?>
 

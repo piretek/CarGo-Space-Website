@@ -12,7 +12,7 @@ else {
   $carInfo = carInfo($car['id']); ?>
 
   <div class="columns">
-    <div class="column col-100 bm-2">
+    <div class="column col-100 mb-2">
       <a href='dashboard.php?view=fleet'><button>&lt; Powrót</button></a>
       <a href="dashboard.php?action=edit-fleet&id=<?= $car['id'] ?>"><button>Edytuj</button></a>
       <form class='as-anchor-button' method='post'>
@@ -42,7 +42,7 @@ else {
       <h3 class='bm'>Status wypożyczenia</h3>
       <?php
 
-      $rentQuery = sprintf("SELECT rents.*, CONCAT(clients.name, ' ', clients.surname) AS client, clients.phone FROM rents INNER JOIN clients ON rents.client = clients.id WHERE car = '%s' AND begin < '%d' AND end > '%d'",
+      $rentQuery = sprintf("SELECT rents.*, CONCAT(clients.name, ' ', clients.surname) AS client, clients.phone FROM rents INNER JOIN clients ON rents.client = clients.id WHERE car = '%s' AND begin <= '%d' AND end >= '%d' AND (status = '3' OR status = '2')",
         $db->real_escape_string($_GET['id']),
         time(),
         time()
@@ -52,7 +52,7 @@ else {
       if ($rents->num_rows == 0) : ?>
 
         <p><span class='success'>Wolny, dostępny do wypożyczenia</span></p>
-        <a href='dashboard?action=add-rent'>
+        <a href='dashboard.php?action=add-rent&car=<?= $car['id'] ?>'>
           <button>Dodaj nowe wypożyczenie dla auta</button>
         </a>
 
@@ -82,7 +82,7 @@ else {
 
               <?php
 
-              $rentQuery = sprintf("SELECT rents.*, CONCAT(clients.name, ' ', clients.surname) AS client FROM rents INNER JOIN clients ON rents.client = clients.id WHERE car = '%s' LIMIT 15",
+              $rentQuery = sprintf("SELECT rents.*, CONCAT(clients.surname, ' ', clients.name) AS client FROM rents INNER JOIN clients ON rents.client = clients.id WHERE car = '%s' LIMIT 15",
                 $db->real_escape_string($_GET['id'])
               );
 
@@ -98,7 +98,7 @@ else {
                 <?php while ($rent = $rents->fetch_assoc()) : ?>
                   <tr>
                     <td><?= $rent['client'] ?></td>
-                    <td><?= '' ?></td>
+                    <td><?= $rentStatus[$rent['status']] ?></td>
                     <td><?= date('d.m.Y', $rent['begin']).' - '.date('d.m.Y', $rent['end']) ?></td>
                     <td>
                       <a href="?view=rent&id=<?= $car['id'] ?>">Zobacz</a>
@@ -110,9 +110,6 @@ else {
               <?php endif; ?>
             </tbody>
           </table>
-        </div>
-        <div class="column col-50">
-          Tu planuję stworzyć wydatki pojazdu
         </div>
       </div>
     </div>

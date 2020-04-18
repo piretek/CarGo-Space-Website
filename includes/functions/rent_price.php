@@ -22,7 +22,7 @@ function rent_price( $id, $isCar = false, $from = null, $to = null ) {
     $rent = $rents->fetch_assoc();
 
     if (array_key_exists('begin', $rent) && array_key_exists('end', $rent)) {
-      $price = (float) (abs($rent['begin'] - $rent['end']) / 60 / 60 / 24 ) * (float) $rent['price'];
+      $price = (float) (round(abs($rent['end'] - $rent['begin']) / 60 / 60 / 24, 2) - 1) * (float) $rent['price'];
     }
     else if ($from !== null && $to !== null) {
       list($from_year, $from_month, $from_day) = explode("-", $from);
@@ -30,14 +30,12 @@ function rent_price( $id, $isCar = false, $from = null, $to = null ) {
 
       list($to_year, $to_month, $to_day) = explode("-", $to);
       $to = mktime(23, 59, 59, $to_month, $to_day, $to_year);
-
       $price = (float) (abs($from - $to) / 60 / 60 / 24 ) * (float) $rent['price'];
     }
     else {
-
       $price = (float) $rent['price'];
     }
 
-    return str_replace('.', ',', number_format($price, 2));
+    return number_format($price, 2);
   }
 }

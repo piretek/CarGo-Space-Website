@@ -28,7 +28,7 @@ if (isset($_POST['action'])) {
       $_SESSION["dashboard-form-error-email"] = "Niepoprawny email";
     }
 
-    $emailExists = $db->query("SELECT * FROM users WHERE email = {$_POST['email']}")->num_rows;
+    $emailExists = $db->query(sprintf("SELECT * FROM users WHERE email = '%s'", $db->real_escape_string($_POST['email'])))->num_rows;
     if($emailExists == 1){
       $ok = false;
       $_SESSION["dashboard-form-error-email"] = "Ten email jest już ustawiony";
@@ -65,7 +65,7 @@ if (isset($_POST['action'])) {
     $query1 = "UPDATE users SET firstname = '{$_POST['firstname']}', lastname = '{$_POST['lastname']}' WHERE id = '{$_SESSION['user']}'";
     $query2 = "UPDATE users SET email = '{$_POST['email']}' WHERE id = '{$_SESSION['user']}'";
     $query3 = "UPDATE users SET password = '{$hashedPassword}' WHERE id = '{$_SESSION['user']}'";
-    
+
     $successful1 = $db->query($query1);
     $successful2 = $emailWillChange ? $db->query($query2) : true;
     $successful3 = $passwordWillChange ? $db->query($query3) : true;

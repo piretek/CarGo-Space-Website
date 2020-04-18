@@ -25,6 +25,14 @@ $actions = [
   'delete-model' => 'edit-model',
   // User account
   'user-selfedit' => 'user-account',
+  // Rents
+  'add-rent' => 'add-rent',
+  'edit-rent' => 'edit-rent',
+  'edit-rent-status' => 'edit-rent',
+  // Clients
+  'add-client' => 'add-client',
+  'edit-client' => 'edit-client',
+  'delete-client' => 'edit-client',
 ];
 
 if (isset($_POST['action'])) {
@@ -56,6 +64,7 @@ include './includes/header.php';
           <div class="column col-20">
             <ul class='d-menu'>
               <li id='rents' class='page-bttn d-menu_element'>Wypożyczenia</li>
+              <li id='clients' class='page-bttn d-menu_element'>Klienci</li>
               <li id='fleet' class='page-bttn d-menu_element'>Flota</li>
               <li id='account' class='page-bttn d-menu_element'>Twoje konto</li>
             </ul>
@@ -102,6 +111,14 @@ include './includes/header.php';
 
               <?php include_once "dashboard/car.php" ?>
 
+            <?php elseif (isset($_GET['view']) && $_GET['view'] == 'client' && isset($_GET['id']) && !empty($_GET['id'])) : ?>
+
+              <?php include_once "dashboard/client.php" ?>
+
+            <?php elseif (isset($_GET['view']) && $_GET['view'] == 'rent' && isset($_GET['id']) && !empty($_GET['id'])) : ?>
+
+              <?php include_once "dashboard/rent.php" ?>
+
             <?php else : ?>
 
               <div class="columns">
@@ -133,6 +150,9 @@ include './includes/header.php';
                 </div>
                 <div id='page-fleet' class="page column col-100">
                   <?php include_once 'dashboard/fleet.php' ?>
+                </div>
+                <div id='page-clients' class="page column col-100">
+                  <?php include_once 'dashboard/clients.php' ?>
                 </div>
                 <div id='page-account' class="page column col-100">
                   <?php include_once 'dashboard/user-account.php' ?>

@@ -20,7 +20,7 @@ if (isset($_POST['action'])) {
     exit;
   }
 
-  $models = $db->query("SELECT * FROM models WHERE id = '{$_POST['model']}'");
+  $models = $db->query(sprintf("SELECT * FROM models WHERE id = '%s'", $db->real_escape_string($_POST['model'])));
   if ($models->num_rows == 0) {
     $ok = false;
     $_SESSION['dashboard-form-error-model'] = 'Taki model nie istnieje.';
@@ -116,7 +116,7 @@ if (isset($_POST['action'])) {
   }
 
   if ($ok) {
-    $query = sprintf("INSERT INTO `cars` VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
+    $query = sprintf("INSERT INTO cars VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
       $db->real_escape_string($_POST['model']),
       $db->real_escape_string($_POST['year']),
       $db->real_escape_string($_POST['engine']),

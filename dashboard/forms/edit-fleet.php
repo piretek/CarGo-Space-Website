@@ -30,7 +30,7 @@ if (isset($_POST['action'])) {
       exit;
     }
 
-    $models = $db->query("SELECT * FROM models WHERE id = '{$_POST['model']}'");
+    $models = $db->query(sprintf("SELECT * FROM models WHERE id = '%s'", $db->real_escape_string($_POST['model'])));
     if ($models->num_rows == 0) {
       $ok = false;
       $_SESSION['dashboard-form-error-model'] = 'Taki model nie istnieje.';
@@ -136,7 +136,7 @@ if (isset($_POST['action'])) {
     }
 
     if ($ok) {
-      $query = sprintf("UPDATE `cars` SET model = '%s', year = '%s', engine = '%s', fuel = '%s', clutch = '%s', registration = '%s', price = '%s' WHERE id = '%s'",
+      $query = sprintf("UPDATE cars SET model = '%s', year = '%s', engine = '%s', fuel = '%s', clutch = '%s', registration = '%s', price = '%s' WHERE id = '%s'",
         $db->real_escape_string($_POST['model']),
         $db->real_escape_string($_POST['year']),
         $db->real_escape_string($_POST['engine']),
@@ -149,7 +149,7 @@ if (isset($_POST['action'])) {
       $successful = $db->query($query);
 
       if ($successful && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
-        $query = sprintf("UPDATE `cars` SET image = '%s' WHERE id = '%s'",
+        $query = sprintf("UPDATE cars SET image = '%s' WHERE id = '%s'",
           $db->real_escape_string($photo),
           $db->real_escape_string($_POST['id']),
         );
@@ -195,7 +195,13 @@ if (isset($_POST['action'])) {
 }
 
 $query = sprintf("SELECT * FROM cars WHERE id = '%s'", $db->real_escape_string($_GET['id']));
-$car = $db->query($query)->fetch_assoc();
+$cars = $db->query($query);
+if ($cars->num_rows == 0) {
+  header('Location: dashboard.php?view=fleet');
+  exit;
+}
+$car = $cars->fetch_assoc();
+
 $carInfo = carinfo($car['id']);
 
 ?>

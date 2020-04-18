@@ -34,10 +34,16 @@ if(isset($_POST['email'])){
 
   $availableFrom = strtotime("now +1 day midnight");
   $availableTo = strtotime("now +3 months");
+  $availableToFrom = strtotime("now +2 day midnight");
 
   if($from < $availableFrom){
     $ok = false;
     $errors["from"] = "Data nie może być wcześniejsza niż ".date("d.m.Y", $availableFrom)."!";
+  }
+
+  if($to < $availableToFrom){
+    $ok = false;
+    $errors["to"] = "Data nie może być wcześniejsza niż ".date("d.m.Y", $availableToFrom)."!";
   }
 
   if($to > $availableTo){
@@ -55,7 +61,13 @@ if(isset($_POST['email'])){
     $errors["phone"] = "Numer telefonu musi mieć 9 cyfr!";
   }
 
-  $cars = $db->query("SELECT * FROM rents WHERE (begin >= $from AND end <= $from) OR (begin >= $to AND end <= $to)");
+  $cars = $db->query(sprintf("SELECT * FROM rents WHERE ((begin <= '%s' AND end >= '%s') OR (begin <= '%s' AND end >= '%s')) AND (status = '3' OR status = '2')",
+    $db->real_escape_string($from),
+    $db->real_escape_string($from),
+    $db->real_escape_string($to),
+    $db->real_escape_string($to),
+  ));
+
   if($cars->num_rows != 0){
     $ok = false;
     $errors['car'] = "Pojazd jest wypożyczony w tym czasie!";
@@ -77,9 +89,25 @@ if(isset($_POST['email'])){
   }
   else {
 
-    $clients = $db->query("SELECT * FROM clients WHERE pesel = '{$_POST['pesel']}'");
+    $clients = $db->query(sprintf("SELECT * FROM clients WHERE pesel = '%s'", $db->real_escape_string($_POST['pesel'])));
     if($clients->num_rows == 0){
-      $db->query("INSERT INTO clients VALUES (null,'{$_POST['name']}','{$_POST['surname']}','{$_POST['city']}','{$_POST['street']}','{$_POST['number']}','{$_POST['phone']}','{$_POST['email']}','{$_POST['pesel']}')");
+
+      $insertClientQuery = sprintf("INSERT INTO clients VALUES (null,'%s','%s','%s','%s','%s','%s','%s','%s')",
+        $db->real_escape_string($_POST['name']),
+        $db->real_escape_string($_POST['surname']),
+        $db->real_escape_string($_POST['city']),
+        $db->real_escape_string($_POST['street']),
+        $db->real_escape_string($_POST['number']),
+        $db->real_escape_string($_POST['phone']),
+        $db->real_escape_string($_POST['email']),
+        $db->real_escape_string($_POST['pesel'])
+      );
+
+      if (!$db->query($insertClientQuery)) {
+        $_SESSION['contact-form-error'] = 'Błąd podczas wysyłania wiadomości. Skontaktuj się z administratorem. '.$db->error;
+        header("Location: {$config['site_url']}/contact.php");
+        exit;
+      }
 
       $client_id = $db->insert_id;
     }
@@ -87,27 +115,45 @@ if(isset($_POST['email'])){
       $client_id = $clients->fetch_assoc()['id'];
     }
 
-    $mail_to = "{$_POST['name']} {$_POST['surname']} <{$_POST['email']}>";
-    $mail_from = 'CarGo Space <no-reply@cargospace.com>';
-    $subject = 'Samochód został wypożyczony';
-    $message = 'Samochód został wypożyczony';
-    $headers = [
-      'MIME-Version' => '1.0',
-      'Content-type' => 'text/html; charset=iso-8859-1',
-      'To' => $mail_to,
-      'From' => $mail_from,
-      'Reply-To' => $mail_from,
-      'X-Mailer' => 'PHP/' . phpversion()
+    $client = [
+      'name' => $_POST['name'],
+      'surname' => $_POST['surname'],
+      'email' => $_POST['email']
     ];
 
-    // $emailSent = mail(null, $subject, $message, $headers);
-    $emailSent = false;
+    $rentedCar = carinfo($_POST['car']);
 
-    $db->query("INSERT INTO rents VALUES (null,'{$client_id}','{$_POST['car']}','{$from}','{$to}', '".($emailSent ? '1' : '0')."')");
+    $insertRentQuery = sprintf("INSERT INTO rents VALUES (null,'%s','%s','%s','%s', '0', '%d')",
+      $db->real_escape_string($client_id),
+      $db->real_escape_string($_POST['car']),
+      $from,
+      $to,
+      time()
+    );
 
-    $_SESSION['contact-form-success'] = 'Samochód został wypożyczony. Oczekuj na odpowiedź naszego pracownika. Dziękujemy za zainsteresowanie ofertą CarGo Space!';
-    header("Location: {$config['site_url']}/contact.php");
-    exit;
+    $successful = $db->query($insertRentQuery);
+
+    if ($successful) {
+      $sent = send_mail($client, 'rent-created', [
+        'rent-id' => $db->insert_id,
+        'rent-car' => "{$rentedCar['brand']} {$rentedCar['model']} {$rentedCar['engine']} {$rentedCar['fuel']} {$rentedCar['registration']}",
+        'rent-time' => date('d.m.Y', $from).' - '.date('d.m.Y', $to),
+        'rent-price' => rent_price($db->insert_id).' zł'
+      ]);
+
+      if (!$sent) {
+        $_SESSION['contact-form-error'] = 'Potwierdzenie nie zostało wysłane.';
+      }
+
+      $_SESSION['contact-form-success'] = 'Samochód został wypożyczony. Oczekuj na odpowiedź naszego pracownika. Dziękujemy za zainsteresowanie ofertą CarGo Space!';
+      header("Location: {$config['site_url']}/contact.php");
+      exit;
+    }
+    else {
+      $_SESSION['contact-form-error'] = 'Błąd podczas wysyłania wiadomości. Skontaktuj się z administratorem.';
+      header("Location: {$config['site_url']}/contact.php");
+      exit;
+    }
   }
 }
 include './includes/header.php';
@@ -130,7 +176,7 @@ include './includes/header.php';
           <div class="columns">
             <div class="column col-50">
               <?php input('name', 'Imię:', '', 'np. Jan') ?>
-              <?php input('sruname', 'Nazwisko:', '', 'np. Kowalski') ?>
+              <?php input('surname', 'Nazwisko:', '', 'np. Kowalski') ?>
               <?php input('pesel', 'PESEL:', '', 'Numer PESEL (11 cyfr)', 'text', null, [
                 'minlength' => '11',
                 'maxlength' => '11'
@@ -148,24 +194,25 @@ include './includes/header.php';
                 <label class='input--label' for='car'>Samochód:</label>
                 <?php
 
-                  $cars = $db->query("SELECT cars.id, brands.name as brand, models.model as model, types.name as type, year, engine, clutch FROM (((cars INNER JOIN models ON cars.model = models.id) INNER JOIN types ON types.id = models.type) INNER JOIN brands ON brands.id = models.brand)");
-                  if($cars->num_rows != 0){ ?>
+                $cars = $db->query("SELECT cars.id, brands.name as brand, models.model as model, types.name as type, year, engine, clutch FROM (((cars INNER JOIN models ON cars.model = models.id) INNER JOIN types ON types.id = models.type) INNER JOIN brands ON brands.id = models.brand)");
+                if($cars->num_rows != 0){ ?>
 
-                    <select class="input" id="car" name="car">
-                      <?php while($car = $cars->fetch_assoc()){ ?>
+                  <select class="input" id="car" name="car">
+                    <?php while($car = $cars->fetch_assoc()){ ?>
 
-                      <option <?= isset($_GET['car']) && $car['id'] == $_GET['car'] ? 'selected' : '' ?> value='<?= $car["id"] ?>'><?= $car["brand"]." ".$car["model"]." ".$car["type"]." ".$car["year"]." ".$car["engine"]." ".$car["clutch"]; ?></option>
+                    <option <?= isset($_GET['car']) && $car['id'] == $_GET['car'] ? 'selected' : '' ?> value='<?= $car["id"] ?>'><?= $car["brand"]." ".$car["model"]." ".$car["type"]." ".$car["year"]." ".$car["engine"]." ".$car["clutch"]; ?></option>
 
-                      <?php } ?>
-                    </select>
+                    <?php } ?>
+                  </select>
 
-                  <?php
-                  }
-                  else {
-                    echo "Brak pojazdów w systemie";
-                  }
+                <?php
+                }
+                else {
+                  echo "Brak pojazdów w systemie";
+                }
+
                 ?>
-              <span class='input--error'><?php $errField = 'car'; if (isset($_SESSION['contact-error-'.$errField])) { echo $_SESSION['contact-error-'.$errField]; unset($_SESSION['contact-error-'.$errField]); } ?></span>
+                <span class='input--error'><?php $errField = 'car'; if (isset($_SESSION['contact-form-error-'.$errField])) { echo $_SESSION['contact-form-error-'.$errField]; unset($_SESSION['contact-form-error-'.$errField]); } ?></span>
               </div>
             </div>
           </div>
@@ -180,15 +227,15 @@ include './includes/header.php';
         </h2>
         <div class="column col-center">
           <div class="cities">
-              <div class="city">
-                <img src="assets/images/cities/lublin.png" alt="Lublin">
-                <p>
-                  CarGo Space Lublin<br/>
-                  ul. Sezamkowa 20 (2. piętro, pokój nr 14)<br />
-                  20-000 Lublin<br/>
-                  E-mail: contact.lublin@cargospace.com
-                </p>
-              </div>
+            <div class="city">
+              <img src="assets/images/cities/lublin.png" alt="Lublin">
+              <p>
+                CarGo Space Lublin<br/>
+                ul. Sezamkowa 20 (2. piętro, pokój nr 14)<br />
+                20-000 Lublin<br/>
+                E-mail: contact.lublin@cargospace.com
+              </p>
+            </div>
             <div class="city">
               <img src="assets/images/cities/warsaw.png" alt="Warszawa">
               <p>
@@ -224,7 +271,6 @@ include './includes/header.php';
         </p>
         <p>
          Numer rachunku bankowego:<br /> 10 9029 1023 8549 3843 3600 5157
-        </p>
         </p>
       </div>
     </div>
