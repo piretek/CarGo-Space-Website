@@ -9,7 +9,7 @@ function send_mail($client, $mailType, $vars = []) {
 
   $headers = [
     'MIME-Version' => '1.0',
-    'Content-type' => 'text/html; charset=UTF-8',
+    'Content-type' => 'text/html; charset=utf-8',
     'From' => $mail_from,
     'Reply-To' => $mail_reply,
     'X-Mailer' => 'PHP/' . phpversion()
@@ -74,7 +74,7 @@ function send_mail($client, $mailType, $vars = []) {
       break;
   }
 
-  return mail($mail_to, $subject, $message, $headers);
+  return mail($mail_to, "=?UTF-8?B?".base64_encode($subject)."?=", $message, $headers);
 }
 
 function prepare_mail_content($user, $mailContent) {

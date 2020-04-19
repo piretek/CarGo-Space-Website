@@ -139,8 +139,6 @@ $client = $clients->fetch_assoc();
             <?php input('from', 'Od:', date('Y-m-d', $rent['begin']), '', 'date') ?>
             <?php input('to', 'Do:', date('Y-m-d', $rent['end']), '', 'date') ?>
 
-            <input type='hidden' name='action' value='edit-rent' />
-            <input type='hidden' name='id' value='<?= $car['id'] ?>' />
             <button type='submit'>Zmień</button>
           </form>
         <?php endif; ?>

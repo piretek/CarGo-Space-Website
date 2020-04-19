@@ -198,7 +198,11 @@ include './includes/header.php';
               <?php input('city', 'Miejscowość:', '', 'np. Warszawa') ?>
               <?php input('street', 'Ulica:', '', 'np. ul. Wiejska') ?>
               <?php input('number', 'Numer domu/bloku:', '', 'np. 3/1') ?>
-              <?php input('phone', 'Numer telefonu:', '', 'np. 555 555 555') ?>
+              <?php input('phone', 'Numer telefonu:', '', 'np. 555 555 555', 'number', null, [
+                'minlength' => '9',
+                'maxlength' => '9'
+              ]) ?>
+              <?php input('email', 'E-mail:', '', 'np. jan.kowalski@example.com', 'email') ?>
              </div>
             <div class="column col-50">
               <?php input('from', 'Od:', isset($_GET['from']) && !empty($_GET['from']) ? $_GET['from'] : '', '', 'date') ?>
