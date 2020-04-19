@@ -558,6 +558,7 @@ ul.nav > li:hover > a {
 .info-content {
   position: absolute;
   height: 100%;
+  width: 100%;
 }
 
 .info-background {
