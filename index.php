@@ -26,7 +26,7 @@ include './includes/header.php';
 
 <div class="columns col-center min-page-height">
   <div class="column page-column">
-    <h1>Jak to działa?</h1>
+    <h1 class="mt-2">Jak to działa?</h1>
     <div class="instruction columns col-center columns__no-spacing">
       <ol class="how-to">
         <li>

@@ -220,6 +220,10 @@ form.as-anchor > button[type=submit].cancel { background-color: #B71C1C }
   font-size: .8em;
 }
 
+select {
+  max-width: 100%;
+}
+
 .input--select {
   display: block;
   padding: 5px;
@@ -230,6 +234,8 @@ p.no-cats {
   font-size: .6em;
   color:#CC0000;
 }
+
+
 
 button[type=submit] {
   border: 0;
@@ -944,7 +950,7 @@ table.search-results td:nth-child(3):hover {
   width: calc(100% / 3);
   font-weight: bold;
   text-align: inherit;
-  padding: 20px 0;
+  padding: 20px 10px;
 }
 
 .how-to li:nth-child(even) {

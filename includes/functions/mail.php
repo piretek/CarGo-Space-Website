@@ -34,7 +34,7 @@ function send_mail($client, $mailType, $vars = []) {
       $subject = 'Zmieniliśmy informacje o Twoim wypożyczeniu';
 
       $message = prepare_mail_content("{$client['name']} {$client['surname']}", [
-        "Informujemy, że zmieniliśmy informację dot. wypożyczenia nr {$vars['rent-id']}:",
+        "Informujemy, że zmieniliśmy informacje dot. wypożyczenia nr {$vars['rent-id']}:",
         '<strong>Pojazd:</strong> '.$vars['rent-car'],
         '<strong>Okres:</strong> '.$vars['rent-time'],
         '<strong>Cena wynajmu:</strong> '.$vars['rent-price'],
