@@ -65,7 +65,7 @@ if(isset($_POST['email'])){
     $db->real_escape_string($from),
     $db->real_escape_string($from),
     $db->real_escape_string($to),
-    $db->real_escape_string($to),
+    $db->real_escape_string($to)
   ));
 
   if($cars->num_rows != 0){
