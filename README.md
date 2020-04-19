@@ -1,4 +1,6 @@
 # System zarządzania wypożyczalnią samochodów
+## Wersja poglądowa DEMO
+[http://cargospace.grabski.wtf](www.cargospace.grabski.wtf)
 ## Instrukcja instalacji
 1. Po wypakowaniu plików, należy skopiować plik ```config.sample.php``` do pliku ```config.php```
 2. Następnie należy wypełnić w pliku ```config.php``` dane do połączenia z bazą danych oraz adres witryny wg. następującego formatu:
