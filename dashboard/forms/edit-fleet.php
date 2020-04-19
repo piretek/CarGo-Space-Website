@@ -46,7 +46,7 @@ if (isset($_POST['action'])) {
 
     $registrations = $db->query(sprintf("SELECT * FROM cars WHERE registration = '%s' AND id NOT IN ('%s')",
       $db->real_escape_string($_POST['registration']),
-      $db->real_escape_string($_POST['id']),
+      $db->real_escape_string($_POST['id'])
     ));
 
     if ($registrations->num_rows != 0) {
@@ -144,14 +144,14 @@ if (isset($_POST['action'])) {
         $db->real_escape_string($_POST['clutch']),
         $db->real_escape_string($_POST['registration']),
         $db->real_escape_string($_POST['price']),
-        $db->real_escape_string($_POST['id']),
+        $db->real_escape_string($_POST['id'])
       );
       $successful = $db->query($query);
 
       if ($successful && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
         $query = sprintf("UPDATE cars SET image = '%s' WHERE id = '%s'",
           $db->real_escape_string($photo),
-          $db->real_escape_string($_POST['id']),
+          $db->real_escape_string($_POST['id'])
         );
 
         $successful = $db->query($query);
