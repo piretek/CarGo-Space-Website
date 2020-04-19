@@ -46,8 +46,13 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(e) {
       e.preventDefault()
 
-      if (!confirm('Czy na pewno chcesz wykonać tą operację?')) {
-        return false
+      if (!form.classList.contains('dont-ask')){
+        if (!confirm('Czy na pewno chcesz wykonać tą operację?')) {
+          return false
+        }
+        else {
+          e.target.submit()
+        }
       }
       else {
         e.target.submit()

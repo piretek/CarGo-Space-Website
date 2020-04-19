@@ -15,11 +15,11 @@ if (!defined('SECURE_BOOT')) exit();
             <br>
             z klasy 3ft.
             <div class="dark-mode-button">
-              <form class="as-anchor" method="post">
+              <form class="as-anchor dont-ask" method="post">
                 <input type="hidden" name="action" value="dark-mode-toggle">
                 <button type="submit">Przełącz na tryb <?= isset($_COOKIE['dark-mode']) && $_COOKIE['dark-mode'] == 1 ? 'jasny' : 'ciemny' ?></button>
-              </form>  
-            </div>  
+              </form>
+            </div>
         </div>
         <div class="footer-2">
           <h2>Wynajem aut</h2>
