@@ -82,7 +82,7 @@ else {
 
               <?php
 
-              $rentQuery = sprintf("SELECT rents.*, CONCAT(clients.surname, ' ', clients.name) AS client FROM rents INNER JOIN clients ON rents.client = clients.id WHERE car = '%s' LIMIT 15",
+              $rentQuery = sprintf("SELECT rents.*, CONCAT(clients.surname, ' ', clients.name) AS client FROM rents INNER JOIN clients ON rents.client = clients.id WHERE car = '%s' ORDER BY rents.created_at DESC LIMIT 15",
                 $db->real_escape_string($_GET['id'])
               );
 
@@ -101,7 +101,7 @@ else {
                     <td><?= $rentStatus[$rent['status']] ?></td>
                     <td><?= date('d.m.Y', $rent['begin']).' - '.date('d.m.Y', $rent['end']) ?></td>
                     <td>
-                      <a href="?view=rent&id=<?= $car['id'] ?>">Zobacz</a>
+                      <a href="?view=rent&id=<?= $rent['id'] ?>">Zobacz</a>
                     </td>
                   </tr>
 

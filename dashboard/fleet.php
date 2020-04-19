@@ -25,7 +25,7 @@ if(!defined('SECURE_BOOT')) exit;
 
         <?php
 
-        $cars = $db->query('SELECT * FROM cars');
+        $cars = $db->query('SELECT * FROM cars ORDER BY model, year ASC');
         if ($cars->num_rows == 0) : ?>
 
           <tr>
@@ -43,7 +43,7 @@ if(!defined('SECURE_BOOT')) exit;
               <td><?= $carInfo['registration'] ?></td>
               <td>
                 <?php
-                  $isRentedQuery = sprintf("SELECT * FROM rents WHERE car = '%s' AND begin <= '%s' AND end >= '%s' AND (status = '3' OR status = '2')",
+                  $isRentedQuery = sprintf("SELECT * FROM rents WHERE car = '%s' AND (begin <= '%d' AND end >= '%d') AND (status = '3' OR status = '2')",
                     $car['id'],
                     time(),
                     time()

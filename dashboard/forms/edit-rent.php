@@ -83,7 +83,8 @@ if (isset($_POST['action'])) {
 
     if ($_POST['new-status'] == 2 || $_POST['new-status'] == 3) {
 
-      $isRentedQuery = sprintf("SELECT * FROM rents WHERE ((begin <= '%s' AND end >= '%s') OR (begin <= '%s' AND end >= '%s')) AND (status = '3' OR status = '2') AND id != '%s'",
+      $isRentedQuery = sprintf("SELECT * FROM rents WHERE car = '%s' ((begin <= '%s' AND end >= '%s') OR (begin <= '%s' AND end >= '%s')) AND (status = '3' OR status = '2') AND id != '%s'",
+        $db->real_escape_string($rent['id']),
         $db->real_escape_string($rent['begin']),
         $db->real_escape_string($rent['begin']),
         $db->real_escape_string($rent['end']),

@@ -143,11 +143,12 @@ if (isset($_POST['action'])) {
       $status = 0;
     }
 
-    $query = sprintf("INSERT INTO rents VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s');",
+    $query = sprintf("INSERT INTO rents VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
       $db->real_escape_string($clientId),
       $db->real_escape_string($_POST['car']),
       $db->real_escape_string($from),
       $db->real_escape_string($to),
+      $db->real_escape_string(isset($_POST['insurance']) ? '1' : '0'),
       $db->real_escape_string($status),
       time()
     );
@@ -250,6 +251,7 @@ $doWeHaveAnyClient = $db->query("SELECT * FROM clients")->num_rows != 0 ? true :
     <h3>Dane dot. wypożyczenia</h3>
     <?php input('from', 'Od:', isset($_GET['from']) && !empty($_GET['from']) ? $_GET['from'] : '', '', 'date') ?>
     <?php input('to', 'Do:', isset($_GET['to']) && !empty($_GET['to']) ? $_GET['to'] : '', '', 'date') ?>
+    <?php input('insurance', 'Z ubezpieczeniem', 'on', 'insurance', 'checkbox', null, ['checked' => 'checked']) ?>
     <?php input('accept', 'Potwierdzić od razu wypożyczenie?', 'on', 'accept', 'checkbox', null, ['checked' => 'checked']) ?>
   </div>
   <div class='column col-50'>

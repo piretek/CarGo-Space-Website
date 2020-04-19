@@ -104,7 +104,7 @@ $client = $clients->fetch_assoc();
 
         <?php
 
-        $rentQuery = sprintf("SELECT * FROM rents WHERE client = '%s' LIMIT 15",
+        $rentQuery = sprintf("SELECT * FROM rents WHERE client = '%s' ORDER BY created_at LIMIT 15",
           $db->real_escape_string($_GET['id'])
         );
 
