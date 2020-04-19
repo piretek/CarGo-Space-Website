@@ -16,6 +16,16 @@ if(isset($_POST['email'])){
     }
   }
 
+  if (!isset($_POST['agreement-1'])) {
+    $ok = false;
+    $errors["agreement-1"] = "Wymagana zgoda.";
+  }
+
+  if (!isset($_POST['agreement-2'])) {
+    $ok = false;
+    $errors["agreement-2"] = "Wymagana zgoda.";
+  }
+
   if(!$ok){
     foreach($errors as $field => $error){
       $_SESSION["contact-form-error-$field"] = $error;
@@ -61,12 +71,15 @@ if(isset($_POST['email'])){
     $errors["phone"] = "Numer telefonu musi mieć 9 cyfr!";
   }
 
-  $cars = $db->query(sprintf("SELECT * FROM rents WHERE ((begin <= '%s' AND end >= '%s') OR (begin <= '%s' AND end >= '%s')) AND (status = '3' OR status = '2')",
+  $rentedCarsQuery = sprintf("SELECT * FROM rents WHERE car = '%s' AND ((begin <= '%s' AND end >= '%s') OR (begin <= '%s' AND end >= '%s')) AND (status = '3' OR status = '2')",
+    $db->real_escape_string($_POST['car']),
     $db->real_escape_string($from),
     $db->real_escape_string($from),
     $db->real_escape_string($to),
     $db->real_escape_string($to)
-  ));
+  );
+
+  $cars = $db->query($rentedCarsQuery);
 
   if($cars->num_rows != 0){
     $ok = false;
@@ -104,7 +117,7 @@ if(isset($_POST['email'])){
       );
 
       if (!$db->query($insertClientQuery)) {
-        $_SESSION['contact-form-error'] = 'Błąd podczas wysyłania wiadomości. Skontaktuj się z administratorem. '.$db->error;
+        $_SESSION['contact-form-error'] = 'Błąd podczas rejestracji klienta. '.$db->error;
         header("Location: {$config['site_url']}/contact.php");
         exit;
       }
@@ -123,11 +136,12 @@ if(isset($_POST['email'])){
 
     $rentedCar = carinfo($_POST['car']);
 
-    $insertRentQuery = sprintf("INSERT INTO rents VALUES (null,'%s','%s','%s','%s', '0', '%d')",
+    $insertRentQuery = sprintf("INSERT INTO rents VALUES (null,'%s','%s','%s','%s', '%s', '0', '%d')",
       $db->real_escape_string($client_id),
       $db->real_escape_string($_POST['car']),
       $from,
       $to,
+      $db->real_escape_string($_POST['insurance'] == '1' ? '1' : '0'),
       time()
     );
 
@@ -185,8 +199,7 @@ include './includes/header.php';
               <?php input('street', 'Ulica:', '', 'np. ul. Wiejska') ?>
               <?php input('number', 'Numer domu/bloku:', '', 'np. 3/1') ?>
               <?php input('phone', 'Numer telefonu:', '', 'np. 555 555 555') ?>
-              <?php input('email', 'Email:', '', 'np. jan.kowalski@example.com', 'email') ?>
-            </div>
+             </div>
             <div class="column col-50">
               <?php input('from', 'Od:', isset($_GET['from']) && !empty($_GET['from']) ? $_GET['from'] : '', '', 'date') ?>
               <?php input('to', 'Do:', isset($_GET['to']) && !empty($_GET['to']) ? $_GET['to'] : '', '', 'date') ?>
@@ -231,9 +244,14 @@ include './includes/header.php';
               <?php input('insurance-yes', 'Tak (+ 39,90 zł/każdy dzień)', '1', 'insurance', 'radio', null, (isset($_GET['insurance']) && $_GET['insurance'] == '1') || !isset($_GET['insurance']) ? ['checked' => 'checked'] : []) ?>
               <?php input('insurance-no', 'Nie', '0', 'insurance', 'radio', null, isset($_GET['insurance']) && $_GET['insurance'] == '0' ? ['checked' => 'checked'] : []) ?>
               <hr />
+              <?php input('cats', 'Ile kotków dołączyć do auta?', '1', '', 'number', null, ['disabled' => 'disabled']) ?>
+              <p class='no-cats'>Przepraszamy, ale skończyły nam się kotki. Jednakże nadal mogą Państwo wynająć auto.</p>
+              <hr />
               <p class='contact-price-calculation'>
                 <strong>Koszt wynajmu:</strong> <span></span>
               </p>
+              <?php input('agreement-1', 'Wyrażam zgodę na przetwarzanie moich danych osobowych zgodnie z RODO przez firmę CarGo Space Polska S.A (wymagane)', 'i-agree', 'agreement-1', 'checkbox', null, ['required' => 'required']) ?>
+              <?php input('agreement-2', 'Wyrażam zgodę na na przesyłanie informacji dot. wypożyczenia drogą elektroniczną przez CarGo Space Polska S.A (wymagane)', 'i-agree', 'agreement-2', 'checkbox', null, ['required' => 'required']) ?>
             </div>
           </div>
           <div>
