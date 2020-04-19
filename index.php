@@ -4,6 +4,14 @@ $pageName = 'Strona główna';
 $auth = false;
 require_once './includes/init.php';
 
+if (isset($_POST['action'])){
+  if(($_POST['action'] == "dark-mode-toggle")){
+    setcookie('dark-mode', isset($_COOKIE['dark-mode']) && $_COOKIE['dark-mode'] == 1 ? 0 : 1 );
+    header("Location: {$config['site_url']}/");
+    exit;
+  }
+}
+
 include './includes/header.php';
 ?>
 

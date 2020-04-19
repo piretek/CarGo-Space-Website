@@ -49,7 +49,7 @@ if (!defined('SECURE_BOOT')) exit();
 
   <script src='assets/js/background.js' type='text/javascript'></script>
 </head>
-<body>
+<body <?= isset($_COOKIE['dark-mode']) && $_COOKIE['dark-mode'] == 1 ? 'class=\'dark-mode\'' : '' ?>>
 
 <?php
 

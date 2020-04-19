@@ -14,6 +14,12 @@ if (!defined('SECURE_BOOT')) exit();
             Piotr Czarnecki, Michał Kowalski i Paulina Sznajder
             <br>
             z klasy 3ft.
+            <div class="dark-mode-button">
+              <form class="as-anchor" method="post">
+                <input type="hidden" name="action" value="dark-mode-toggle">
+                <button type="submit">Przełącz na tryb <?= isset($_COOKIE['dark-mode']) && $_COOKIE['dark-mode'] == 1 ? 'jasny' : 'ciemny' ?></button>
+              </form>  
+            </div>  
         </div>
         <div class="footer-2">
           <h2>Wynajem aut</h2>
