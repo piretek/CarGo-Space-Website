@@ -1118,6 +1118,7 @@ body.dark-mode form.as-anchor > button[type=submit].cancel {
 body.dark-mode form.as-anchor > button[type=submit].accept { background-color: #2E7D32 }
 body.dark-mode form.as-anchor > button[type=submit].cancel { background-color: #B71C1C }
 
+body.dark-mode .pagination--container > span.pagination
 body.dark-mode .pagination--container > span.three-dots,
 body.dark-mode .pagination--container > a.pagination {
   color: #FFF;
