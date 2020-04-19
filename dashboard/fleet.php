@@ -46,7 +46,7 @@ if(!defined('SECURE_BOOT')) exit;
                   $isRentedQuery = sprintf("SELECT * FROM rents WHERE car = '%s' AND begin <= '%s' AND end >= '%s' AND (status = '3' OR status = '2')",
                     $car['id'],
                     time(),
-                    time(),
+                    time()
                   );
 
                   $rents = $db->query($isRentedQuery);
