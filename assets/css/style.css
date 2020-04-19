@@ -488,6 +488,7 @@ ul.nav > li:hover > a {
 }
 
 .dashboard--pages-container button {
+  color: #000;
   border: 0;
   background-color: #FAFAFA;
   padding: 8px 20px;
