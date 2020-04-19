@@ -95,7 +95,7 @@ if (isset($_POST['action'])) {
       $db->real_escape_string($from),
       $db->real_escape_string($from),
       $db->real_escape_string($to),
-      $db->real_escape_string($to),
+      $db->real_escape_string($to)
     );
 
     $isRented = $db->query($isRentedQuery)->num_rows != 0 ? true : false;
@@ -116,7 +116,7 @@ if (isset($_POST['action'])) {
         $db->real_escape_string($_POST['client']['number']),
         $db->real_escape_string($_POST['client']['phone']),
         $db->real_escape_string($_POST['client']['email']),
-        $db->real_escape_string($_POST['client']['pesel']),
+        $db->real_escape_string($_POST['client']['pesel'])
       );
 
       $client_success = $db->query($query);

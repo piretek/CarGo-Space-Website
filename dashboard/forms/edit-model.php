@@ -46,7 +46,7 @@ if (isset($_POST['action'])) {
         $db->real_escape_string($_POST['year_from']),
         $db->real_escape_string($_POST['year_to']),
         $db->real_escape_string($_POST['price']),
-        $db->real_escape_string($_POST['id']),
+        $db->real_escape_string($_POST['id'])
       );
       $successful = $db->query($query);
 

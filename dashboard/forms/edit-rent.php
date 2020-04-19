@@ -38,7 +38,7 @@ if (isset($_POST['action'])) {
         $db->real_escape_string($_POST['car']),
         $db->real_escape_string($from),
         $db->real_escape_string($to),
-        $db->real_escape_string($_POST['id']),
+        $db->real_escape_string($_POST['id'])
       );
       $successful = $db->query($query);
 
@@ -88,7 +88,7 @@ if (isset($_POST['action'])) {
         $db->real_escape_string($rent['begin']),
         $db->real_escape_string($rent['end']),
         $db->real_escape_string($rent['end']),
-        $db->real_escape_string($rent['id']),
+        $db->real_escape_string($rent['id'])
       );
 
       $isRented = $db->query($isRentedQuery)->num_rows != 0 ? true : false;
@@ -102,7 +102,7 @@ if (isset($_POST['action'])) {
 
     $query = sprintf("UPDATE rents SET status = '%s' WHERE id = '%s'",
       $db->real_escape_string($_POST['new-status']),
-      $db->real_escape_string($_POST['id']),
+      $db->real_escape_string($_POST['id'])
     );
 
     $successful = $db->query($query);

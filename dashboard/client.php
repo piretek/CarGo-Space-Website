@@ -78,7 +78,7 @@ $client = $clients->fetch_assoc();
     $rents = $db->query(sprintf("SELECT * FROM rents WHERE client = '%s' AND (begin <= '%d' AND end >= '%d') AND (status = '3' OR status = '2')",
       $db->real_escape_string($_GET['id']),
       time(),
-      time(),
+      time()
     ));
 
     if ($rents->num_rows != 0) : $rent = $rents->fetch_assoc(); $car = carinfo($rent['car']); ?>

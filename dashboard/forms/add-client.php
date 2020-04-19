@@ -45,7 +45,7 @@ if (isset($_POST['action'])) {
       $db->real_escape_string($_POST['number']),
       $db->real_escape_string($_POST['phone']),
       $db->real_escape_string($_POST['email']),
-      $db->real_escape_string($_POST['pesel']),
+      $db->real_escape_string($_POST['pesel'])
     );
 
     $successful = $db->query($query);
