@@ -194,15 +194,27 @@ include './includes/header.php';
                 <label class='input--label' for='car'>Samochód:</label>
                 <?php
 
-                $cars = $db->query("SELECT cars.id, brands.name as brand, models.model as model, types.name as type, year, engine, clutch FROM (((cars INNER JOIN models ON cars.model = models.id) INNER JOIN types ON types.id = models.type) INNER JOIN brands ON brands.id = models.brand)");
+                $carsQuery = "SELECT id FROM cars";
+                $cars = $db->query($carsQuery);
+                if ($cars->num_rows != 0) {
+                  echo "<span>";
+
+                  while($car = $cars->fetch_assoc()) : ?>
+                    <span class='data-tag' data-car='<?= $car["id"] ?>' data-car-price='<?= rent_price($car["id"], true) ?>'></span>
+                  <?php endwhile;
+
+                  echo "</span>";
+                }
+
+                $cars = $db->query($carsQuery);
                 if($cars->num_rows != 0){ ?>
 
                   <select class="input" id="car" name="car">
-                    <?php while($car = $cars->fetch_assoc()){ ?>
+                    <?php $ix = 0; while($car = $cars->fetch_assoc()) { $carInfo = carinfo($car['id']); ?>
 
-                    <option <?= isset($_GET['car']) && $car['id'] == $_GET['car'] ? 'selected' : '' ?> value='<?= $car["id"] ?>'><?= $car["brand"]." ".$car["model"]." ".$car["type"]." ".$car["year"]." ".$car["engine"]." ".$car["clutch"]; ?></option>
+                    <option <?= (isset($_GET['car']) && $car['id'] == $_GET['car']) || $ix == 0 ? 'selected' : '' ?> value='<?= $car["id"] ?>'><?= $carInfo["brand"]." ".$carInfo["model"]." ".$carInfo["type"]." ".$carInfo["year"]." ".$carInfo["engine"]." ".$carInfo["clutch"]; ?></option>
 
-                    <?php } ?>
+                    <?php $ix++; } ?>
                   </select>
 
                 <?php
@@ -214,6 +226,14 @@ include './includes/header.php';
                 ?>
                 <span class='input--error'><?php $errField = 'car'; if (isset($_SESSION['contact-form-error-'.$errField])) { echo $_SESSION['contact-form-error-'.$errField]; unset($_SESSION['contact-form-error-'.$errField]); } ?></span>
               </div>
+
+              <p>Dodatkowe ubezpieczenie:</p>
+              <?php input('insurance-yes', 'Tak (+ 39,90 zł/każdy dzień)', '1', 'insurance', 'radio', null, (isset($_GET['insurance']) && $_GET['insurance'] == '1') || !isset($_GET['insurance']) ? ['checked' => 'checked'] : []) ?>
+              <?php input('insurance-no', 'Nie', '0', 'insurance', 'radio', null, isset($_GET['insurance']) && $_GET['insurance'] == '0' ? ['checked' => 'checked'] : []) ?>
+              <hr />
+              <p class='contact-price-calculation'>
+                <strong>Koszt wynajmu:</strong> <span></span>
+              </p>
             </div>
           </div>
           <div>

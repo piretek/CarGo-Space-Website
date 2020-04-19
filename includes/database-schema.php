@@ -62,6 +62,7 @@ CREATE TABLE `rents` (
   `car` int(11) NOT NULL,
   `begin` int(11) NOT NULL,
   `end` int(11) NOT NULL,
+  `insurance` tinyint(1) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `created_at` int(11) NOT NULL,
   PRIMARY KEY (`id`),

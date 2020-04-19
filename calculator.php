@@ -55,6 +55,9 @@ include './includes/header.php';
         <?php input('end', 'Do:', '', '', 'date', null, [
           'min' => date('Y-m-d', strtotime('today +2 days'))
         ]) ?>
+        <p>Dodatkowe ubezpieczenie:</p>
+        <?php input('insurance-yes', 'Tak (+ 39,90 zł/każdy dzień)', '1', 'insurance', 'radio', null, ['checked' => 'checked']) ?>
+        <?php input('insurance-no', 'Nie', '0', 'insurance', 'radio') ?>
       </div>
       <div class='column col-25'>
         <h3>Koszty wynajmu</h3>
