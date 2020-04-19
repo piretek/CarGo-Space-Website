@@ -200,13 +200,19 @@ form.as-anchor > button[type=submit].cancel { background-color: #B71C1C }
   outline: 0;
 }
 
-.input--container.rc > .input {
-  margin: 5px 5px 0 0;
+.input--container > .input:disabled {
+  color: #5d5d5d;
+  background-color:rgba(0,0,0,.3);
 }
 
-.input--container.rc > .input--label,
 .input--container.rc > .input {
+  margin: 5px 5px 0 0;
   width: initial;
+}
+
+.input--container.rc > .input--label {
+  width: calc(100% - 18px);
+  font-size: .8em;
 }
 
 .input--container > .input--error {
@@ -218,6 +224,11 @@ form.as-anchor > button[type=submit].cancel { background-color: #B71C1C }
   display: block;
   padding: 5px;
   font-size: 1em;
+}
+
+p.no-cats {
+  font-size: .6em;
+  color:#CC0000;
 }
 
 button[type=submit] {
@@ -996,6 +1007,11 @@ body.dark-mode .input--container > .input {
   color: #FFF;
 }
 
+body.dark-mode .input--container > .input:disabled {
+  color: #5d5d5d;
+  background-color:rgba(0,0,0,.3);
+}
+
 body.dark-mode .dashboard--pages-container button {
   background-color: rgba(0,0,0,.25);
   color: #FFF;
@@ -1026,6 +1042,10 @@ body.dark-mode .car-selector {
 body.dark-mode .footer-1,
 body.dark-mode .footer-2 {
   border-right: 1px solid white;
+}
+
+body.dark-mode p.no-cats {
+  color: #f54444;
 }
 
 body.dark-mode .cities {
@@ -1083,6 +1103,14 @@ body.dark-mode form.as-anchor > button[type=submit] {
   color: #69cadd;
   background-color: transparent;
 }
+
+body.dark-mode form.as-anchor > button[type=submit].accept,
+body.dark-mode form.as-anchor > button[type=submit].cancel {
+  color: #FFF;
+}
+
+body.dark-mode form.as-anchor > button[type=submit].accept { background-color: #2E7D32 }
+body.dark-mode form.as-anchor > button[type=submit].cancel { background-color: #B71C1C }
 
 /*----------------------------------------------------------------------------*/
 

@@ -91,7 +91,8 @@ if (isset($_POST['action'])) {
   }
 
   if (isset($_POST['accept'])) {
-    $isRentedQuery = sprintf("SELECT * FROM rents WHERE ((begin <= '%s' AND end >= '%s') OR (begin <= '%s' AND end >= '%s')) AND (status = '3' OR status = '2')",
+    $isRentedQuery = sprintf("SELECT * FROM rents WHERE car = '%s' AND ((begin <= '%s' AND end >= '%s') OR (begin <= '%s' AND end >= '%s')) AND (status = '3' OR status = '2')",
+    $db->real_escape_string($_POST['car']),
       $db->real_escape_string($from),
       $db->real_escape_string($from),
       $db->real_escape_string($to),

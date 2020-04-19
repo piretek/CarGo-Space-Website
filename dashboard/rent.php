@@ -55,9 +55,16 @@ $client = $clients->fetch_assoc();
       <li><strong>Okres: </strong> <?= date('d.m.Y', $rent['begin']).' - '.date('d.m.Y', $rent['end']) ?></li>
     </ul>
     <h4>Koszty wypożyczenia</h4>
+    <?php
+
+    $dayNum = round(abs($rent['end'] - $rent['begin']) / 60 / 60 / 24, 2) - 1;
+
+
+    ?>
     <ul>
       <li><strong>Cena za 1 dzień: </strong> <?= calcPrice(function($price) { return $price; }, $car['id'], true) ?> zł</li>
-      <li><strong>Cena netto: </strong> <?= calcPrice(function($price) { return $price * 0.77; }, $rent['id']) ?> zł</li>
+      <li><strong>Cena netto: </strong> <?= calcPrice(function($price) use (&$rent, &$dayNum) { return ($price - ($rent['insurance'] == 1 ? $dayNum * 39.90 : 0)) * 0.77; }, $rent['id']) ?> zł</li>
+      <li><strong>Ubezpieczenie: </strong> <?= $rent['insurance'] == 0 ? 'Nie' : number_format($dayNum * 39.90, 2).' zł' ?></li>
       <li><strong>VAT (23%): </strong> <?= calcPrice(function($price) { return $price * 0.23; }, $rent['id']) ?> zł</li>
       <li><strong>Cena brutto: </strong> <?= rent_price($rent['id']) ?> zł</li>
     </ul>
