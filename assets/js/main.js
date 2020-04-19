@@ -1,4 +1,7 @@
+const urlParams = new URLSearchParams(window.location.search)
 const cardContainer = document.querySelectorAll('.cards')
+
+const priceWithCurrency = (price) => `${price.toFixed(2).toString().replace('.',',')} zł`
 
 cardContainer.forEach((container) => {
   const cards = container.querySelectorAll('.card')
@@ -69,4 +72,54 @@ if(!cookie){
     cookieConsent.classList.add('hidden')
     setCookie('cookieConsent', '1', 7)
   }
+}
+
+const priceResult = document.querySelector('p.contact-price-calculation')
+if (priceResult) {
+  const beginInput = document.querySelector('input[name=from]')
+  const endInput = document.querySelector('input[name=to]')
+  const car = document.querySelector('select#car')
+  const insuranceYes = document.querySelector('input#insurance-yes')
+  const insuranceNo = document.querySelector('input#insurance-no')
+
+  const usedFields = {
+    beginInput: urlParams.has('from') ? true : false,
+    endInput: urlParams.has('to') ? true : false,
+  }
+
+  const calculateFinal = () => {
+    if (!Object.values(usedFields).includes(false)) {
+      if (!priceResult.classList.contains('show')) priceResult.classList.add('show')
+
+      const insurance = insuranceYes.checked && !insuranceNo.checked ? true : false
+      const begin = new Date(beginInput.value).getTime()
+      console.log(beginInput.value, endInput.value, car.value)
+      const end = new Date(endInput.value).getTime()
+      const dayDifference = (end - begin) / (1000 * 3600 * 24)
+
+      const priceSpan = parseFloat(document.querySelector(`span.data-tag[data-car='${car.value}']`).dataset.carPrice)
+
+      const price = insurance ? priceSpan * dayDifference + 39.90 * dayDifference : priceSpan * dayDifference
+
+      if (!isNaN(price)) {
+        priceResult.querySelector('span').textContent = priceWithCurrency(price)
+      }
+    }
+  }
+
+  beginInput.addEventListener('change', () => {
+    usedFields.beginInput = true
+    calculateFinal()
+  })
+
+  endInput.addEventListener('change', () => {
+    usedFields.endInput = true
+    calculateFinal()
+  })
+
+  car.addEventListener('click', () => calculateFinal())
+  insuranceYes.addEventListener('click', () => calculateFinal())
+  insuranceNo.addEventListener('click', () => calculateFinal())
+
+  calculateFinal()
 }

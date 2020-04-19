@@ -4,6 +4,9 @@ const selected = document.querySelector('.selected-car')
 const beginInput = document.querySelector('input[name=begin]')
 const endInput = document.querySelector('input[name=end]')
 
+const insuranceYes = document.querySelector('input#insurance-yes')
+const insuranceNo = document.querySelector('input#insurance-no')
+
 let carData = {}
 
 const elementsFilled = {
@@ -15,12 +18,12 @@ const elementsFilled = {
 const calculate = () => {
 
   if (!Object.values(elementsFilled).includes(false)) {
-    const priceWithCurrency = (price) => `${price.toFixed(2).toString().replace('.',',')} zł`
 
     const costContainer = document.querySelector('.costs')
     costContainer.innerHTML = ''
 
-    const price = parseFloat(carData.price)
+    let price = parseFloat(carData.price)
+    const insurance = insuranceYes.checked === true && insuranceNo.checked == false ? true : false
 
     const begin = new Date(beginInput.value).getTime()
     const end = new Date(endInput.value).getTime()
@@ -33,6 +36,7 @@ const calculate = () => {
       costPerOne: {},
       days: {},
       costNetto: {},
+      costInsurance: {},
       costVat: {},
       costBrutto: {},
     }
@@ -53,25 +57,33 @@ const calculate = () => {
       costs.costNetto.label.textContent = 'Cena netto: '
       costs.costNetto.text = document.createTextNode(priceWithCurrency(price * dayDifference * 0.77))
 
+      if (insurance) {
+        costs.costInsurance.label = document.createElement('strong')
+        costs.costInsurance.label.textContent = 'Ubezpieczenie: '
+        costs.costInsurance.text = document.createTextNode(priceWithCurrency(dayDifference * 39.90))
+      }
+
       costs.costVat.label = document.createElement('strong')
       costs.costVat.label.textContent = 'VAT (23%): '
-      costs.costVat.text = document.createTextNode(priceWithCurrency(price * dayDifference * 0.23))
+      costs.costVat.text = document.createTextNode(priceWithCurrency(insurance ? (price * dayDifference + 39.90 * dayDifference) * 0.23 : price * dayDifference * 0.23))
 
       costs.costBrutto.label = document.createElement('strong')
       costs.costBrutto.label.textContent = 'Cena brutto: '
-      costs.costBrutto.text = document.createTextNode(priceWithCurrency(price * dayDifference))
+      costs.costBrutto.text = document.createTextNode(priceWithCurrency(insurance ? price * dayDifference + 39.90 * dayDifference : price * dayDifference))
 
       Object.values(costs).forEach((cost) => {
         const costWrapper = document.createElement('p')
 
-        costWrapper.appendChild(cost.label)
-        costWrapper.appendChild(cost.text)
+        if (cost.label) {
+          costWrapper.appendChild(cost.label)
+          costWrapper.appendChild(cost.text)
 
-        costContainer.appendChild(costWrapper)
+          costContainer.appendChild(costWrapper)
+        }
       })
 
       const anchor = document.createElement('a')
-      anchor.setAttribute('href', `contact.php?car=${carData.id}&from=${beginInput.value}&to=${endInput.value}`)
+      anchor.setAttribute('href', `contact.php?car=${carData.id}&from=${beginInput.value}&to=${endInput.value}&insurance=${insurance ? '1' : '0'}`)
       anchor.textContent = 'Wynajmij to auto'
       anchor.classList.add('rent-a-car')
 
@@ -93,6 +105,9 @@ endInput.addEventListener('input', () => {
   elementsFilled.end = true
   calculate()
 })
+
+insuranceYes.addEventListener('input', () => calculate())
+insuranceNo.addEventListener('input', () => calculate())
 
 selectors.forEach((selector) => {
   selector.addEventListener('click', (e) => {
